@@ -22,3 +22,35 @@ html {
 .logo {
     width: 50px;
 }
+
+.nav-bar-content {
+    background-color: #000;
+}
+
+.nav-bar-content a {
+    text-decoration: none;
+    color: #ffff;
+    font-size: 1.8em;
+    font-family: fantasy, Arial, Helvetica, sans-serif;
+}
+
+h1 {
+    color: white;
+}
+
+.nav-item .nav-link {
+    color: #ffff;
+    font-size: 20px;
+    font-family: fantasy, Arial, Helvetica, sans-serif;
+}
+
+.nav-item .nav-link:hover {
+    color: #c300ff;
+    transition: color 200ms;
+}
+
+body {
+    background-image: url(../images/background.png);
+    background-size: cover;
+    color: #b4b4b4;
+}
