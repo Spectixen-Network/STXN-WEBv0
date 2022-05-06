@@ -2,9 +2,10 @@
 <html lang="en">
 
 <head>
-    <title>STX-1</title>
+    <title>Spectixen Network | Home</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="images/SpectixenNetwork_logo_bez_pozadi_400x400.png" type="image/x-icon">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <link href="css/style.css" rel="stylesheet">
@@ -16,7 +17,7 @@
             <div class="navbar">
                 <a href="#" class="navbar-brand">
                     <img src="images/SpectixenNetwork_logo_bez_pozadi_400x400.png" alt="" class="logo">
-                    <span class="navbar-text">Spectixen Network</span>
+                    <span class="navbar-text">STXN</span>
                 </a>
                 <ul class="nav justify-content-center">
                     <li class="nav-item">
@@ -118,10 +119,10 @@
 
 
     <?php
-    // include 'funkce.php';
-    // echo '<div class="container" style="padding-top: 5vh">';
-    // some_text();
-    // echo '</div>';
+    include 'funkce.php';
+    echo '<div class="container" style="padding-top: 5vh">';
+    some_text();
+    echo '</div>';
     ?>
 </body>
 

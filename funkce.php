@@ -186,7 +186,7 @@ function navbar()
                 <div class="navbar">
                     <a href="#" class="navbar-brand">
                         <img src="images/SpectixenNetwork_logo_bez_pozadi_400x400.png" alt="" class="logo">
-                        <span class="navbar-text">Spectixen Network</span>
+                        <span class="navbar-text">STXN</span>
                     </a>
                     <ul class="nav justify-content-center">
                         <li class="nav-item">
@@ -203,7 +203,7 @@ function navbar()
                         </li>
                         <li class="nav-item">
                             <a href="#" class="nav-link">Test 5</a>
-                        // </li>
+                        </li>
                     </ul>
                 </div>
             </div>
