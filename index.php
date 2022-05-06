@@ -39,7 +39,7 @@
         </div>
     </nav>
 
-    <div class="container-fluid" style="padding: 0; height: 90vh;">
+    <div class="container-fluid" style="padding: 0; height: 89vh;">
         <svg style="height: 100%; width: 100%;" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1920" height="1080" viewBox="0 0 1920 1080">
             <defs>
                 <style>
@@ -118,10 +118,10 @@
 
 
     <?php
-    include 'funkce.php';
-    echo '<div class="container" style="padding-top: 5vh">';
-    some_text();
-    echo '</div>';
+    // include 'funkce.php';
+    // echo '<div class="container" style="padding-top: 5vh">';
+    // some_text();
+    // echo '</div>';
     ?>
 </body>
 
