@@ -23,10 +23,6 @@ html {
     width: 50px;
 }
 
-.nav-bar-content {
-    background-color: #000;
-}
-
 .nav-bar-content a {
     text-decoration: none;
     color: #ffff;
