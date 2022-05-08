@@ -2,20 +2,20 @@ html {
     scroll-behavior: smooth;
 }
 
-::-webkit-scrollbar {
+ ::-webkit-scrollbar {
     width: 10px;
 }
 
-::-webkit-scrollbar-track {
+ ::-webkit-scrollbar-track {
     background-color: #232323;
 }
 
-::-webkit-scrollbar-thumb {
+ ::-webkit-scrollbar-thumb {
     background-color: #c300ff;
     border-radius: 5px;
 }
 
-::-webkit-scrollbar-thumb:hover {
+ ::-webkit-scrollbar-thumb:hover {
     background-color: #9f00cf;
 }
 
@@ -46,7 +46,76 @@ h1 {
 }
 
 body {
-    background-image: url(../images/background.png);
+    background-image: url(../images/system/background.png);
     background-size: cover;
     color: #b4b4b4;
+    overflow-x: hidden;
+}
+
+#banner {
+    padding: 0;
+    height: 20vh;
+    justify-content: center;
+}
+
+#banner p {
+    padding-top: 2vh;
+    margin: 0;
+    color: #c300ff;
+    font-size: 5em;
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+#loginButton {
+    text-decoration: none;
+    color: #ffff;
+    font-size: 1.1em;
+    font-family: fantasy, Arial, Helvetica, sans-se
+}
+
+.modal-backdrop {
+    z-index: 105;
+}
+
+#loginSubmit {
+    float: right;
+    margin-bottom: 10px;
+}
+
+#loginRegister {
+    float: right;
+    margin-right: 5px;
+    margin-bottom: 10px;
+}
+
+#registerSubmit {
+    float: right;
+    margin-bottom: 10px;
+}
+
+#termsOfServiceCheckbox {
+    text-decoration: underline;
+}
+
+#dropdownButton {
+    background-color: #c300ff;
+    color: #ffff;
+}
+
+#dropdownMenuList {
+    left: -114%;
+    text-align: center;
+}
+
+#dropdownMenuContent {
+    text-decoration: none;
+    color: black;
+    font-size: 1.1em;
+    font-family: fantasy, Arial, Helvetica, sans-se
+}
+
+#card {
+    background-color: rgba(83, 83, 83, 0.2);
+    backdrop-filter: blur(5px);
 }
