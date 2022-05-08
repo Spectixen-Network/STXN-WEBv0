@@ -25,6 +25,7 @@ nav();
     });
 </script>
 
+
 <?php
 echo '<div class="container" style="padding-top: 5vh">';
 some_text();

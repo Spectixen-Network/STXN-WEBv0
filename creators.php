@@ -9,7 +9,7 @@ banner("Founders of Spectixen Network");
 ?>
 <div class="container-fluid d-flex" style="justify-content: center;">
     <div class="card col-sm-4" style="width:450px; text-align: center;" id="card">
-        <div class="d-flex justify-content-center"><img class="card-img-top rounded-circle" src="images/SpectixenNetwork_logo_red.png" style="width:400px; margin-top: 5px;" Card image"></div>
+        <div class="d-flex justify-content-center"><img class="card-img-top rounded-circle" src="/user/1/images/avatar_red_zoomed.png" style="width:400px; margin-top: 5px;" Card image"></div>
         <div class="card-body">
             <h4 class="card-title text-warning">AppleJamp</h4>
             <p class="card-text text-primary">I’m a Back-End Developer located in Czechia.</p>
@@ -21,7 +21,7 @@ banner("Founders of Spectixen Network");
     </div>
     <div class="col-sm-4"></div>
     <div class="card col-sm-4" style="width:450px; text-align: center;" id="card">
-        <div class="d-flex justify-content-center"><img class="card-img-top rounded-circle d-flex" src="images/SpectixenNetwork_logo.png" style="width:400px; margin-top: 5px;" Card image"></div>
+        <div class="d-flex justify-content-center"><img class="card-img-top rounded-circle d-flex" src="/user/2/images/SpectixenNetwork_logo.png" style="width:400px; margin-top: 5px;" Card image"></div>
         <div class="card-body">
             <h4 class="card-title text-warning">Yura</h4>
             <p class="card-text text-primary">I’m a Front-End Developer located in Czechia.</p>

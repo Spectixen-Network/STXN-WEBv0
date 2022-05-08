@@ -19,10 +19,6 @@ html {
     background-color: #9f00cf;
 }
 
-a {
-    text-decoration: none;
-}
-
 .logo {
     width: 50px;
 }
@@ -38,6 +34,10 @@ h1 {
     color: white;
 }
 
+a {
+    text-decoration: none;
+}
+
 .nav-item .nav-link {
     color: #ffff;
     font-size: 20px;
@@ -50,7 +50,7 @@ h1 {
 }
 
 body {
-    background-image: url(../images/system/background.png);
+    background-image: url(/images/system/background.png);
     background-size: cover;
     color: #b4b4b4;
     overflow-x: hidden;
@@ -79,7 +79,7 @@ body {
 }
 
 .modal-backdrop {
-    z-index: 105;
+    z-index: 1;
 }
 
 #loginSubmit {
@@ -124,6 +124,9 @@ body {
     backdrop-filter: blur(5px);
 }
 
+
+/* File Manager Start */
+
 #fileManagerSideRowBox {
     background-color: rgba(83, 83, 83, 0.2);
     backdrop-filter: blur(5px);
@@ -166,42 +169,7 @@ body {
 
 .folder-list li i {
     margin-right: 8px;
-    color: #3d4d5d;
-}
-
-.category-list li a {
-    color: #666666;
-    display: block;
-    padding: 5px 0;
-}
-
-.category-list li {
-    display: block;
-}
-
-.category-list li i {
-    margin-right: 8px;
-    color: #3d4d5d;
-}
-
-.category-list li a .text-navy {
-    color: #1ab394;
-}
-
-.category-list li a .text-primary {
-    color: #1c84c6;
-}
-
-.category-list li a .text-info {
-    color: #23c6c8;
-}
-
-.category-list li a .text-danger {
-    color: #EF5352;
-}
-
-.category-list li a .text-warning {
-    color: #F8AC59;
+    color: #c300ff;
 }
 
 .file-manager h5.tag-title {
@@ -262,12 +230,6 @@ body {
     text-decoration: underline;
 }
 
-.file .icon i {
-    font-size: 70px;
-    color: rgba(83, 83, 83, 0.8);
-    backdrop-filter: blur(5px);
-}
-
 .file .file-name {
     padding: 10px;
     background-color: rgba(83, 83, 83, 0.2);
@@ -276,6 +238,12 @@ body {
     font-family: fantasy, Arial, Helvetica, sans-se;
     font-weight: 100;
     text-decoration: none;
+}
+
+.file .icon i {
+    font-size: 70px;
+    color: rgba(83, 83, 83, 0.8);
+    backdrop-filter: blur(5px);
 }
 
 .file .file-name a {
@@ -304,36 +272,11 @@ ul.tag-list li {
     bottom: 0em;
 }
 
-a.compose-mail {
-    padding: 8px 10px;
-}
-
-.mail-search {
-    max-width: 300px;
-}
-
 .ibox {
     clear: both;
     margin-bottom: 25px;
     margin-top: 0;
     padding: 0;
-}
-
-.ibox.collapsed .ibox-content {
-    display: none;
-}
-
-.ibox.collapsed .fa.fa-chevron-up:before {
-    content: "\f078";
-}
-
-.ibox.collapsed .fa.fa-chevron-down:before {
-    content: "\f077";
-}
-
-.ibox:after,
-.ibox:before {
-    display: table;
 }
 
 .ibox-title {
@@ -364,4 +307,179 @@ a.compose-mail {
 
 a:hover {
     text-decoration: none;
+}
+
+
+/* File Manager End */
+
+
+/* wawy banner Start */
+
+.wavy {
+    position: relative;
+    -webkit-box-reflect: below -20px linear-gradient(transparent, rgba(0, 0, 0, .2));
+    font-size: 60px;
+}
+
+.wavy span {
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    position: relative;
+    display: inline-block;
+    color: #c300ff;
+    animation: wavy 2s;
+    animation-delay: calc(.1s * var(--i));
+}
+
+@keyframes wavy {
+    0%,
+    40%,
+    100% {
+        transform: translateY(0)
+    }
+    20% {
+        transform: translateY(-20px)
+    }
+}
+
+
+/*  banner End */
+
+
+/*  file upload modal start */
+
+#uploadSubmit {
+    float: right;
+    margin-bottom: 10px;
+    color: #ffff;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+
+/*  file upload modal end */
+
+.showNone {
+    display: none;
+}
+
+
+/* Admin panel start */
+
+#adminSidebarContainer {
+    text-align: left;
+    background-color: rgba(83, 83, 83, 0.2);
+    backdrop-filter: blur(10px);
+}
+
+#adminSidebar {
+    color: #ffff;
+    background-color: transparent;
+    text-decoration: none;
+    text-align: left;
+}
+
+#adminPanelHeader {
+    text-align: center;
+    background-color: rgba(83, 83, 83, 0.2);
+    backdrop-filter: blur(10px);
+    margin: 0;
+}
+
+#administratorNicknameHeader {
+    color: #ffff;
+}
+
+#administratorNicknameFooter {
+    margin: 0;
+    padding: 0;
+}
+
+#adminPanelTotalUsers {
+    color: green;
+    border: 3px solid rgba(0, 0, 0, .2);
+    margin: 0px 5px 0px 2px;
+    text-align: left;
+    background-color: rgba(83, 83, 83, 0.2);
+    backdrop-filter: blur(10px);
+    padding: 0;
+}
+
+#adminPanelNewUsers {
+    color: red;
+    border: 3px solid rgba(0, 0, 0, .2);
+    text-align: left;
+    margin: 0px 2px 0px 2px;
+    background-color: rgba(83, 83, 83, 0.2);
+    backdrop-filter: blur(10px);
+    padding: 0;
+}
+
+#adminPanelBannedUsers {
+    color: cyan;
+    border: 3px solid rgba(0, 0, 0, .2);
+    text-align: left;
+    margin: 0px 2px 0px 2px;
+    background-color: rgba(83, 83, 83, 0.2);
+    backdrop-filter: blur(10px);
+    padding: 0;
+}
+
+#adminPanelUniqueVisitors {
+    color: plum;
+    border: 3px solid rgba(0, 0, 0, .2);
+    text-align: left;
+    margin: 0px 2px 0px 2px;
+    background-color: rgba(83, 83, 83, 0.2);
+    backdrop-filter: blur(10px);
+    padding: 0;
+}
+
+#adminPanelLargeGraph {
+    color: rgb(255, 251, 0);
+    border: 3px solid rgba(0, 0, 0, .2);
+    text-align: left;
+    margin: 0px 2px 0px 2px;
+    background-color: rgba(83, 83, 83, 0.2);
+    backdrop-filter: blur(10px);
+    padding: 0;
+}
+
+#adminPanelSmallGraph {
+    color: rgb(17, 14, 184);
+    border: 3px solid rgba(0, 0, 0, .2);
+    text-align: left;
+    margin: 0px 2px 0px 2px;
+    background-color: rgba(83, 83, 83, 0.2);
+    backdrop-filter: blur(10px);
+    padding: 0;
+}
+
+#adminPanelInbox {
+    color: rgb(255, 123, 0);
+    border: 3px solid rgba(0, 0, 0, .2);
+    text-align: left;
+    margin: 0px 2px 0px 2px;
+    background-color: rgba(83, 83, 83, 0.2);
+    backdrop-filter: blur(10px);
+    padding: 0;
+}
+
+#adminPanelAdminChat {
+    color: rgb(25, 214, 8);
+    border: 3px solid rgba(0, 0, 0, .2);
+    text-align: left;
+    margin: 0px 2px 0px 2px;
+    background-color: rgba(83, 83, 83, 0.2);
+    backdrop-filter: blur(10px);
+    padding: 0;
+}
+
+#adminPanelToDoList {
+    color: rgb(199, 0, 199);
+    border: 3px solid rgba(0, 0, 0, .2);
+    text-align: left;
+    margin: 0px 2px 0px 2px;
+    background-color: rgba(83, 83, 83, 0.2);
+    backdrop-filter: blur(10px);
+    padding: 0;
 }

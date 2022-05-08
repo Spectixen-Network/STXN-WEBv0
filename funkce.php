@@ -14,7 +14,7 @@ function validate_email($email)
 
 function db_connection()
 {
-    $db_info = json_decode(file_get_contents($_SERVER["DOCUMENT_ROOT"] . '/stx_1/else/database.json'), true);
+    $db_info = json_decode(file_get_contents($_SERVER["DOCUMENT_ROOT"] . '/else/database.json'), true);
     $connection = mysqli_init();
     $server = $db_info["db_ip"];
     $database = $db_info["db_name"];
@@ -117,21 +117,18 @@ function navbar()
             <div class="container-fluid nav-bar-content" id="nav-bar">
                 <div class="navbar">
                     <a href="#" class="navbar-brand">
-                        <img src="/stx_1/images/SpectixenNetwork_logo_bez_pozadi_400x400.png" alt="" class="logo">
+                        <img src="/images/system/SpectixenNetwork_logo_bez_pozadi_400x400.png" alt="" class="logo">
                         <span class="navbar-text">STXN</span>
                     </a>
                     <ul class="nav justify-content-center">
                         <li class="nav-item">
-                            <a href="/stx_1/index.php" class="nav-link">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="/stx_1/fileManager.php" class="nav-link">File Manager</a>
+                            <a href="/index.php" class="nav-link">Home</a>
                         </li>
                         <li class="nav-item">
                             <a href="#" class="nav-link">Test 3</a>
                         </li>
                         <li class="nav-item">
-                        <a href="/stx_1/creators.php" class="nav-link">Creators</a>
+                        <a href="/creators.php" class="nav-link">Creators</a>
                         </li>
                         <button type="button" id="loginButton" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#loginModal">
                             Log In
@@ -152,7 +149,7 @@ function navbar()
 
                         <!-- Login Modal body -->
                         <div class="container">
-                            <form action="/stx_1/handlers/login.php" class="was-validated" method="POST">
+                            <form action="/handlers/login.php" class="was-validated" method="POST">
                                 <div class="form-floating mt-3 mb-3">
                                     <input type="text" class="form-control" id="username" placeholder="Enter username" name="username" required>
                                     <label for="username" class="form-label">Username:</label>
@@ -192,7 +189,7 @@ function navbar()
 
                         <!-- Register Modal body -->
                         <div class="container">
-                            <form action="/stx_1/handlers/register.php" class="was-validated" method="POST">
+                            <form action="/handlers/register.php" class="was-validated" method="POST">
                                 <div class="form-floating mt-3 mb-3">
 
                                     <input type="text" class="form-control" id="username" placeholder="Enter username" name="username" required>
@@ -245,35 +242,35 @@ function navbar_logged()
             <div class="container-fluid nav-bar-content" id="nav-bar">
                 <div class="navbar">
                     <a href="#" class="navbar-brand">
-                        <img src="/stx_1/images/SpectixenNetwork_logo_bez_pozadi_400x400.png" alt="" class="logo">
+                        <img src="/images/system/SpectixenNetwork_logo_bez_pozadi_400x400.png" alt="" class="logo">
                         <span class="navbar-text">STXN</span>
                     </a>
                     <ul class="nav justify-content-center">
                         <li class="nav-item">
-                            <a href="/stx_1/index.php" class="nav-link">Home</a>
+                            <a href="/index.php" class="nav-link">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a href="/stx_1/fileManager.php" class="nav-link">File manager</a>
+                            <a href="/fileManager.php" class="nav-link">File manager</a>
                         </li>
                         <li class="nav-item">
                             <a href="#" class="nav-link">Test 3</a>
                         </li>
                         <li class="nav-item">
-                            <a href="/stx_1/creators.php" class="nav-link">Creators</a>
+                            <a href="/creators.php" class="nav-link">Creators</a>
                         </li>';
     if (is_admin($_SESSION["UID"]))
     {
         echo
         '
             <li class="nav-item">
-                <a href="/stx_1/adminPanel/adminPanel.php" class="nav-link">Admin Panel</a>
+                <a href="/adminPanel/adminPanel.php" class="nav-link">Admin Panel</a>
             </li>
         ';
     }
     echo '
                         <div class="dropdown">
                             <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown" id="dropdownButton">
-                                <img src="/stx_1/' . navbar_profile_image() . '" width="30" height="30" class="rounded-circle">
+                                <img src="/user/' . $_SESSION["UID"] . "/" . navbar_profile_image() . '" width="30" height="30" class="rounded-circle">
                             </button>
 
                             <ul class="dropdown-menu" id="dropdownMenuList">
@@ -283,10 +280,10 @@ function navbar_logged()
                                         <label class="form-check-label" for="mySwitch">Dark mode</label>
                                     </li>
                                 </div>
-                                <li><a class="dropdown-item" id="dropdownMenuContent" href="#"><i class="bi bi-person"></i>  Profile</a></li>
+                                <li><a class="dropdown-item" id="dropdownMenuContent" href="/profile.php"><i class="bi bi-person"></i>  Profile</a></li>
                                 <li><a class="dropdown-item" id="dropdownMenuContent" href="#"><i class="bi bi-gear"></i>  Settings</a></li>
                                 <li>
-                                    <hr class="dropdown-divider"><a class="dropdown-item" id="dropdownMenuContent" href="handlers/logout.php"><i class="bi bi-box-arrow-in-right"></i>  Log out</a></hr>
+                                    <hr class="dropdown-divider"><a class="dropdown-item" id="dropdownMenuContent" href="/handlers/logout.php"><i class="bi bi-box-arrow-in-right"></i>  Log out</a></hr>
                                 </li>
                         </div>
                     </ul>
@@ -297,10 +294,28 @@ function navbar_logged()
 }
 function banner($name)
 {
+    $delka = strlen($name);
+    $text = str_split($name, 1);
+
     echo
     '
         <div id="banner" class="container-fluid">
-            <p class="text-center">' . $name . '</p>
+            <div class="wavy">
+                <div class="container d-flex" style="justify-content: center;">';
+    for ($i = 0; $i < $delka; $i++)
+    {
+        if (strcmp($text[$i], " "))
+        {
+            echo '<span style=" --i:' . $i . '">' .  $text[$i] . '</span>';
+        }
+        else
+        {
+            echo '<span style=" --i:' . $i . '"> </span>';
+        }
+    }
+    echo '
+                </div>
+            </div>
         </div>
     ';
 
@@ -334,20 +349,20 @@ function html_start($title, $css_file_pathname_1, $css_file_pathname_2 = "", $cs
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="shortcut icon" href="images/system/SpectixenNetwork_logo_bez_pozadi_400x400.png" type="image/x-icon">
+        <link rel="shortcut icon" href="/images/system/SpectixenNetwork_logo_bez_pozadi_400x400.png" type="image/x-icon">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
         <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
         <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
-        <link rel="stylesheet" href="' . $css_file_pathname_1 . '.css">';
+        <link rel="stylesheet" href="/' . $css_file_pathname_1 . '.css">';
     if ($css_file_pathname_2 != "")
     {
-        echo '<link rel="stylesheet" href="' . $css_file_pathname_2 . '.css">';
+        echo '<link rel="stylesheet" href="/' . $css_file_pathname_2 . '.css">';
     }
     if ($css_file_pathname_3 != "")
     {
-        echo '<link rel="stylesheet" href="' . $css_file_pathname_3 . '.css">';
+        echo '<link rel="stylesheet" href="/' . $css_file_pathname_3 . '.css">';
     }
 
     echo '
