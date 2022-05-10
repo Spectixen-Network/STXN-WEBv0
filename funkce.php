@@ -116,7 +116,7 @@ function navbar()
         <nav class="sticky-top">
             <div class="container-fluid nav-bar-content" id="nav-bar">
                 <div class="navbar">
-                    <a href="#" class="navbar-brand">
+                    <a href="/" class="navbar-brand">
                         <img src="/images/system/SpectixenNetwork_logo_bez_pozadi_400x400.png" alt="" class="logo">
                         <span class="navbar-text">STXN</span>
                     </a>
@@ -241,7 +241,7 @@ function navbar_logged()
         <nav class="sticky-top">
             <div class="container-fluid nav-bar-content" id="nav-bar">
                 <div class="navbar">
-                    <a href="#" class="navbar-brand">
+                    <a href="/" class="navbar-brand">
                         <img src="/images/system/SpectixenNetwork_logo_bez_pozadi_400x400.png" alt="" class="logo">
                         <span class="navbar-text">STXN</span>
                     </a>
