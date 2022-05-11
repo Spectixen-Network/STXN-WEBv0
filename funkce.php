@@ -281,7 +281,7 @@ function navbar_logged()
                                     </li>
                                 </div>
                                 <li><a class="dropdown-item" id="dropdownMenuContent" href="/profile.php"><i class="bi bi-person"></i>  Profile</a></li>
-                                <li><a class="dropdown-item" id="dropdownMenuContent" href="#"><i class="bi bi-gear"></i>  Settings</a></li>
+                                <li><a class="dropdown-item" id="dropdownMenuContent" href="/settings.php"><i class="bi bi-gear"></i>  Settings</a></li>
                                 <li>
                                     <hr class="dropdown-divider"><a class="dropdown-item" id="dropdownMenuContent" href="/handlers/logout.php"><i class="bi bi-box-arrow-in-right"></i>  Log out</a></hr>
                                 </li>
