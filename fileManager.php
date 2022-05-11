@@ -24,7 +24,27 @@ $basePath = $_SERVER["DOCUMENT_ROOT"] . "/user/" . $_SESSION["UID"] . "/files/";
     <div class="row">
         <?php ibox($basePath); ?>
         <div class="col-lg-10">
-            <div>
+            <div class="container-fluid" id="topBarInFileManager">
+                <div class="row">
+                    <div class="col-1">
+                        <div class="row">
+                            <span class="col-5">
+                                <a>Sort by:</a>
+                            </span>
+                            <span class="col-3">
+                                <a>abc</a>
+                            </span>
+                            <span class="col-3">
+                                <a>xyz</a>
+                            </span>
+                        </div>
+                    </div>
+                    <form class="col-md-2 d-flex">
+                        <input class="form-control me-2" type="text" placeholder="Search">
+                        <button class="btn btn-primary" type="button">Search</button>
+                    </form>
+                </div>
+            </div>
                 <?php
                 if (isset($_GET["dir"]))
                 {
