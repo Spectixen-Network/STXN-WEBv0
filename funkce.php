@@ -125,10 +125,7 @@ function navbar()
                             <a href="/index.php" class="nav-link">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">Test 3</a>
-                        </li>
-                        <li class="nav-item">
-                        <a href="/creators.php" class="nav-link">Creators</a>
+                            <a href="/creators.php" class="nav-link">Creators</a>
                         </li>
                         <button type="button" id="loginButton" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#loginModal">
                             Log In
@@ -251,9 +248,6 @@ function navbar_logged()
                         </li>
                         <li class="nav-item">
                             <a href="/fileManager.php" class="nav-link">File manager</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">Test 3</a>
                         </li>
                         <li class="nav-item">
                             <a href="/creators.php" class="nav-link">Creators</a>
@@ -382,6 +376,47 @@ function html_end()
 function curr_time_formatted()
 {
     return date("Y-m-d H:i:s", time());
+}
+function errorModal()
+{
+    echo
+    '
+        <!-- Upload Modal -->
+        <div class="modal fade" id="uploadModal">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+
+                    <!-- Upload modal Header -->
+                    <div class="modal-header">
+                        <h4 class="modal-title">Upload files</h4>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+
+                    <!-- Upload Modal body -->
+                    <div class="container">
+                        <form action="/handlers/fileUpload.php" class="was-validated" method="POST" enctype="multipart/form-data">
+                            <input type="hidden" name="fileManagerUpload" value="1">
+                            <div class="form-floating mt-3 mb-3">
+                      <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" onclick="toggleMakeFolder();" id="mySwitch" name="makeFolder" value="Yes">
+                                    <label class="form-check-label" for="mySwitch">Make folder</label>
+                                </div>
+                                <div class="form-floating mt-3 mb-3 showNone" id="folderNameInput">
+                                    <input type="text" class="form-control" placeholder="Some text" name="folderToMake" id="folderName">
+                                    <label for="folderToMake">Folder Name</label>
+                                </div>
+                                <input type="file" class="form-control-file" id="file" placeholder="add files." name="files" required>
+                                <div class="valid-feedback"></div>
+                                <div class="invalid-feedback"></div>
+                            </div>
+                            <button id="uploadSubmit" type="submit" class="btn btn-success">Upload</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Upload Modal End --->
+    ';
 }
 function some_text()
 {

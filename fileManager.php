@@ -16,6 +16,20 @@ banner("File Manager");
 
 $basePath = $_SERVER["DOCUMENT_ROOT"] . "/user/" . $_SESSION["UID"] . "/files/";
 
+if (isset($_POST["createFolder"]) && $_POST["createFolder"] !== "")
+{
+    $folder = test_input($_POST["createFolder"]);
+    $folderPath = $basePath . $folder;
+    if (file_exists($folderPath))
+    {
+        echo "Folder '$folder' already exists!";
+    }
+    else
+    {
+        mkdir($basePath . $folder);
+    }
+}
+
 ?>
 
 
@@ -45,19 +59,19 @@ $basePath = $_SERVER["DOCUMENT_ROOT"] . "/user/" . $_SESSION["UID"] . "/files/";
                     </form>
                 </div>
             </div>
-                <?php
-                if (isset($_GET["dir"]))
-                {
-                    folderContent($_GET["dir"]);
-                }
-                else
-                {
-                    folderContent();
-                }
-                ?>
-            </div>
+            <?php
+            if (isset($_GET["dir"]))
+            {
+                folderContent($_GET["dir"]);
+            }
+            else
+            {
+                folderContent();
+            }
+            ?>
         </div>
     </div>
+</div>
 </div>
 
 
@@ -177,7 +191,10 @@ function ibox($path)
             echo '          <li><a href="/fileManager.php?dir=' . $directories[$i] . '"><i class="fa fa-folder"></i>' . $directories[$i] . '</a></li>';
         }
     }
-    echo '                  <li><a href=""><i class="bi bi-plus-square-fill"></i> Crate new folder</a></li>
+    echo '             <form method="POST" id="createFolderForm" class="showNone">
+                             <li><a><i class="fa fa-folder col-1"></i><input type="text" name="createFolder" onfocusout="formSubmit()" class="col-9 createFolder" id="createFolder" placeholder="Folder Name" style="background-color: rgba(83, 83, 83, 0.2); color: #ffff; border: none" required></a></li>
+                        </form>
+                            <li><a onclick="folderCreate()" style="cursor: pointer; color: #ffff;"><i class="bi bi-plus-square-fill"></i> Crate new folder</a></li>
                         </ul>
                         <!-- <h5 class="tag-title">Tags</h5>
                         <ul class="tag-list" style="padding: 0">
@@ -195,6 +212,17 @@ function ibox($path)
                 </div>
             </div>
         </div>
+        <script>
+            function formSubmit()
+            {
+                document.getElementById("createFolderForm").submit();
+            }
+            function folderCreate()
+            {
+                document.getElementById("createFolderForm").classList.remove("showNone");
+                document.getElementById("createFolder").focus();
+            }
+        </script>
     ';
 }
 function folderContent($folder = "")
