@@ -9,12 +9,38 @@ if (!isset($_SESSION["UID"]))
 
 include 'funkce.php';
 
+$basePath = $_SERVER["DOCUMENT_ROOT"] . "/user/" . $_SESSION["UID"] . "/files/";
+$dir = "";
+if (isset($_GET["dir"]))
+{
+    if (file_exists($basePath . test_input($_GET["dir"])))
+    {
+        $dir = test_input($_GET["dir"]);
+    }
+    else
+    {
+        header("Location: fileManager.php");
+    }
+}
+
+
 html_start("Files", "css/style");
 nav();
-
 banner("File Manager");
 
-$basePath = $_SERVER["DOCUMENT_ROOT"] . "/user/" . $_SESSION["UID"] . "/files/";
+if (isset($_GET["delFolder"]))
+{
+    $folder = test_input($_GET["delFolder"]);
+    if (file_exists($basePath . $folder))
+    {
+        rmdir($basePath . $folder);
+    }
+    else
+    {
+        echo "Folder '$folder' doesn't exists!";
+    }
+}
+
 
 if (isset($_POST["createFolder"]) && $_POST["createFolder"] !== "")
 {
@@ -59,15 +85,27 @@ if (isset($_POST["createFolder"]) && $_POST["createFolder"] !== "")
                     </form>
                 </div>
             </div>
+            <!-- <div class="file-box">
+                        <div class="file">
+                            <a href="#">
+                                <span class="corner">
+
+                                </span>
+                                <div class="icon">
+                                    <i class="img-responsive fa fa-film">
+
+                                    </i>
+                                </div>
+                                <div class="file-name">
+                                    ' . $fileName . '
+                                    <br>
+                                    <small>Added: Fab 18, 2014</small>
+                                </div>
+                            </a>
+                        </div>
+                    </div> -->
             <?php
-            if (isset($_GET["dir"]))
-            {
-                folderContent($_GET["dir"]);
-            }
-            else
-            {
-                folderContent();
-            }
+            folderContent($dir);
             ?>
         </div>
     </div>
@@ -162,7 +200,10 @@ function ibox($path)
     $dir = "";
     if (isset($_GET["dir"]))
     {
-        $dir = "dir=" . $_GET["dir"];
+        if (file_exists(test_input($_GET["dir"])))
+        {
+            $dir = "dir=" . test_input($_GET["dir"]);
+        }
     }
 
     $directories = scandir($path);
@@ -188,7 +229,17 @@ function ibox($path)
     {
         if (is_dir($path . $directories[$i]) && $directories[$i] != '.' && $directories[$i] != '..')
         {
-            echo '          <li><a href="/fileManager.php?dir=' . $directories[$i] . '"><i class="fa fa-folder"></i>' . $directories[$i] . '</a></li>';
+            echo '          <li>
+                            <span class="row" style="padding: 0px 12px;">
+                                <a class="col-9" href="/fileManager.php?dir=' . $directories[$i] . '">
+                                    <i class="fa fa-folder"></i>
+                                    ' . $directories[$i] . '
+                                </a>
+                                <a class="col-2" href="?delFolder=' . $directories[$i] . '">
+                                    <i class="fa fa-trash"></i>
+                                </a>
+                            </span>
+                            </li>';
         }
     }
     echo '             <form method="POST" id="createFolderForm" class="showNone">
@@ -196,17 +247,17 @@ function ibox($path)
                         </form>
                             <li><a onclick="folderCreate()" style="cursor: pointer; color: #ffff;"><i class="bi bi-plus-square-fill"></i> Crate new folder</a></li>
                         </ul>
-                        <!-- <h5 class="tag-title">Tags</h5>
-                        <ul class="tag-list" style="padding: 0">
-                            <li><a href="">Family</a></li>
-                            <li><a href="">Work</a></li>
-                            <li><a href="">Home</a></li>
-                            <li><a href="">Children</a></li>
-                            <li><a href="">Holidays</a></li>
-                            <li><a href="">Music</a></li>
-                            <li><a href="">Photography</a></li>
-                            <li><a href="">Film</a></li>
-                        </ul> -->
+                                    <!-- <h5 class="tag-title">Tags</h5>
+                                    <ul class="tag-list" style="padding: 0">
+                                        <li><a href="">Family</a></li>
+                                        <li><a href="">Work</a></li>
+                                        <li><a href="">Home</a></li>
+                                        <li><a href="">Children</a></li>
+                                        <li><a href="">Holidays</a></li>
+                                        <li><a href="">Music</a></li>
+                                        <li><a href="">Photography</a></li>
+                                        <li><a href="">Film</a></li>
+                                    </ul> -->
                         <div class="clearfix"></div>
                     </div>
                 </div>
@@ -253,7 +304,7 @@ function determinFile($fileName)
     $type = true;
     if (isset($_GET["type"]))
     {
-        $type = $_GET["type"];
+        $type = test_input($_GET["type"]);
     }
 
     if (in_array($fileType, $imageFormats))
@@ -355,7 +406,7 @@ function imageFileEcho($fileName)
 {
     if (isset($_GET["dir"]))
     {
-        $dir = $_GET["dir"] . "/";
+        $dir = test_input($_GET["dir"]) . "/";
     }
     else
     {
