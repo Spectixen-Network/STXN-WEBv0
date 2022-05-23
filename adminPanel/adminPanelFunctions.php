@@ -8,16 +8,16 @@ $GLOBALS["userFilesFolder"] = "files/";
 function adminSidebar()
 {
     echo
-        '
+    '
         <!-- Sidebar  -->
-        <div class="container col-2" id="adminSidebarContainer">
+        <div class="container col-2 " id="adminSidebarContainer">
 
             <nav id="adminSidebar">
                 <div class="adminSidebarHeader">
                     <div class="row" style="margin-bottom: 0;">
-                        <h3 id="administratorNicknameHeader" class="col-9">'. $_SESSION["USERNAME"] . '</h3>
+                        <h3 id="administratorNicknameHeader" class="col-9">' . $_SESSION["USERNAME"] . '</h3>
                         <div class="btn dropdown-toggle col-3">
-                            <img src="' . $GLOBALS["relativeUserDirPath"] . navbar_profile_image() .'" width="30" height="30" class="rounded-circle">
+                            <img src="' . $GLOBALS["relativeUserDirPath"] . navbar_profile_image() . '" width="30" height="30" class="rounded-circle">
                         </div>
                     </div>
                     <p id="administratorNicknameFooter" style="color: gray;">Administrator</p>

@@ -14,14 +14,14 @@ html_end();
 function adminDashnoard()
 {
     echo
-        '
+    '
         <div class="container-fluid ">
             <div class="container-fluid" id="adminPanelHeader">
                 <h1>Admin Panel</h1>
             </div>
             <div class="row">';
 
-            adminSidebar();
+    adminSidebar();
 
     echo '
                 <div class="container col-10">
@@ -76,7 +76,3 @@ function adminDashnoard()
         </div>  
     ';
 }
-
-
-
-
