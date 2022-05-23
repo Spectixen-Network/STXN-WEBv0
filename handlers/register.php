@@ -21,7 +21,7 @@ if (email_exist($email))
 
 if ($emailErr === "" && $usernameErr === "")
 {
-    $query = "INSERT INTO user(username, password, email) VALUES('" . $username . "', '" . $password . "', '" . $email . "')";
+    $query = "INSERT INTO user(username, password, email, image_path) VALUES('" . $username . "', '" . $password . "', '" . $email . "' , 'images/noavatar.png')";
     mysqli_query($con, $query);
     $_SESSION["USERNAME"] = $username;
 
@@ -33,6 +33,7 @@ if ($emailErr === "" && $usernameErr === "")
     mkdir("../user/" . $uid . "/images");
     mkdir("../user/" . $uid . "/chats");
     mkdir("../user/" . $uid . "/files");
+    copy("../images/noavatar.png", "../user/" . $uid . "/images/noavatar.png");
 
     header("Location: " . $_SESSION["PAGE"]);
     die();

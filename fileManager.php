@@ -33,6 +33,15 @@ if (isset($_GET["delFolder"]))
     $folder = test_input($_GET["delFolder"]);
     if (file_exists($basePath . $folder))
     {
+        $folderContentToDelete = scandir($basePath . $folder);
+        foreach ($folderContentToDelete as $value)
+        {
+            if($value == "." || $value == "..") continue;
+            else
+            {
+                unlink($basePath . $folder . "/" . $value);
+            }
+        }
         rmdir($basePath . $folder);
     }
     else
@@ -66,19 +75,6 @@ if (isset($_POST["createFolder"]) && $_POST["createFolder"] !== "")
         <div class="col-lg-10">
             <div class="container-fluid" id="topBarInFileManager">
                 <div class="row">
-                    <div class="col-1">
-                        <div class="row">
-                            <span class="col-5">
-                                <a>Sort by:</a>
-                            </span>
-                            <span class="col-3">
-                                <a>abc</a>
-                            </span>
-                            <span class="col-3">
-                                <a>xyz</a>
-                            </span>
-                        </div>
-                    </div>
                     <form class="col-md-2 d-flex">
                         <input class="form-control me-2" type="text" placeholder="Search">
                         <button class="btn btn-primary" type="button">Search</button>
@@ -197,13 +193,20 @@ function uploadModal($path)
 }
 function ibox($path)
 {
-    $dir = "";
+
     if (isset($_GET["dir"]))
     {
-        if (file_exists(test_input($_GET["dir"])))
+        if (test_input($_GET["dir"]))
         {
             $dir = "dir=" . test_input($_GET["dir"]);
         }
+        else
+        {
+            $dir = "";
+        }
+    }
+    else{
+        $dir = "";
     }
 
     $directories = scandir($path);
@@ -280,6 +283,7 @@ function folderContent($folder = "")
 {
     $path = $_SERVER["DOCUMENT_ROOT"] . "/user/" . $_SESSION["UID"] . "/files/" . $folder;
 
+
     $folderContent = scandir($path);
     $folderContent = sortDirFirst($path, $folderContent);
     for ($i = 0; $i < count($folderContent); $i++)
@@ -338,6 +342,7 @@ function determinFile($fileName)
 }
 function sortDirFirst($path, $array)
 {
+
     $dirArray = [];
     $rest = [];
 
@@ -352,8 +357,6 @@ function sortDirFirst($path, $array)
             array_push($rest, $array[$i]);
         }
     }
-    sort($dirArray);
-    sort($rest);
 
     return array_merge($dirArray, $rest);
 }
