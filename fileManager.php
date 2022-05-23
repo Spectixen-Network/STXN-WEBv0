@@ -479,3 +479,5 @@ function dirFileEcho($fileName)
             </div>
         ';
 }
+
+footer();

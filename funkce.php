@@ -122,6 +122,9 @@ function navbar()
                     </a>
                     <ul class="nav justify-content-center">
                         <li class="nav-item">
+                            <a href="/test.php" class="nav-link">test</a>
+                        </li>
+                        <li class="nav-item">
                             <a href="/index.php" class="nav-link">Home</a>
                         </li>
                         <li class="nav-item">
@@ -133,7 +136,7 @@ function navbar()
                     </ul>
                 </div>
             </div>
-            <!-- Log In Modal -->
+            <!-- LogIn Modal -->
             <div class="modal fade" id="loginModal">
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
@@ -243,6 +246,9 @@ function navbar_logged()
                         <span class="navbar-text">STXN</span>
                     </a>
                     <ul class="nav justify-content-center">
+                        <li class="nav-item">
+                            <a href="/test.php" class="nav-link">test</a>
+                        </li>
                         <li class="nav-item">
                             <a href="/index.php" class="nav-link">Home</a>
                         </li>
@@ -714,11 +720,38 @@ function some_text()
 
     </p>';
 }
+
+function footer()
+{
+    echo
+    '
+    <footer>
+        <div class="footer-content">
+            <h3>Spectixen Network</h3>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus, repellat? Lorem ipsum dolor sit amet
+                consectetur adipisicing elit. Fugit quibusdam minus, nesciunt numquam adipisci praesentium, cupiditate velit
+                neque unde fugiat consequatur dolore sunt, magnam exercitationem voluptatum soluta placeat dicta maxime.</p>
+            <ul class="footer-links">
+                <li><a href="#"><i class="fa fa-github"></i></a></li>
+                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                <li><a href="#"><i class="fa fa-youtube"></i></a></li>
+                <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+                <li><a href="#"><i class="fa fa-linkedin-square"></i></a></li>
+            </ul>
+        </div>
+        <div class="footer-bottom">
+            <p>Copyright &copy;2022 Spectixen Network. Footer created by <span>Yura</span></p>
+        </div>
+    </footer>
+    ';
+}
+
 function svg_image()
 {
     echo
     '
-         <svg style="height: 100%; width: 100%;" xmlns="http://www.w3.org/2000/svg"
+        <svg style="height: 100%; width: 100%;" xmlns="http://www.w3.org/2000/svg"
             xmlns:xlink="http://www.w3.org/1999/xlink" width="1920" height="1080" viewBox="0 0 1920 1080">
             <defs>
                 <style>

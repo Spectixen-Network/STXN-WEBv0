@@ -6,4 +6,5 @@ html_start("Settings", "css/style");
 nav();
 banner("Settings");
 
+footer();
 html_end();

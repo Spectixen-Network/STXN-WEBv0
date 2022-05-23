@@ -362,7 +362,6 @@ a:hover {
     display: none;
 }
 
-
 /* Admin panel start */
 
 #adminSidebarContainer {
@@ -493,4 +492,85 @@ a:hover {
     border-radius: 5px;
     border: rgba(83, 83, 83, 0.1) 1px solid;
     margin-bottom: 5px;
+}
+
+footer{
+    bottom: 0px;
+    color: #ffff;
+    height: auto;
+    width: 100vw;
+    padding-top: 50px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.footer-content{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    background-color: rgba(31, 31, 31, 0.8);
+}
+
+.footer-content h3{
+    font-family: fantasy, Arial, Helvetica, sans-serif;
+    margin-top: 10px;
+    font-size: 1.5rem;
+    text-transform: capitalize;
+    line-height: 2rem;
+}
+
+.footer-content p{
+    max-width: 90%;
+    margin: 10px auto;
+    line-height: 28px;
+    font-size: 1.2rem;
+    font-weight: 100;
+}
+
+.footer-links{
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 1rem 0 3rem 0;
+}
+
+.footer-links li{
+    margin: 0 10px;
+}
+
+.footer-links a{
+    text-decoration: none;
+}
+
+.footer-links a i{
+    font-size: 1.5rem;
+    color: #c300ff;
+    transition: color .5s ease;
+}
+
+.footer-links a:hover i{
+    color: #9f00cf;
+}
+
+.footer-bottom{
+    background-color: rgba(31, 31, 31);
+    width: 100vw;
+    padding: 5px 0;
+    text-align: center;
+}
+
+.footer-bottom p{
+    margin: 0;
+    font-size: 14px;
+    word-spacing: 2px;
+    text-transform: capitalize;
+}
+
+.footer-bottom p span{
+    font-weight: 400;
+    opacity: 0.5;
+    color: #9f00cf;
+    text-transform: uppercase;
 }
