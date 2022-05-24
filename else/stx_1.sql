@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Počítač: 127.0.0.1
--- Vytvořeno: Pon 23. kvě 2022, 14:53
+-- Vytvořeno: Úte 24. kvě 2022, 11:24
 -- Verze serveru: 10.4.24-MariaDB
 -- Verze PHP: 8.1.6
 
@@ -30,7 +30,8 @@ SET time_zone = "+00:00";
 CREATE TABLE `banneduser` (
   `uid` int(10) UNSIGNED NOT NULL,
   `from_date` date NOT NULL,
-  `to_date` date NOT NULL
+  `to_date` date NOT NULL,
+  `reason` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
