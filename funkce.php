@@ -99,6 +99,20 @@ function is_admin($uid)
     $result = mysqli_query($con, $query);
     return mysqli_fetch_array($result)[0];
 }
+function is_banned($uid)
+{
+    $con = db_connection();
+    $query = "SELECT uid FROM banneduser WHERE uid='" . $uid . "'";
+    $result = mysqli_query($con, $query);
+    if (mysqli_num_rows($result) > 0)
+    {
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
+}
 function nav()
 {
     if (isset($_SESSION["USERNAME"]) && isset($_SESSION["UID"]))
@@ -353,7 +367,8 @@ function html_start($title, $css_file_pathname_1, $css_file_pathname_2 = "", $cs
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
-        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+ <!--       <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet"> -->
+        <script src="https://kit.fontawesome.com/2f73e7245a.js" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
         <link rel="stylesheet" href="/' . $css_file_pathname_1 . '.css">';
     if ($css_file_pathname_2 != "")
@@ -382,6 +397,16 @@ function html_end()
 function curr_time_formatted()
 {
     return date("Y-m-d H:i:s", time());
+}
+function curr_time_date()
+{
+    return date("Y-m-d", time());
+}
+function date_formatted($dateFromDB)
+{
+    $date = explode("-", $dateFromDB);
+    $format = $date[2] . "." . $date[1] . "." . $date[0];
+    return $format;
 }
 function errorModal()
 {

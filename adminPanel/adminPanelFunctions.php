@@ -41,3 +41,10 @@ function adminSidebar()
         <!-- Sidebar end -->
     ';
 }
+function ifNotAdminRedirect()
+{
+    if (!is_admin($_SESSION["UID"]))
+    {
+        header("Location: " . $_SESSION["PAGE"]);
+    }
+}

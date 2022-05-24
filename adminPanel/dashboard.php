@@ -2,6 +2,7 @@
 session_start();
 include '../funkce.php';
 include  'adminPanelFunctions.php';
+ifNotAdminRedirect();
 
 
 html_start("Admin", "../css/style");
