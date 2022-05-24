@@ -263,7 +263,7 @@ function navbar_logged()
         echo
         '
             <li class="nav-item">
-                <a href="/adminPanel/dashboard.php" class="nav-link">Admin Panel</a>
+                <a href="/adminPanel/dashboard.php" class="nav-link">Dashboard</a>
             </li>
         ';
     }
