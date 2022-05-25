@@ -11,7 +11,6 @@ function validate_email($email)
     $email = test_input($email);
     return filter_var($email, FILTER_VALIDATE_EMAIL);
 }
-
 function db_connection()
 {
     $db_info = json_decode(file_get_contents($_SERVER["DOCUMENT_ROOT"] . '/else/database.json'), true);
@@ -398,7 +397,7 @@ function curr_time_formatted()
 {
     return date("Y-m-d H:i:s", time());
 }
-function curr_time_date()
+function curr_date_to_DB()
 {
     return date("Y-m-d", time());
 }
@@ -449,7 +448,6 @@ function errorModal()
         <!-- Upload Modal End --->
     ';
 }
-
 function footer()
 {
     echo
@@ -473,7 +471,6 @@ function footer()
     </footer>
     ';
 }
-
 function some_text()
 {
     echo '<p>
@@ -770,8 +767,6 @@ function some_text()
 
     </p>';
 }
-
-
 function svg_image()
 {
     echo

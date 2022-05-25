@@ -45,6 +45,6 @@ function ifNotAdminRedirect()
 {
     if (!is_admin($_SESSION["UID"]))
     {
-        header("Location: " . $_SESSION["PAGE"]);
+        header("Location: /index.php");
     }
 }

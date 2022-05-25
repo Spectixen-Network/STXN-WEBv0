@@ -360,7 +360,6 @@ function sortDirFirst($path, $array)
 
     return array_merge($dirArray, $rest);
 }
-
 function audioFileEcho($fileName)
 {
     echo

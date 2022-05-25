@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Počítač: 127.0.0.1
--- Vytvořeno: Úte 24. kvě 2022, 21:19
--- Verze serveru: 10.4.22-MariaDB
--- Verze PHP: 8.1.2
+-- Vytvořeno: Stř 25. kvě 2022, 13:57
+-- Verze serveru: 10.4.24-MariaDB
+-- Verze PHP: 8.1.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,6 +24,19 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Struktura tabulky `address`
+--
+
+CREATE TABLE `address` (
+  `address_id` int(10) UNSIGNED NOT NULL,
+  `city` varchar(255) DEFAULT NULL,
+  `street` varchar(255) DEFAULT NULL,
+  `zipcode` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Struktura tabulky `banneduser`
 --
 
@@ -33,13 +46,6 @@ CREATE TABLE `banneduser` (
   `to_date` date NOT NULL,
   `reason` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Vypisuji data pro tabulku `banneduser`
---
-
-INSERT INTO `banneduser` (`uid`, `from_date`, `to_date`, `reason`) VALUES
-(6, '2022-05-23', '2022-05-25', NULL);
 
 -- --------------------------------------------------------
 
@@ -66,17 +72,38 @@ INSERT INTO `user` (`uid`, `username`, `password`, `email`, `image_path`, `admin
 (3, 'test', '9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08', 'test@test.test', 'images/noavatar.png', 0),
 (4, 'test1', '1b4f0e9851971998e732078544c96b36c3d01cedf7caa332359d6f1d83567014', 'test1@test1.test1', 'images/noavatar.png', 0),
 (5, 'admin', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918', '', 'images/noavatar.png', 1),
-(6, 'testToBan', 'e0670e55dbf2e1d06fbd1eabc6100b43f44c75857832c44f7d5c0034454fe98b', 'testToBan@test.com', 'images/noavatar.png', 0);
+(7, 'testToBanAdmin', '1', '', 'images/noavatar.png', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Struktura tabulky `userinfo`
+--
+
+CREATE TABLE `userinfo` (
+  `uid` int(10) UNSIGNED NOT NULL,
+  `first_name` varchar(255) DEFAULT NULL,
+  `last_name` varchar(255) DEFAULT NULL,
+  `gender` varchar(255) DEFAULT NULL,
+  `address_id` int(10) UNSIGNED DEFAULT NULL,
+  `phone_number` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Indexy pro exportované tabulky
 --
 
 --
+-- Indexy pro tabulku `address`
+--
+ALTER TABLE `address`
+  ADD PRIMARY KEY (`address_id`);
+
+--
 -- Indexy pro tabulku `banneduser`
 --
 ALTER TABLE `banneduser`
-  ADD KEY `uid` (`uid`);
+  ADD KEY `user_key` (`uid`);
 
 --
 -- Indexy pro tabulku `user`
@@ -85,14 +112,27 @@ ALTER TABLE `user`
   ADD PRIMARY KEY (`uid`);
 
 --
+-- Indexy pro tabulku `userinfo`
+--
+ALTER TABLE `userinfo`
+  ADD KEY `user_key_info` (`uid`),
+  ADD KEY `fk_address` (`address_id`);
+
+--
 -- AUTO_INCREMENT pro tabulky
 --
+
+--
+-- AUTO_INCREMENT pro tabulku `address`
+--
+ALTER TABLE `address`
+  MODIFY `address_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT pro tabulku `user`
 --
 ALTER TABLE `user`
-  MODIFY `uid` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `uid` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- Omezení pro exportované tabulky
@@ -102,7 +142,16 @@ ALTER TABLE `user`
 -- Omezení pro tabulku `banneduser`
 --
 ALTER TABLE `banneduser`
-  ADD CONSTRAINT `banneduser_ibfk_1` FOREIGN KEY (`uid`) REFERENCES `user` (`uid`);
+  ADD CONSTRAINT `banneduser_ibfk_1` FOREIGN KEY (`uid`) REFERENCES `user` (`uid`),
+  ADD CONSTRAINT `banneduser_ibfk_2` FOREIGN KEY (`uid`) REFERENCES `user` (`uid`),
+  ADD CONSTRAINT `user_key` FOREIGN KEY (`uid`) REFERENCES `user` (`uid`);
+
+--
+-- Omezení pro tabulku `userinfo`
+--
+ALTER TABLE `userinfo`
+  ADD CONSTRAINT `fk_address` FOREIGN KEY (`address_id`) REFERENCES `address` (`address_id`),
+  ADD CONSTRAINT `user_key_info` FOREIGN KEY (`uid`) REFERENCES `user` (`uid`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

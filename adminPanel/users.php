@@ -192,7 +192,7 @@ function bannedListListUser($userId, $userUsername, $from_date, $to_date)
                     <span class="col-3">
                     </span>
                     <span class="col-3">
-                        <a href="#"><i class="fa-solid fa-ban"></i></a>
+                        <a href="/handlers/unBanUser.php?uid='.$userId.'"><i class="fa-solid fa-ban"></i></a>
                     </span>
                 </div>
             </span>
