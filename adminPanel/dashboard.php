@@ -5,7 +5,7 @@ include  'adminPanelFunctions.php';
 ifNotAdminRedirect();
 
 
-html_start("Admin", "../css/style");
+html_start("Admin", "css/style");
 nav();
 
 adminDashnoard();

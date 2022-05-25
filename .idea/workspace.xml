@@ -1,19 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e54c1f8a-9c3e-4c5c-9bcb-84966b22651f" name="Changes" comment="Update SQL, do tabulky bannedUsers přibyla kolonka reason, je však nepovinná.">
+    <list default="true" id="e54c1f8a-9c3e-4c5c-9bcb-84966b22651f" name="Changes" comment="Do databáze přibyly tabulky pro userinfo a adresu.&#10;Funkčnost pro zabanování, odstranění, promotnutí, demotnutí a odbanování byly vytvořeny.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/adminPanel/adminPanelFunctions.php" beforeDir="false" afterPath="$PROJECT_DIR$/adminPanel/adminPanelFunctions.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/adminPanel/dashboard.php" beforeDir="false" afterPath="$PROJECT_DIR$/adminPanel/dashboard.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/adminPanel/users.php" beforeDir="false" afterPath="$PROJECT_DIR$/adminPanel/users.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/else/stx_1.sql" beforeDir="false" afterPath="$PROJECT_DIR$/else/stx_1.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fileManager.php" beforeDir="false" afterPath="$PROJECT_DIR$/fileManager.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/funkce.php" beforeDir="false" afterPath="$PROJECT_DIR$/funkce.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/handlers/banUser.php" beforeDir="false" afterPath="$PROJECT_DIR$/handlers/banUser.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/handlers/deleteUser.php" beforeDir="false" afterPath="$PROJECT_DIR$/handlers/deleteUser.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/handlers/demoteFromAdmin.php" beforeDir="false" afterPath="$PROJECT_DIR$/handlers/demoteFromAdmin.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/handlers/promoteToAdmin.php" beforeDir="false" afterPath="$PROJECT_DIR$/handlers/promoteToAdmin.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/handlers/unBanUser.php" beforeDir="false" afterPath="$PROJECT_DIR$/handlers/unBanUser.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user/6/images/noavatar.png" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,7 +54,7 @@
       <updated>1652956952674</updated>
       <workItem from="1652956953940" duration="623000" />
       <workItem from="1652958767881" duration="1244000" />
-      <workItem from="1653284525612" duration="35581000" />
+      <workItem from="1653284525612" duration="36852000" />
     </task>
     <task id="LOCAL-00001" summary="Admin panel functions: &#10; Přesunutí funkce sidebaru do jiného souboru&#10;Změna struktury admin panelu&#10; rozhodl jsem se přehodnotit funkčnost admin panelu. KAždá stránka bude mít vlastní soubor namísto všechno v jednom souboru. &#10; Přibyly soubory users.php, adminPanelFunctions.php. soubor adminPanel.php byl přejmenován na dashboard.php.">
       <created>1653302012448</created>
@@ -93,7 +84,14 @@
       <option name="project" value="LOCAL" />
       <updated>1653384350474</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Do databáze přibyly tabulky pro userinfo a adresu.&#10;Funkčnost pro zabanování, odstranění, promotnutí, demotnutí a odbanování byly vytvořeny.">
+      <created>1653479972641</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1653479972641</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -119,6 +117,7 @@
     <MESSAGE value="Aktualizovaný soubor databáze" />
     <MESSAGE value="adminPanel: &#10; user list, bere z DB seznam všech userů. Možnost zabanovat, smazat a kouknout na profil, všechny tyto možnosti jsou WIP.&#10; banned user list, teprve začátek, bude třeba dodělat." />
     <MESSAGE value="Update SQL, do tabulky bannedUsers přibyla kolonka reason, je však nepovinná." />
-    <option name="LAST_COMMIT_MESSAGE" value="Update SQL, do tabulky bannedUsers přibyla kolonka reason, je však nepovinná." />
+    <MESSAGE value="Do databáze přibyly tabulky pro userinfo a adresu.&#10;Funkčnost pro zabanování, odstranění, promotnutí, demotnutí a odbanování byly vytvořeny." />
+    <option name="LAST_COMMIT_MESSAGE" value="Do databáze přibyly tabulky pro userinfo a adresu.&#10;Funkčnost pro zabanování, odstranění, promotnutí, demotnutí a odbanování byly vytvořeny." />
   </component>
 </project>
