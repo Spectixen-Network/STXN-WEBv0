@@ -24,8 +24,8 @@ else
     {
         $con = db_connection();
         $query = "DELETE FROM user WHERE uid = ". $userToDeleteUID;
-        deleteUserFolder($basePath, $userToDeleteUID);
         mysqli_query($con, $query);
+        deleteUserFolder($basePath, $userToDeleteUID);
         header("Location: /adminPanel/users.php");
         die();
     }

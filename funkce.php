@@ -791,3 +791,21 @@ function svg_image()
         </svg>
     ';
 }
+function isLoggedElseRedirect()
+{
+    if(!isset($_SESSION["UID"]))
+    {
+        header("Location: /index.php");
+    }
+}
+// NOT MY FUNCTION
+function GetDirectorySize($path){
+    $bytestotal = 0;
+    $path = realpath($path);
+    if($path!==false && $path!='' && file_exists($path)){
+        foreach(new RecursiveIteratorIterator(new RecursiveDirectoryIterator($path, FilesystemIterator::SKIP_DOTS)) as $object){
+            $bytestotal += $object->getSize();
+        }
+    }
+    return $bytestotal;
+}

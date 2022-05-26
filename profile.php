@@ -2,11 +2,20 @@
 session_start();
 include 'funkce.php';
 
+isLoggedElseRedirect();
 html_start($_SESSION["USERNAME"], "css/style");
 nav();
 
 $con = db_connection();
-$uid = $_SESSION["UID"];
+if(is_admin($_SESSION["UID"]) && isset($_GET["uid"]))
+{
+    $uid = test_input($_GET["uid"]);
+}
+else
+{
+    $uid = $_SESSION["UID"];
+}
+
 $query = "SELECT * FROM `user` u LEFT JOIN (userinfo ui LEFT JOIN address a USING (address_id)) USING (uid) WHERE u.uid = " . $uid;
 $result = mysqli_query($con, $query);
 $profileInfo = mysqli_fetch_assoc($result);
@@ -15,14 +24,14 @@ $profileInfo = mysqli_fetch_assoc($result);
 <div class="container-fluid">
     <div>
         <div class="col">
-            <div class="row justify-content-center"><img id="profile-avatar-img" src="/user/<?php echo $uid; ?>/<?php echo $profileInfo["image_path"]; ?>" alt="#">
+            <div class="row justify-content-center"><img id="profile-avatar-img" src="/user/<?php echo $uid . "/" . $profileInfo["image_path"]; ?>" alt="#">
             </div>
         </div>
     </div>
 </div>
 
 <?php
-banner($_SESSION["USERNAME"]);
+banner(username_from_uid($uid));
 ?>
 <div class="container-fluid" id="profile-box">
     <div class="row" id="profile-content-box">

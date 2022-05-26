@@ -1,14 +1,9 @@
 <?php
 session_start();
-
-if (!isset($_SESSION["UID"]))
-{
-    header("Location: /index.php");
-    die();
-}
-
 include 'funkce.php';
 
+
+isLoggedElseRedirect();
 $basePath = $_SERVER["DOCUMENT_ROOT"] . "/user/" . $_SESSION["UID"] . "/files/";
 $dir = "";
 if (isset($_GET["dir"]))
@@ -25,6 +20,7 @@ if (isset($_GET["dir"]))
 
 
 html_start("Files", "css/style");
+echo '<script src="/scripts/customContextMenu.js"></script>';
 nav();
 banner("File Manager");
 
@@ -81,6 +77,7 @@ if (isset($_POST["createFolder"]) && $_POST["createFolder"] !== "")
                     </form>
                 </div>
             </div>
+            <div id="files">
             <!-- <div class="file-box">
                         <div class="file">
                             <a href="#">
@@ -100,9 +97,10 @@ if (isset($_POST["createFolder"]) && $_POST["createFolder"] !== "")
                             </a>
                         </div>
                     </div> -->
-            <?php
-            folderContent($dir);
-            ?>
+                <?php
+                folderContent($dir);
+                ?>
+            </div>
         </div>
     </div>
 </div>
@@ -364,7 +362,7 @@ function audioFileEcho($fileName)
 {
     echo
     '
-            <div class="file-box">
+            <div class="file-box" >
                 <div class="file">
                     <a href="#">
                         <span class="corner"></span>
@@ -460,7 +458,7 @@ function dirFileEcho($fileName)
 {
     echo
     '
-            <div class="file-box">
+            <div class="file-box" value="bhgvgh">
                 <div class="file">
                     <a href="/fileManager.php?dir=' . $fileName . '">
                         <span class="corner"></span>

@@ -4,7 +4,7 @@ include '../funkce.php';
 include  'adminPanelFunctions.php';
 ifNotAdminRedirect();
 
-
+isLoggedElseRedirect();
 html_start("Admin", "css/style");
 nav();
 
