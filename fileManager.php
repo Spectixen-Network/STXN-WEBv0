@@ -3,11 +3,11 @@ session_start();
 include 'funkce.php';
 
 isLoggedElseRedirect();
-if(isset($_GET["uid"]) && is_admin($_SESSION["UID"]))
+if (isset($_GET["uid"]) && is_admin($_SESSION["UID"]))
 {
     $_SESSION["FILE_MANAGER_UID"] = $_GET["uid"];
 }
-if(isset($_SESSION["FILE_MANAGER_UID"]))
+if (isset($_SESSION["FILE_MANAGER_UID"]))
 {
     $uid = $_SESSION["FILE_MANAGER_UID"];
 }
@@ -43,7 +43,7 @@ if (isset($_GET["delFolder"]))
         $folderContentToDelete = scandir($basePath . $folder);
         foreach ($folderContentToDelete as $value)
         {
-            if($value == "." || $value == "..") continue;
+            if ($value == "." || $value == "..") continue;
             else
             {
                 unlink($basePath . $folder . "/" . $value);
@@ -71,7 +71,7 @@ if (isset($_POST["createFolder"]) && $_POST["createFolder"] !== "")
         mkdir($basePath . $folder);
     }
 }
-if(isset($_GET["delFile"]))
+if (isset($_GET["delFile"]))
 {
     $file = test_input($_GET["delFile"]);
     unlink($file);
@@ -93,7 +93,7 @@ if(isset($_GET["delFile"]))
                 </div>
             </div>
             <div id="files">
-            <!-- <div class="file-box">
+                <!-- <div class="file-box">
                         <div class="file">
                             <a href="#">
                                 <span class="corner">
@@ -218,7 +218,8 @@ function ibox($path)
             $dir = "";
         }
     }
-    else{
+    else
+    {
         $dir = "";
     }
 
@@ -344,7 +345,7 @@ function determinFile($fileName, $uid)
     {
         if ($type === "video" || $type === true)
         {
-            videoFileEcho($videoFormats, $uid);
+            videoFileEcho($fileName, $uid);
         }
         return;
     }
@@ -387,32 +388,32 @@ function audioFileEcho($fileName, $uid)
     '
             <div class="file-box" >
                 <div class="file">
-                    <span class="corner" style="z-index: 10" onclick="contextMenu_'.str_replace([".", " "], "_", $fileName).'();"></span>
+                    <span class="corner" style="z-index: 10" onclick="contextMenu_' . str_replace([".", " ", "-"], "_", $fileName) . '();"></span>
                     <a href="#">
                         <div class="icon">
                             <i class="fa fa-music"></i>
                         </div>
-                        <div class="file-name">
-                            ' . $fileName . '
+                        <div class="file-name" style="overflow: hidden">
+                            <p style="height: 24px; overflow: hidden">' . $fileName . '</p>
                         </div>
                     </a>
                 </div>
-                <div id="contextMenu-'.str_replace([".", " "], "_", $fileName).'" class="contextMenu container showNone" style="background-color: rgba(83, 83, 83, 1); width: 200px; z-index: 11; margin-right: 20px; position: absolute;">
+                <div id="contextMenu-' . str_replace([".", " ", "-"], "_", $fileName) . '" class="contextMenu container showNone" style="background-color: rgba(83, 83, 83, 1); width: 200px; z-index: 11; margin-right: 20px; position: absolute;">
                     <div class="">
                         <div>
                             <ul style="list-style: none">
-                                <li><a href="/user/' .$uid. '/files/'. $dir . $fileName.'" download>Download</a></li>
+                                <li><a href="/user/' . $uid . '/files/' . $dir . $fileName . '" download>Download</a></li>
                                 <li><a>Rename</a></li>
-                                <li><a href="?delFile=user/' .$uid. '/files/'. $dir . $fileName.'">Delete</a></li>
+                                <li><a href="?delFile=user/' . $uid . '/files/' . $dir . $fileName . '">Delete</a></li>
                                 <li><a>Move</a></li>
                             </ul>
                         </div>
                     </div>
                 </div>
                 <script>
-                    function contextMenu_'.str_replace([".", " "], "_", $fileName).'()
+                    function contextMenu_' . str_replace([".", " ", "-"], "_", $fileName) . '()
                     {
-                        let doc = document.getElementById("contextMenu-'.str_replace([".", " "], "_", $fileName).'");
+                        let doc = document.getElementById("contextMenu-' . str_replace([".", " ", "-"], "_", $fileName) . '");
                         doc.classList.toggle("showNone");
                     }
                 </script>
@@ -433,32 +434,32 @@ function videoFileEcho($fileName, $uid)
     '
             <div class="file-box">
                 <div class="file">
-                    <span class="corner" style="z-index: 10" onclick="contextMenu_'.str_replace([".", " "], "_", $fileName).'();"></span>
+                    <span class="corner" style="z-index: 10" onclick="contextMenu_' . str_replace([".", " ", "-"], "_", $fileName) . '();"></span>
                     <a href="#">
                         <div class="icon">
                             <i class="img-responsive fa fa-film"></i>
                         </div>
-                        <div class="file-name">
-                            ' . $fileName . '
+                        <div class="file-name" style="overflow: hidden">
+                            <p style="height: 24px; overflow: hidden">' . $fileName . '</p>
                         </div>
                     </a>
                 </div>
-                <div id="contextMenu-'.str_replace([".", " "], "_", $fileName).'" class="contextMenu container showNone" style="background-color: rgba(83, 83, 83, 1); width: 200px; z-index: 11; margin-right: 20px; position: absolute;">
+                <div id="contextMenu-' . str_replace([".", " ", "-"], "_", $fileName) . '" class="contextMenu container showNone" style="background-color: rgba(83, 83, 83, 1); width: 200px; z-index: 11; margin-right: 20px; position: absolute;">
                     <div class="">
                         <div>
                             <ul style="list-style: none">
-                                <li><a href="/user/' .$uid. '/files/'. $dir . $fileName.'" download>Download</a></li>
+                                <li><a href="/user/' . $uid . '/files/' . $dir . $fileName . '" download>Download</a></li>
                                 <li><a>Rename</a></li>
-                                <li><a href="?delFile=user/' .$uid. '/files/'. $dir . $fileName.'">Delete</a></li>
+                                <li><a href="?delFile=user/' . $uid . '/files/' . $dir . $fileName . '">Delete</a></li>
                                 <li><a>Move</a></li>
                             </ul>
                         </div>
                     </div>
                 </div>
                 <script>
-                    function contextMenu_'.str_replace([".", " "], "_", $fileName).'()
+                    function contextMenu_' . str_replace([".", " ", "-"], "_", $fileName) . '()
                     {
-                        let doc = document.getElementById("contextMenu-'.str_replace([".", " "], "_", $fileName).'");
+                        let doc = document.getElementById("contextMenu-' . str_replace([".", " ", "-"], "_", $fileName) . '");
                         doc.classList.toggle("showNone");
                     }
                 </script>
@@ -479,32 +480,32 @@ function imageFileEcho($fileName, $uid)
     '
             <div class="file-box">
                 <div class="file">
-                    <span class="corner" style="z-index: 10" onclick="contextMenu_'.str_replace([".", " "], "_", $fileName).'();"></span>
+                    <span class="corner" style="z-index: 10" onclick="contextMenu_' . str_replace([".", " ", "-"], "_", $fileName) . '();"></span>
                     <a href="#">
                         <div class="image">
                             <img alt="' . $fileName . '" class="img-fluid" src="/user/' . $uid . '/files/' . $dir . $fileName . '">
                         </div>
-                        <div class="file-name">
-                            ' . $fileName . '
+                        <div class="file-name" style="overflow: hidden">
+                            <p style="height: 24px; overflow: hidden">' . $fileName . '</p>
                         </div>
                     </a>
                 </div>
-                <div id="contextMenu-'.str_replace([".", " "], "_", $fileName).'" class="contextMenu container showNone" style="background-color: rgba(83, 83, 83, 1); width: 200px; z-index: 11; margin-right: 20px; position: absolute;">
+                <div id="contextMenu-' . str_replace([".", " ", "-"], "_", $fileName) . '" class="contextMenu container showNone" style="background-color: rgba(83, 83, 83, 1); width: 200px; z-index: 11; margin-right: 20px; position: absolute;">
                     <div class="">
                         <div>
                             <ul style="list-style: none">
-                                <li><a href="/user/' .$uid. '/files/'. $dir . $fileName.'" download>Download</a></li>
+                                <li><a href="/user/' . $uid . '/files/' . $dir . $fileName . '" download>Download</a></li>
                                 <li><a>Rename</a></li>
-                                <li><a href="?delFile=user/' .$uid. '/files/'. $dir . $fileName.'">Delete</a></li>
+                                <li><a href="?delFile=user/' . $uid . '/files/' . $dir . $fileName . '">Delete</a></li>
                                 <li><a>Move</a></li>
                             </ul>
                         </div>
                     </div>
                 </div>
                 <script>
-                    function contextMenu_'.str_replace([".", " "], "_", $fileName).'()
+                    function contextMenu_' . str_replace([".", " ", "-"], "_", $fileName) . '()
                     {
-                        let doc = document.getElementById("contextMenu-'.str_replace([".", " "], "_", $fileName).'");
+                        let doc = document.getElementById("contextMenu-' . str_replace([".", " ", "-"], "_", $fileName) . '");
                         doc.classList.toggle("showNone");
                     }
                 </script>
@@ -525,32 +526,32 @@ function elseFileEcho($fileName, $uid)
     '
             <div class="file-box">
                 <div class="file">
-                    <span class="corner" style="z-index: 10" onclick="contextMenu_'.str_replace([".", " "], "_", $fileName).'();"></span>
+                    <span class="corner" style="z-index: 10" onclick="contextMenu_' . str_replace([".", " ", "-"], "_", $fileName) . '();"></span>
                     <a href="#">
                         <div class="icon">
                             <i class="fa fa-file"></i>
                         </div>
-                        <div class="file-name">
-                            ' . $fileName . '
+                        <div class="file-name" style="overflow: hidden">
+                            <p style="height: 24px; overflow: hidden">' . $fileName . '</p>
                         </div>
                     </a>
                 </div>
-                <div id="contextMenu-'.str_replace([".", " "], "_", $fileName).'" class="contextMenu container showNone" style="background-color: rgba(83, 83, 83, 1); width: 200px; z-index: 11; margin-right: 20px; position: absolute;">
+                <div id="contextMenu-' . str_replace([".", " ", "-"], "_", $fileName) . '" class="contextMenu container showNone" style="background-color: rgba(83, 83, 83, 1); width: 200px; z-index: 11; margin-right: 20px; position: absolute;">
                     <div class="">
                         <div>
                             <ul style="list-style: none">
-                                <li><a href="/user/' .$uid. '/files/'. $dir . $fileName.'" download>Download</a></li>
+                                <li><a href="/user/' . $uid . '/files/' . $dir . $fileName . '" download>Download</a></li>
                                 <li><a onclick="renameInput()">Rename</a></li>
-                                <li><a href="?delFile=user/' .$uid. '/files/'. $dir . $fileName.'">Delete</a></li>
+                                <li><a href="?delFile=user/' . $uid . '/files/' . $dir . $fileName . '">Delete</a></li>
                                 <li><a>Move</a></li>
                             </ul>
                         </div>
                     </div>
                 </div>
                 <script>
-                    function contextMenu_'.str_replace([".", " "], "_", $fileName).'()
+                    function contextMenu_' . str_replace([".", " ", "-"], "_", $fileName) . '()
                     {
-                        let doc = document.getElementById("contextMenu-'.str_replace([".", " "], "_", $fileName).'");
+                        let doc = document.getElementById("contextMenu-' . str_replace([".", " ", "-"], "_", $fileName) . '");
                         doc.classList.toggle("showNone");
                     }
                     function renameInput() {
@@ -573,30 +574,30 @@ function dirFileEcho($fileName)
     '
             <div class="file-box">
                 <div class="file">
-                    <span class="corner" style="z-index: 10" onclick="contextMenu_'.str_replace([".", " "], "_", $fileName).'();"></span>
+                    <span class="corner" style="z-index: 10" onclick="contextMenu_' . str_replace([".", " ", "-"], "_", $fileName) . '();"></span>
                     <a href="/fileManager.php?dir=' . $fileName . '">
                         <div class="icon">
                             <i class="fa fa-folder"></i>
                         </div>
-                        <div class="file-name">
-                            ' . $fileName . '
+                        <div class="file-name" style="overflow: hidden">
+                            <p style="height: 24px; overflow: hidden">' . $fileName . '</p>
                         </div>
                     </a>
                 </div>
-                <div id="contextMenu-'.str_replace([".", " "], "_", $fileName).'" class="contextMenu container showNone" style="background-color: rgba(83, 83, 83, 1); width: 200px; z-index: 11; margin-right: 20px; position: absolute;">
+                <div id="contextMenu-' . str_replace([".", " ", "-"], "_", $fileName) . '" class="contextMenu container showNone" style="background-color: rgba(83, 83, 83, 1); width: 200px; z-index: 11; margin-right: 20px; position: absolute;">
                     <div class="">
                         <div>
                             <ul style="list-style: none; margin: 0;">
                                 <li><a href="" onclick="renameInput()">Rename</a></li>
-                                <li><a href="?delFolder='.$fileName.'">Delete</a></li>
+                                <li><a href="?delFolder=' . $fileName . '">Delete</a></li>
                             </ul>
                         </div>
                     </div>
                 </div>
                 <script>
-                    function contextMenu_'.str_replace([".", " "], "_", $fileName).'()
+                    function contextMenu_' . str_replace([".", " ", "-"], "_", $fileName) . '()
                     {
-                        let doc = document.getElementById("contextMenu-'.str_replace([".", " "], "_", $fileName).'");
+                        let doc = document.getElementById("contextMenu-' . str_replace([".", " ", "-"], "_", $fileName) . '");
                         doc.classList.toggle("showNone");
                     }
                     function renameInput() {

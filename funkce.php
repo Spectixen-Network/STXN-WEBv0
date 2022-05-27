@@ -135,9 +135,6 @@ function navbar()
                     </a>
                     <ul class="nav justify-content-center">
                         <li class="nav-item">
-                            <a href="/test.php" class="nav-link">test</a>
-                        </li>
-                        <li class="nav-item">
                             <a href="/index.php" class="nav-link">Home</a>
                         </li>
                         <li class="nav-item">
@@ -260,13 +257,10 @@ function navbar_logged()
                     </a>
                     <ul class="nav justify-content-center">
                         <li class="nav-item">
-                            <a href="/test.php" class="nav-link">test</a>
-                        </li>
-                        <li class="nav-item">
                             <a href="/index.php" class="nav-link">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a href="/fileManager.php?uid='.$_SESSION["UID"].'" class="nav-link">File manager</a>
+                            <a href="/fileManager.php?uid=' . $_SESSION["UID"] . '" class="nav-link">File manager</a>
                         </li>
                         <li class="nav-item">
                             <a href="/creators.php" class="nav-link">Creators</a>
@@ -354,7 +348,7 @@ function banner($name)
 function html_start($title, $css_file_pathname_1, $css_file_pathname_2 = "", $css_file_pathname_3 = "")
 {
     $_SESSION["PAGE"] = $_SERVER["SCRIPT_NAME"];
-    if($_SERVER["PHP_SELF"] != "/fileManager.php")
+    if ($_SERVER["PHP_SELF"] != "/fileManager.php")
     {
         unset($_SESSION["FILE_MANAGER_UID"]);
     }
@@ -797,17 +791,20 @@ function svg_image()
 }
 function isLoggedElseRedirect()
 {
-    if(!isset($_SESSION["UID"]))
+    if (!isset($_SESSION["UID"]))
     {
         header("Location: /index.php");
     }
 }
 // NOT MY FUNCTION
-function GetDirectorySize($path){
+function GetDirectorySize($path)
+{
     $bytestotal = 0;
     $path = realpath($path);
-    if($path!==false && $path!='' && file_exists($path)){
-        foreach(new RecursiveIteratorIterator(new RecursiveDirectoryIterator($path, FilesystemIterator::SKIP_DOTS)) as $object){
+    if ($path !== false && $path != '' && file_exists($path))
+    {
+        foreach (new RecursiveIteratorIterator(new RecursiveDirectoryIterator($path, FilesystemIterator::SKIP_DOTS)) as $object)
+        {
             $bytestotal += $object->getSize();
         }
     }
