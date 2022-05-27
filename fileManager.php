@@ -2,9 +2,20 @@
 session_start();
 include 'funkce.php';
 
-
 isLoggedElseRedirect();
-$basePath = $_SERVER["DOCUMENT_ROOT"] . "/user/" . $_SESSION["UID"] . "/files/";
+if(isset($_GET["uid"]) && is_admin($_SESSION["UID"]))
+{
+    $_SESSION["FILE_MANAGER_UID"] = $_GET["uid"];
+}
+if(isset($_SESSION["FILE_MANAGER_UID"]))
+{
+    $uid = $_SESSION["FILE_MANAGER_UID"];
+}
+else
+{
+    $uid = $_SESSION["UID"];
+}
+$basePath = $_SERVER["DOCUMENT_ROOT"] . "/user/" . $uid  . "/files/";
 $dir = "";
 if (isset($_GET["dir"]))
 {
@@ -60,10 +71,14 @@ if (isset($_POST["createFolder"]) && $_POST["createFolder"] !== "")
         mkdir($basePath . $folder);
     }
 }
+if(isset($_GET["delFile"]))
+{
+    $file = test_input($_GET["delFile"]);
+    unlink($file);
+    echo '<script>window.location.href = "fileManager.php";</script>';
+}
 
 ?>
-
-
 
 <div class="container-fluid">
     <div class="row">
@@ -98,7 +113,7 @@ if (isset($_POST["createFolder"]) && $_POST["createFolder"] !== "")
                         </div>
                     </div> -->
                 <?php
-                folderContent($dir);
+                folderContent($dir, $uid);
                 ?>
             </div>
         </div>
@@ -277,9 +292,9 @@ function ibox($path)
         </script>
     ';
 }
-function folderContent($folder = "")
+function folderContent($folder = "", $uid)
 {
-    $path = $_SERVER["DOCUMENT_ROOT"] . "/user/" . $_SESSION["UID"] . "/files/" . $folder;
+    $path = $_SERVER["DOCUMENT_ROOT"] . "/user/" . $uid . "/files/" . $folder;
 
 
     $folderContent = scandir($path);
@@ -292,11 +307,11 @@ function folderContent($folder = "")
         }
         else
         {
-            determinFile($folderContent[$i]);
+            determinFile($folderContent[$i], $uid);
         }
     }
 }
-function determinFile($fileName)
+function determinFile($fileName, $uid)
 {
     $fileType = pathinfo($fileName)["extension"];
 
@@ -313,7 +328,7 @@ function determinFile($fileName)
     {
         if ($type === "images" || $type === true)
         {
-            imageFileEcho($fileName);
+            imageFileEcho($fileName, $uid);
         }
         return;
     }
@@ -321,7 +336,7 @@ function determinFile($fileName)
     {
         if ($type === "audio" || $type === true)
         {
-            audioFileEcho($fileName);
+            audioFileEcho($fileName, $uid);
         }
         return;
     }
@@ -329,13 +344,13 @@ function determinFile($fileName)
     {
         if ($type === "video" || $type === true)
         {
-            videoFileEcho($videoFormats);
+            videoFileEcho($videoFormats, $uid);
         }
         return;
     }
     if ($type === true)
     {
-        elseFileEcho($fileName);
+        elseFileEcho($fileName, $uid);
     }
 }
 function sortDirFirst($path, $array)
@@ -358,51 +373,53 @@ function sortDirFirst($path, $array)
 
     return array_merge($dirArray, $rest);
 }
-function audioFileEcho($fileName)
+function audioFileEcho($fileName, $uid)
 {
+    if (isset($_GET["dir"]))
+    {
+        $dir = test_input($_GET["dir"]) . "/";
+    }
+    else
+    {
+        $dir = "";
+    }
     echo
     '
             <div class="file-box" >
                 <div class="file">
+                    <span class="corner" style="z-index: 10" onclick="contextMenu_'.str_replace([".", " "], "_", $fileName).'();"></span>
                     <a href="#">
-                        <span class="corner"></span>
-            
                         <div class="icon">
                             <i class="fa fa-music"></i>
                         </div>
                         <div class="file-name">
                             ' . $fileName . '
-                            <br>
-                            <small>Added: Jan 22, 2014</small>
                         </div>
                     </a>
                 </div>
-            </div>
-        ';
-}
-function videoFileEcho($fileName)
-{
-    echo
-    '
-            <div class="file-box">
-                <div class="file">
-                    <a href="#">
-                        <span class="corner"></span>
-            
-                        <div class="icon">
-                            <i class="img-responsive fa fa-film"></i>
+                <div id="contextMenu-'.str_replace([".", " "], "_", $fileName).'" class="contextMenu container showNone" style="background-color: rgba(83, 83, 83, 1); width: 200px; z-index: 11; margin-right: 20px; position: absolute;">
+                    <div class="">
+                        <div>
+                            <ul style="list-style: none">
+                                <li><a href="/user/' .$uid. '/files/'. $dir . $fileName.'" download>Download</a></li>
+                                <li><a>Rename</a></li>
+                                <li><a href="?delFile=user/' .$uid. '/files/'. $dir . $fileName.'">Delete</a></li>
+                                <li><a>Move</a></li>
+                            </ul>
                         </div>
-                        <div class="file-name">
-                            ' . $fileName . '
-                            <br>
-                            <small>Added: Fab 18, 2014</small>
-                        </div>
-                    </a>
+                    </div>
                 </div>
+                <script>
+                    function contextMenu_'.str_replace([".", " "], "_", $fileName).'()
+                    {
+                        let doc = document.getElementById("contextMenu-'.str_replace([".", " "], "_", $fileName).'");
+                        doc.classList.toggle("showNone");
+                    }
+                </script>
             </div>
         ';
 }
-function imageFileEcho($fileName)
+function videoFileEcho($fileName, $uid)
 {
     if (isset($_GET["dir"]))
     {
@@ -416,41 +433,137 @@ function imageFileEcho($fileName)
     '
             <div class="file-box">
                 <div class="file">
+                    <span class="corner" style="z-index: 10" onclick="contextMenu_'.str_replace([".", " "], "_", $fileName).'();"></span>
                     <a href="#">
-                        <span class="corner"></span>
-            
-                        <div class="image">
-                            <img alt="' . $fileName . '" class="img-fluid" src="/user/' . $_SESSION["UID"] . '/files/' . $dir . $fileName . '">
+                        <div class="icon">
+                            <i class="img-responsive fa fa-film"></i>
                         </div>
                         <div class="file-name">
                             ' . $fileName . '
-                            <br>
-                            <small>Added: Jan 6, 2014</small>
                         </div>
                     </a>
                 </div>
+                <div id="contextMenu-'.str_replace([".", " "], "_", $fileName).'" class="contextMenu container showNone" style="background-color: rgba(83, 83, 83, 1); width: 200px; z-index: 11; margin-right: 20px; position: absolute;">
+                    <div class="">
+                        <div>
+                            <ul style="list-style: none">
+                                <li><a href="/user/' .$uid. '/files/'. $dir . $fileName.'" download>Download</a></li>
+                                <li><a>Rename</a></li>
+                                <li><a href="?delFile=user/' .$uid. '/files/'. $dir . $fileName.'">Delete</a></li>
+                                <li><a>Move</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <script>
+                    function contextMenu_'.str_replace([".", " "], "_", $fileName).'()
+                    {
+                        let doc = document.getElementById("contextMenu-'.str_replace([".", " "], "_", $fileName).'");
+                        doc.classList.toggle("showNone");
+                    }
+                </script>
             </div>
         ';
 }
-function elseFileEcho($fileName)
+function imageFileEcho($fileName, $uid)
 {
+    if (isset($_GET["dir"]))
+    {
+        $dir = test_input($_GET["dir"]) . "/";
+    }
+    else
+    {
+        $dir = "";
+    }
     echo
     '
             <div class="file-box">
                 <div class="file">
+                    <span class="corner" style="z-index: 10" onclick="contextMenu_'.str_replace([".", " "], "_", $fileName).'();"></span>
                     <a href="#">
-                        <span class="corner"></span>
-            
+                        <div class="image">
+                            <img alt="' . $fileName . '" class="img-fluid" src="/user/' . $uid . '/files/' . $dir . $fileName . '">
+                        </div>
+                        <div class="file-name">
+                            ' . $fileName . '
+                        </div>
+                    </a>
+                </div>
+                <div id="contextMenu-'.str_replace([".", " "], "_", $fileName).'" class="contextMenu container showNone" style="background-color: rgba(83, 83, 83, 1); width: 200px; z-index: 11; margin-right: 20px; position: absolute;">
+                    <div class="">
+                        <div>
+                            <ul style="list-style: none">
+                                <li><a href="/user/' .$uid. '/files/'. $dir . $fileName.'" download>Download</a></li>
+                                <li><a>Rename</a></li>
+                                <li><a href="?delFile=user/' .$uid. '/files/'. $dir . $fileName.'">Delete</a></li>
+                                <li><a>Move</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <script>
+                    function contextMenu_'.str_replace([".", " "], "_", $fileName).'()
+                    {
+                        let doc = document.getElementById("contextMenu-'.str_replace([".", " "], "_", $fileName).'");
+                        doc.classList.toggle("showNone");
+                    }
+                </script>
+            </div>
+        ';
+}
+function elseFileEcho($fileName, $uid)
+{
+    if (isset($_GET["dir"]))
+    {
+        $dir = test_input($_GET["dir"]) . "/";
+    }
+    else
+    {
+        $dir = "";
+    }
+    echo
+    '
+            <div class="file-box">
+                <div class="file">
+                    <span class="corner" style="z-index: 10" onclick="contextMenu_'.str_replace([".", " "], "_", $fileName).'();"></span>
+                    <a href="#">
                         <div class="icon">
                             <i class="fa fa-file"></i>
                         </div>
                         <div class="file-name">
                             ' . $fileName . '
-                            <br>
-                            <small>Added: Jan 22, 2014</small>
                         </div>
                     </a>
                 </div>
+                <div id="contextMenu-'.str_replace([".", " "], "_", $fileName).'" class="contextMenu container showNone" style="background-color: rgba(83, 83, 83, 1); width: 200px; z-index: 11; margin-right: 20px; position: absolute;">
+                    <div class="">
+                        <div>
+                            <ul style="list-style: none">
+                                <li><a href="/user/' .$uid. '/files/'. $dir . $fileName.'" download>Download</a></li>
+                                <li><a onclick="renameInput()">Rename</a></li>
+                                <li><a href="?delFile=user/' .$uid. '/files/'. $dir . $fileName.'">Delete</a></li>
+                                <li><a>Move</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <script>
+                    function contextMenu_'.str_replace([".", " "], "_", $fileName).'()
+                    {
+                        let doc = document.getElementById("contextMenu-'.str_replace([".", " "], "_", $fileName).'");
+                        doc.classList.toggle("showNone");
+                    }
+                    function renameInput() {
+                      let text;
+                      let person = prompt("Please enter your name:", "Harry Potter");
+                      if (person == null || person == "") {
+                        text = "User cancelled the prompt.";
+                      } else {
+                        text = "Hello " + person + "! How are you today?";
+                      }
+                      document.getElementById("demo").innerHTML = text;
+                    }
+                </script>
             </div>
         ';
 }
@@ -458,22 +571,47 @@ function dirFileEcho($fileName)
 {
     echo
     '
-            <div class="file-box" value="bhgvgh">
+            <div class="file-box">
                 <div class="file">
+                    <span class="corner" style="z-index: 10" onclick="contextMenu_'.str_replace([".", " "], "_", $fileName).'();"></span>
                     <a href="/fileManager.php?dir=' . $fileName . '">
-                        <span class="corner"></span>
-            
                         <div class="icon">
                             <i class="fa fa-folder"></i>
                         </div>
                         <div class="file-name">
                             ' . $fileName . '
-                            <br>
-                            <small>Added: Jan 22, 2014</small>
                         </div>
                     </a>
                 </div>
+                <div id="contextMenu-'.str_replace([".", " "], "_", $fileName).'" class="contextMenu container showNone" style="background-color: rgba(83, 83, 83, 1); width: 200px; z-index: 11; margin-right: 20px; position: absolute;">
+                    <div class="">
+                        <div>
+                            <ul style="list-style: none; margin: 0;">
+                                <li><a href="" onclick="renameInput()">Rename</a></li>
+                                <li><a href="?delFolder='.$fileName.'">Delete</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <script>
+                    function contextMenu_'.str_replace([".", " "], "_", $fileName).'()
+                    {
+                        let doc = document.getElementById("contextMenu-'.str_replace([".", " "], "_", $fileName).'");
+                        doc.classList.toggle("showNone");
+                    }
+                    function renameInput() {
+                      let text;
+                      let person = prompt("Please enter your name:", "Harry Potter");
+                      if (person == null || person == "") {
+                        text = "User cancelled the prompt.";
+                      } else {
+                        text = "Hello " + person + "! How are you today?";
+                      }
+                      document.getElementById("demo").innerHTML = text;
+                    }
+                </script>
             </div>
+            
         ';
 }
 

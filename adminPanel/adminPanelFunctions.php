@@ -26,14 +26,14 @@ function adminSidebar()
                 <ul class="folder-list" style="padding-left: 0; padding-right: 0.5vh; padding-bottom: 100%">
                     <li><a href="/adminPanel/dashboard.php"><i class="fa fa-folder"></i> Dashboard</a></li>
                     <li><a href="/adminPanel/users.php"><i class="fa fa-folder"></i> Users</a></li>
-                    <li><a href=""><i class="fa fa-folder"></i> Mail</a></li>
+                    <!--<li><a href=""><i class="fa fa-folder"></i> Mail</a></li>
                     <li><a href=""><i class="fa fa-folder"></i> Calendar</a></li>
                     <li><a href=""><i class="fa fa-folder"></i> Icons</a></li>
                     <li><a href=""><i class="fa fa-folder"></i> Forms</a></li>
                     <li><a href=""><i class="fa fa-folder"></i> Charts</a></li>
                     <li><a href=""><i class="fa fa-folder"></i> Maps</a></li>
                     <li><a href=""><i class="fa fa-folder"></i> Layouts</a></li>
-                    <li><a href=""><i class="fa fa-folder"></i> Tables</a></li>
+                    <li><a href=""><i class="fa fa-folder"></i> Tables</a></li>-->
                 </ul>
 
             </nav>

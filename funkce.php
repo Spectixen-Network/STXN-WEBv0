@@ -266,7 +266,7 @@ function navbar_logged()
                             <a href="/index.php" class="nav-link">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a href="/fileManager.php" class="nav-link">File manager</a>
+                            <a href="/fileManager.php?uid='.$_SESSION["UID"].'" class="nav-link">File manager</a>
                         </li>
                         <li class="nav-item">
                             <a href="/creators.php" class="nav-link">Creators</a>
@@ -354,6 +354,10 @@ function banner($name)
 function html_start($title, $css_file_pathname_1, $css_file_pathname_2 = "", $css_file_pathname_3 = "")
 {
     $_SESSION["PAGE"] = $_SERVER["SCRIPT_NAME"];
+    if($_SERVER["PHP_SELF"] != "/fileManager.php")
+    {
+        unset($_SESSION["FILE_MANAGER_UID"]);
+    }
     echo '
 
     <!DOCTYPE html>

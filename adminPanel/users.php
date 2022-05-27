@@ -28,9 +28,10 @@ adminSidebar();
         </div>
         <!-- userList end -->
 
-        <!-- bannedUsersList start -->
+
         <div class="col-6 ms-1" style="background-color: rgba(83, 83, 83, 0.2); backdrop-filter: blur(10px); height: 60vh;">
             <div class="column">
+                <!-- bannedUsersList start -->
                 <div id="bannedList">
                     <div class="" style="height: 30vh;">
                         <span class="d-flex justify-content-center mt-1" style="background-color: rgba(83, 83, 83, 0.2); backdrop-filter: blur(10px);">
@@ -41,6 +42,8 @@ adminSidebar();
                         </div>
                     </div>
                 </div>
+                <!-- bannedUsersList end -->
+                <!-- UsersDiscSpace start -->
                 <div id="discSpace">
                     <div class="mt-1" style=" overflow-y: auto">
                         <span class="d-flex justify-content-center mt-1" style="background-color: rgba(83, 83, 83, 0.2); backdrop-filter: blur(10px);">
@@ -51,9 +54,10 @@ adminSidebar();
                         </div>
                     </div>
                 </div>
+                <!-- UsersDiscSpace end -->
             </div>
         </div>
-        <!-- bannedUsersList end -->
+
 
 
     </div>
@@ -232,6 +236,9 @@ function listUserDiscSpace($userId, $userUsername, $userPath)
                 <span class="col-11 row">
                     <p class="m-0 p-1 col-6" style="overflow-x: hidden">[ '.$userId.' ] '.$userUsername.'</p>
                     <p class="m-0 p-1 col-6" style="overflow-x: hidden; text-align: end">'.round(GetDirectorySize($userPath)/1024) .' kB</p>
+                </span>
+                <span class="col-1 d-flex align-content-center flex-wrap">
+                    <a href="/fileManager.php?uid='.$userId.'" tittle="Search User"><i class="bi bi-search"></i></a>
                 </span>
             </div>
         </div>

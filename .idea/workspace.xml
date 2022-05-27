@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e54c1f8a-9c3e-4c5c-9bcb-84966b22651f" name="Changes" comment="FIX CSS">
-      <change afterPath="$PROJECT_DIR$/scripts/customContextMenu.js" afterDir="false" />
+    <list default="true" id="e54c1f8a-9c3e-4c5c-9bcb-84966b22651f" name="Changes" comment="Výpis velikosti zabraného místa jednotlivými uživateli. Redirect, pokud uživatel není přihlášen a náhodou se ocitl na stránce, která vyžaduje přihlášení. Funkce k vypočtení velikosti složky. Přidána možnost prohlížení cizích profilů, ovšem pokud je osoba admin.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/adminPanel/adminPanelFunctions.php" beforeDir="false" afterPath="$PROJECT_DIR$/adminPanel/adminPanelFunctions.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/adminPanel/dashboard.php" beforeDir="false" afterPath="$PROJECT_DIR$/adminPanel/dashboard.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/adminPanel/users.php" beforeDir="false" afterPath="$PROJECT_DIR$/adminPanel/users.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/style.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/fileManager.php" beforeDir="false" afterPath="$PROJECT_DIR$/fileManager.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/funkce.php" beforeDir="false" afterPath="$PROJECT_DIR$/funkce.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/handlers/deleteUser.php" beforeDir="false" afterPath="$PROJECT_DIR$/handlers/deleteUser.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/profile.php" beforeDir="false" afterPath="$PROJECT_DIR$/profile.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/settings.php" beforeDir="false" afterPath="$PROJECT_DIR$/settings.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user/1/files/logo.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/user/1/files/unknown.png" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -68,7 +68,7 @@
       <workItem from="1652956953940" duration="623000" />
       <workItem from="1652958767881" duration="1244000" />
       <workItem from="1653284525612" duration="37666000" />
-      <workItem from="1653482713298" duration="11347000" />
+      <workItem from="1653482713298" duration="27992000" />
     </task>
     <task id="LOCAL-00001" summary="Admin panel functions: &#10; Přesunutí funkce sidebaru do jiného souboru&#10;Změna struktury admin panelu&#10; rozhodl jsem se přehodnotit funkčnost admin panelu. KAždá stránka bude mít vlastní soubor namísto všechno v jednom souboru. &#10; Přibyly soubory users.php, adminPanelFunctions.php. soubor adminPanel.php byl přejmenován na dashboard.php.">
       <created>1653302012448</created>
@@ -112,7 +112,14 @@
       <option name="project" value="LOCAL" />
       <updated>1653481871089</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Výpis velikosti zabraného místa jednotlivými uživateli. Redirect, pokud uživatel není přihlášen a náhodou se ocitl na stránce, která vyžaduje přihlášení. Funkce k vypočtení velikosti složky. Přidána možnost prohlížení cizích profilů, ovšem pokud je osoba admin.">
+      <created>1653567769448</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1653567769448</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -140,6 +147,8 @@
     <MESSAGE value="Update SQL, do tabulky bannedUsers přibyla kolonka reason, je však nepovinná." />
     <MESSAGE value="Do databáze přibyly tabulky pro userinfo a adresu.&#10;Funkčnost pro zabanování, odstranění, promotnutí, demotnutí a odbanování byly vytvořeny." />
     <MESSAGE value="FIX CSS" />
-    <option name="LAST_COMMIT_MESSAGE" value="FIX CSS" />
+    <MESSAGE value="Výpis velikosti zabraného místa jednotlivými uživateli." />
+    <MESSAGE value="Výpis velikosti zabraného místa jednotlivými uživateli. Redirect, pokud uživatel není přihlášen a náhodou se ocitl na stránce, která vyžaduje přihlášení. Funkce k vypočtení velikosti složky. Přidána možnost prohlížení cizích profilů, ovšem pokud je osoba admin." />
+    <option name="LAST_COMMIT_MESSAGE" value="Výpis velikosti zabraného místa jednotlivými uživateli. Redirect, pokud uživatel není přihlášen a náhodou se ocitl na stránce, která vyžaduje přihlášení. Funkce k vypočtení velikosti složky. Přidána možnost prohlížení cizích profilů, ovšem pokud je osoba admin." />
   </component>
 </project>

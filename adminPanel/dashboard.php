@@ -69,7 +69,9 @@ function adminDashnoard()
                         </div>
                         <div class="col-4" style="background-color: rgba(83, 83, 83, 0.2); backdrop-filter: blur(10px); border: 3px solid rgba(0, 0, 0, .2);">
                             <div id="adminPanelToDoList">TO DO LIST</div>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga veniam totam, porro animi iste, accusamus odio ipsum velit beatae neque debitis recusandae! Omnis nam nulla consequuntur, distinctio corporis asperiores minima.</p>
+                            <p>Dokončit file manager správu souborů.</p>
+                            <p>Nastavení user profilu.</p>
+                            <p>Pro admini možnost prohlížení adresářů jiných uživatelů.</p>
                         </div>
                     </div>
                 </div>
