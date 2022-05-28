@@ -9,7 +9,7 @@ html_start("Admin", "css/style");
 nav();
 
 adminDashnoard();
-
+footer();
 html_end();
 
 function adminDashnoard()

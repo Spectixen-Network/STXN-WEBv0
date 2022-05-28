@@ -362,6 +362,7 @@ a:hover {
     display: none;
 }
 
+
 /* Admin panel start */
 
 #adminSidebarContainer {
@@ -482,15 +483,17 @@ a:hover {
     backdrop-filter: blur(10px);
     padding: 0;
 }
-.userList{
+
+.userList {
     background-color: rgba(83, 83, 83, 0.2);
 }
-.userList a
-{
+
+.userList a {
     text-decoration: none;
     color: #c300ff;
 }
-.userList:hover{
+
+.userList:hover {
     background-color: rgba(83, 83, 83, 0.4);
 }
 
@@ -505,7 +508,7 @@ a:hover {
     margin-bottom: 5px;
 }
 
-footer{
+footer {
     bottom: 0px;
     color: #ffff;
     height: auto;
@@ -514,7 +517,7 @@ footer{
     font-family: Arial, Helvetica, sans-serif;
 }
 
-.footer-content{
+.footer-content {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -523,7 +526,7 @@ footer{
     background-color: rgba(31, 31, 31, 0.8);
 }
 
-.footer-content h3{
+.footer-content h3 {
     font-family: fantasy, Arial, Helvetica, sans-serif;
     margin-top: 10px;
     font-size: 1.5rem;
@@ -531,7 +534,7 @@ footer{
     line-height: 2rem;
 }
 
-.footer-content p{
+.footer-content p {
     max-width: 90%;
     margin: 10px auto;
     line-height: 28px;
@@ -539,7 +542,7 @@ footer{
     font-weight: 100;
 }
 
-.footer-links{
+.footer-links {
     list-style: none;
     display: flex;
     align-items: center;
@@ -548,58 +551,58 @@ footer{
     padding: 0;
 }
 
-.footer-links li{
+.footer-links li {
     margin: 0 10px;
 }
 
-.footer-links a{
+.footer-links a {
     text-decoration: none;
 }
 
-.footer-links a i{
+.footer-links a i {
     font-size: 1.5rem;
     color: #c300ff;
     transition: color .5s ease;
 }
 
-.footer-links a:hover i{
+.footer-links a:hover i {
     color: #9f00cf;
 }
 
-.footer-bottom{
+.footer-bottom {
     background-color: rgba(31, 31, 31);
     width: 100vw;
     padding: 5px 0;
     text-align: center;
 }
 
-.footer-bottom p{
+.footer-bottom p {
     margin: 0;
     font-size: 14px;
     word-spacing: 2px;
     text-transform: capitalize;
 }
 
-.footer-bottom p span{
+.footer-bottom p span {
     font-weight: 400;
     opacity: 0.5;
     color: #9f00cf;
     text-transform: uppercase;
 }
 
-#profile-box{
+#profile-box {
     background-color: rgba(83, 83, 83, 0.5);
     backdrop-filter: blur(10px);
 }
 
-#profile-avatar-img{
+#profile-avatar-img {
     width: 150px;
     height: auto;
     border-radius: 150px;
     margin-bottom: 20px;
 }
 
-#profile-header{
+#profile-header {
     text-align: center;
     text-transform: capitalize;
     font-size: 2em;
@@ -609,72 +612,75 @@ footer{
     padding: 0;
 }
 
-#profile-header span{
+#profile-header span {
     color: #c300ff;
 }
 
-#profile-content-box-1{
+#profile-content-box-1 {
     background-color: rgba(83, 83, 83, 0.4);
     border: #232323 1px solid;
     border-radius: 5px;
     margin: 5px;
 }
 
-#profile-content-box-2{
-    background-color: rgba(83, 83, 83, 0.4);
-    border: #232323 1px solid;
-    border-radius: 5px;
-    margin: 5px;
-}
-#profile-content-box-3{
-    background-color: rgba(83, 83, 83, 0.4);
-    border: #232323 1px solid;
-    border-radius: 5px;
-    margin: 5px;
-}
-#profile-content-box-4{
-    background-color: rgba(83, 83, 83, 0.4);
-    border: #232323 1px solid;
-    border-radius: 5px;
-    margin: 5px;
-}
-#profile-content-box-5{
+#profile-content-box-2 {
     background-color: rgba(83, 83, 83, 0.4);
     border: #232323 1px solid;
     border-radius: 5px;
     margin: 5px;
 }
 
-#profile-basic-info h3{
+#profile-content-box-3 {
+    background-color: rgba(83, 83, 83, 0.4);
+    border: #232323 1px solid;
+    border-radius: 5px;
+    margin: 5px;
+}
+
+#profile-content-box-4 {
+    background-color: rgba(83, 83, 83, 0.4);
+    border: #232323 1px solid;
+    border-radius: 5px;
+    margin: 5px;
+}
+
+#profile-content-box-5 {
+    background-color: rgba(83, 83, 83, 0.4);
+    border: #232323 1px solid;
+    border-radius: 5px;
+    margin: 5px;
+}
+
+#profile-basic-info h3 {
     background-color: rgba(83, 83, 83, 0.4);
     color: #ffff;
     text-align: center;
 }
 
-#profile-additional-info h3{
+#profile-additional-info h3 {
     background-color: rgba(83, 83, 83, 0.4);
     color: #ffff;
     text-align: center;
 }
 
-#profile-contact-info h3{
+#profile-contact-info h3 {
     background-color: rgba(83, 83, 83, 0.4);
     color: #ffff;
     text-align: center;
 }
 
-#profile-rank{
+#profile-rank {
     background-color: rgba(83, 83, 83, 0.4);
     color: #ffff;
     text-align: center;
 }
 
-#profile-age{
+#profile-age {
     background-color: rgba(83, 83, 83, 0.4);
     color: #ffff;
     text-align: center;
 }
-.contextMenu a:hover
-{
-   color: #9f00cf;
+
+.contextMenu a:hover {
+    color: #9f00cf;
 }

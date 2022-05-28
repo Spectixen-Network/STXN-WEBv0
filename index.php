@@ -30,7 +30,5 @@ window.addEventListener("scroll", (event) => {
 echo '<div class="container" style="padding-top: 5vh">';
 some_text();
 echo '</div>';
-html_end();
-
-
 footer();
+html_end();

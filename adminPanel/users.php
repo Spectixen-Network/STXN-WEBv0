@@ -65,7 +65,7 @@ adminSidebar();
 <?php
 echo '      </div>
         </div>';
-
+footer();
 html_end();
 
 
@@ -105,7 +105,7 @@ function userListsListUser($userId, $userUsername, $userAdmin)
         echo
         '                  </span>
                                 <span class="col-3">
-                                    <a href="/profile.php?uid='.$userId.'" tittle="Search User"><i class="bi bi-search"></i></a>
+                                    <a href="/profile.php?uid=' . $userId . '" tittle="Search User"><i class="bi bi-search"></i></a>
                                 </span>
                                 <span class="col-3">';
         if (!is_banned($userId))
@@ -206,7 +206,7 @@ function bannedListListUser($userId, $userUsername, $from_date, $to_date)
                     <span class="col-3">
                     </span>
                     <span class="col-3">
-                        <a href="/handlers/unBanUser.php?uid='.$userId.'"><i class="fa-solid fa-ban"></i></a>
+                        <a href="/handlers/unBanUser.php?uid=' . $userId . '"><i class="fa-solid fa-ban"></i></a>
                     </span>
                 </div>
             </span>
@@ -234,11 +234,11 @@ function listUserDiscSpace($userId, $userUsername, $userPath)
         <div class="mt-1 userList" style="">
             <div class="row" style="width: 100%; margin: 0; text-align: center">
                 <span class="col-11 row">
-                    <p class="m-0 p-1 col-6" style="overflow-x: hidden">[ '.$userId.' ] '.$userUsername.'</p>
-                    <p class="m-0 p-1 col-6" style="overflow-x: hidden; text-align: end">'.round(GetDirectorySize($userPath)/1024) .' kB</p>
+                    <p class="m-0 p-1 col-6" style="overflow-x: hidden">[ ' . $userId . ' ] ' . $userUsername . '</p>
+                    <p class="m-0 p-1 col-6" style="overflow-x: hidden; text-align: end">' . round(GetDirectorySize($userPath) / 1024) . ' kB</p>
                 </span>
                 <span class="col-1 d-flex align-content-center flex-wrap">
-                    <a href="/fileManager.php?uid='.$userId.'" tittle="Search User"><i class="bi bi-search"></i></a>
+                    <a href="/fileManager.php?uid=' . $userId . '" tittle="Search User"><i class="bi bi-search"></i></a>
                 </span>
             </div>
         </div>
@@ -253,7 +253,7 @@ function listAllUsersDiscSpace()
 
     $path = $_SERVER["DOCUMENT_ROOT"] . "/user/";
 
-    for($i = 0; $i < mysqli_num_rows($result); $i++)
+    for ($i = 0; $i < mysqli_num_rows($result); $i++)
     {
         $row = mysqli_fetch_assoc($result);
         listUserDiscSpace($row["uid"], $row["username"], $path . "/" . $row["uid"]);

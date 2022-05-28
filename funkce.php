@@ -163,18 +163,18 @@ function navbar()
                                 <div class="form-floating mt-3 mb-3">
                                     <input type="text" class="form-control" id="username" placeholder="Enter username" name="username" required>
                                     <label for="username" class="form-label">Username:</label>
-                                    <div class="valid-feedback">Valid.</div>
+                                    <div class="valid-feedback"></div>
                                     <div class="invalid-feedback"></div>
                                 </div>
                                 <div class="form-floating mt-3 mb-3">
                                     <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pswd" required>
                                     <label for="pwd" class="form-label">Password:</label>
-                                    <div class="valid-feedback">Valid.</div>
+                                    <div class="valid-feedback"></div>
                                     <div class="invalid-feedback"></div>
                                 </div>
                                 <div class="form-check mb-3">
                                     <label class="form-check-label">
-                                        <input class="form-check-input" type="checkbox" name="remember"> Remember me
+                                        <input class="form-check-input" type="checkbox" name="remember"> Remember me (WIP)
                                     </label>
                                 </div>
                                 <button id="loginSubmit" type="submit" class="btn btn-success">Log In</button>
@@ -204,19 +204,19 @@ function navbar()
 
                                     <input type="text" class="form-control" id="username" placeholder="Enter username" name="username" required>
                                     <label for="username" class="form-label">Username:</label>
-                                    <div class="valid-feedback">Valid.</div>
+                                    <div class="valid-feedback"></div>
                                     <div class="invalid-feedback"></div>
                                 </div>
                                 <div class="form-floating mt-3 mb-3">
                                     <input type="text" class="form-control" id="email" placeholder="Enter email" name="email" required>
                                     <label for="username" class="form-label">Email:</label>
-                                    <div class="valid-feedback">Valid.</div>
+                                    <div class="valid-feedback"></div>
                                     <div class="invalid-feedback"></div>
                                 </div>
                                 <div class="form-floating mt-3 mb-3">
                                     <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pswd" required>
                                     <label for="pwd" class="form-label">Password:</label>
-                                    <div class="valid-feedback">Valid.</div>
+                                    <div class="valid-feedback"></div>
                                     <div class="invalid-feedback"></div>
                                 </div>
                                 <div class="form-check mb-3">
