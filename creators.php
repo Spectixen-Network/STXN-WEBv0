@@ -10,7 +10,7 @@ banner("Founders of Spectixen Network");
 <div class="container-fluid d-flex" style="justify-content: center;">
     <div class="card col-sm-4" style="width:450px; text-align: center;" id="card">
         <div class="d-flex justify-content-center">
-            <img class="card-img-top rounded-circle" src="/user/1/images/avatar_red_zoomed.png" style="width:400px; margin-top: 5px;" Card image>
+            <img class="card-img-top rounded-circle" src="/user/1/<?php echo image_from_id(1); ?>" style="width:400px; margin-top: 5px;" Card image>
         </div>
         <div class="card-body">
             <h4 class="card-title text-warning">AppleJamp</h4>
@@ -20,7 +20,7 @@ banner("Founders of Spectixen Network");
                 working on ambitious projects.</p>
             <div class="container-fluid d-flex" style="text-align: center; font-size: 3em;">
                 <span class="col-sm-4">
-                    <a href=""><i class="bi bi-discord"></i></a>
+                    <a href="https://discord.com/invite/H3ZBhtQ" target="_blank"><i class="bi bi-discord"></i></a>
                 </span>
                 <span class="col-sm-4">
                     <a href="https://twitter.com/DPivka" target="_blank"><i class="bi bi-twitter"></i></a>
@@ -37,7 +37,7 @@ banner("Founders of Spectixen Network");
     <div class="col-sm-4"></div>
     <div class="card col-sm-4" style="width:450px; text-align: center;" id="card">
         <div class="d-flex justify-content-center">
-            <img class="card-img-top rounded-circle d-flex" src="/user/2/images/SpectixenNetwork_logo.png" style="width:400px; margin-top: 5px;" Card image>
+            <img class="card-img-top rounded-circle d-flex" src="/user/2/<?php echo image_from_id(2); ?>" style="width:400px; margin-top: 5px;" Card image>
         </div>
         <div class="card-body">
             <h4 class="card-title text-warning">Yura</h4>
@@ -47,7 +47,7 @@ banner("Founders of Spectixen Network");
                 working on ambitious projects.</p>
             <div class="container-fluid d-flex" style="text-align: center; font-size: 3em;">
                 <span class="col-sm-4">
-                    <a href="#"><i class="bi bi-discord"></i></a>
+                    <a href="https://discord.com/invite/H3ZBhtQ" target="_blank"><i class="bi bi-discord"></i></a>
                 </span>
                 <span class="col-sm-4">
                     <a href="https://twitter.com/CrazyBrumik" target="_blank"><i class="bi bi-twitter"></i></a>

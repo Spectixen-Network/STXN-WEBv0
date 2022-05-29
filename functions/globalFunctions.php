@@ -91,6 +91,13 @@ function navbar_profile_image()
     $result = mysqli_query($con, $query);
     return mysqli_fetch_array($result)[0];
 }
+function image_from_id($id)
+{
+    $con = db_connection();
+    $query = "SELECT image_path FROM user WHERE uid='" . $id . "'";
+    $result = mysqli_query($con, $query);
+    return mysqli_fetch_array($result)[0];
+}
 function is_admin($uid)
 {
     $con = db_connection();

@@ -681,6 +681,47 @@ footer {
     text-align: center;
 }
 
+.contextMenu {
+    background-color: rgba(83, 83, 83, 0.5);
+    width: 200px;
+    z-index: 11;
+    margin-right: 20px;
+    position: absolute;
+    padding: 0;
+}
+
+.contextMenu ul {
+    margin: 0;
+    padding: 0;
+}
+
+.contextMenu ul li {
+    text-align: center;
+}
+
+.contextMenu a {
+    padding: 10px;
+    color: #ffff;
+    display: block;
+}
+
+.contextMenu button {
+    padding: 10px;
+    margin: 0;
+    color: #ffff;
+    background-color: transparent;
+    border: none;
+    width: 100%;
+}
+
 .contextMenu a:hover {
-    color: #9f00cf;
+    color: #c300ff;
+}
+
+.contextMenu button:hover {
+    color: #c300ff;
+}
+
+.contextMenu li:hover {
+    background-color: rgba(83, 83, 83, 0.75);
 }
