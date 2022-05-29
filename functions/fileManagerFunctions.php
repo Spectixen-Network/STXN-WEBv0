@@ -334,7 +334,7 @@ function audioFileEcho($fileName, $uid)
             <div class="file-box" >
                 <div class="file">
                     <span class="corner" style="z-index: 10" onclick="contextMenu_' . str_replace([".", " ", "-"], "_", $fileName) . '();"></span>
-                    <a href="#">
+                    <a href="/user/' . $uid . '/files/' . $dir . $fileName . '" target="_blank">
                         <div class="icon">
                             <i class="fa fa-music"></i>
                         </div>
@@ -397,7 +397,7 @@ function videoFileEcho($fileName, $uid)
             <div class="file-box">
                 <div class="file">
                     <span class="corner" style="z-index: 10" onclick="contextMenu_' . str_replace([".", " ", "-"], "_", $fileName) . '();"></span>
-                    <a href="#">
+                    <a href="/user/' . $uid . '/files/' . $dir . $fileName . '" target="_blank">
                         <div class="icon">
                             <i class="img-responsive fa fa-film"></i>
                         </div>
