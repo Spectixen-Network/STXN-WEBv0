@@ -333,7 +333,7 @@ function audioFileEcho($fileName, $uid)
     '
             <div class="file-box" >
                 <div class="file">
-                    <span class="corner" style="z-index: 10" onclick="contextMenu_' . str_replace([".", " ", "-"], "_", $fileName) . '();"></span>
+                    <span class="corner" style="z-index: 10" onclick="contextMenu_' . str_replace([".", " ", "-", "(", ")"], "_", $fileName) . '();"></span>
                     <a href="/user/' . $uid . '/files/' . $dir . $fileName . '" target="_blank">
                         <div class="icon">
                             <i class="fa fa-music"></i>
@@ -343,36 +343,36 @@ function audioFileEcho($fileName, $uid)
                         </div>
                     </a>
                 </div>
-                <div id="contextMenu-' . str_replace([".", " ", "-"], "_", $fileName) . '" class="contextMenu container-fluid showNone">
+                <div id="contextMenu-' . str_replace([".", " ", "-", "(", ")"], "_", $fileName) . '" class="contextMenu container-fluid showNone">
                     <ul style="list-style: none">
                         <li><a href="/user/' . $uid . '/files/' . $dir . $fileName . '" download><i class="bi bi-download"></i> Download</a></li>
-                        <li><button onclick="renameInput_' . str_replace([".", " ", "-"], "_", $fileName) . '()"><i class="bi bi-pencil-fill"></i> Rename</button></li>
-                        <li><a href="" data-bs-toggle="modal" data-bs-target="#moveModal" onclick="move_' . str_replace([".", " ", "-"], "_", $fileName) . '()"><i class="bi bi-arrows-move"></i> Move</a></li>
+                        <li><button onclick="renameInput_' . str_replace([".", " ", "-", "(", ")"], "_", $fileName) . '()"><i class="bi bi-pencil-fill"></i> Rename</button></li>
+                        <li><a href="" data-bs-toggle="modal" data-bs-target="#moveModal" onclick="move_' . str_replace([".", " ", "-", "(", ")"], "_", $fileName) . '()"><i class="bi bi-arrows-move"></i> Move</a></li>
                         <li><a href="?delFile=user/' . $uid . '/files/' . $dir . $fileName . '"><i class="fa fa-trash"></i> Delete</a></li>
                     </ul>    
                 </div>
-               <form method="POST" id="rename_form_' . str_replace([".", " ", "-"], "_", $fileName) . '">
-                    <input type="hidden" id="rename_input_' . str_replace([".", " ", "-"], "_", $fileName) . '" name="rename">
+               <form method="POST" id="rename_form_' . str_replace([".", " ", "-", "(", ")"], "_", $fileName) . '">
+                    <input type="hidden" id="rename_input_' . str_replace([".", " ", "-", "(", ")"], "_", $fileName) . '" name="rename">
                     <input type="hidden" name="fileToRename" value="' . $fileName . '">
                 </form>
                 <script>
-                    function contextMenu_' . str_replace([".", " ", "-"], "_", $fileName) . '()
+                    function contextMenu_' . str_replace([".", " ", "-", "(", ")"], "_", $fileName) . '()
                     {
-                        let doc = document.getElementById("contextMenu-' . str_replace([".", " ", "-"], "_", $fileName) . '");
+                        let doc = document.getElementById("contextMenu-' . str_replace([".", " ", "-", "(", ")"], "_", $fileName) . '");
                         doc.classList.toggle("showNone");
                     }
-                    function renameInput_' . str_replace([".", " ", "-"], "_", $fileName) . '() {
+                    function renameInput_' . str_replace([".", " ", "-", "(", ")"], "_", $fileName) . '() {
                         let newName = prompt("Please enter new name:", "' . $fileName . '");
                         console.log(newName);
                         if (newName == null || newName == "") {
                         }
                         else
                         {
-                            document.getElementById("rename_input_' . str_replace([".", " ", "-"], "_", $fileName) . '").setAttribute("value", newName);
-                            document.getElementById("rename_form_' . str_replace([".", " ", "-"], "_", $fileName) . '").submit();
+                            document.getElementById("rename_input_' . str_replace([".", " ", "-", "(", ")"], "_", $fileName) . '").setAttribute("value", newName);
+                            document.getElementById("rename_form_' . str_replace([".", " ", "-", "(", ")"], "_", $fileName) . '").submit();
                         }
                     }
-                    function move_' . str_replace([".", " ", "-"], "_", $fileName) . '()
+                    function move_' . str_replace([".", " ", "-", "(", ")"], "_", $fileName) . '()
                     {
                         document.getElementById("fileToMove").value = "' . $fileName . '";
                         document.getElementById("inFolder").value = "' . $dir . '";
@@ -396,7 +396,7 @@ function videoFileEcho($fileName, $uid)
     '
             <div class="file-box">
                 <div class="file">
-                    <span class="corner" style="z-index: 10" onclick="contextMenu_' . str_replace([".", " ", "-"], "_", $fileName) . '();"></span>
+                    <span class="corner" style="z-index: 10" onclick="contextMenu_' . str_replace([".", " ", "-", "(", ")"], "_", $fileName) . '();"></span>
                     <a href="/user/' . $uid . '/files/' . $dir . $fileName . '" target="_blank">
                         <div class="icon">
                             <i class="img-responsive fa fa-film"></i>
@@ -406,36 +406,36 @@ function videoFileEcho($fileName, $uid)
                         </div>
                     </a>
                 </div>
-                <div id="contextMenu-' . str_replace([".", " ", "-"], "_", $fileName) . '" class="contextMenu container-fluid showNone"> 
+                <div id="contextMenu-' . str_replace([".", " ", "-", "(", ")"], "_", $fileName) . '" class="contextMenu container-fluid showNone"> 
                     <ul style="list-style: none">
                         <li><a href="/user/' . $uid . '/files/' . $dir . $fileName . '" download><i class="bi bi-download"></i> Download</a></li>
-                        <li><button onclick="renameInput_' . str_replace([".", " ", "-"], "_", $fileName) . '()"><i class="bi bi-pencil-fill"></i> Rename</button></li>
-                        <li><a href="" data-bs-toggle="modal" data-bs-target="#moveModal" onclick="move_' . str_replace([".", " ", "-"], "_", $fileName) . '()"><i class="bi bi-arrows-move"></i> Move</a></li>
+                        <li><button onclick="renameInput_' . str_replace([".", " ", "-", "(", ")"], "_", $fileName) . '()"><i class="bi bi-pencil-fill"></i> Rename</button></li>
+                        <li><a href="" data-bs-toggle="modal" data-bs-target="#moveModal" onclick="move_' . str_replace([".", " ", "-", "(", ")"], "_", $fileName) . '()"><i class="bi bi-arrows-move"></i> Move</a></li>
                         <li><a href="?delFile=user/' . $uid . '/files/' . $dir . $fileName . '"><i class="fa fa-trash"></i> Delete</a></li>
                     </ul>
                 </div>
-                <form method="POST" id="rename_form_' . str_replace([".", " ", "-"], "_", $fileName) . '">
-                    <input type="hidden" id="rename_input_' . str_replace([".", " ", "-"], "_", $fileName) . '" name="rename">
+                <form method="POST" id="rename_form_' . str_replace([".", " ", "-", "(", ")"], "_", $fileName) . '">
+                    <input type="hidden" id="rename_input_' . str_replace([".", " ", "-", "(", ")"], "_", $fileName) . '" name="rename">
                     <input type="hidden" name="fileToRename" value="' . $fileName . '">
                 </form>
                 <script>
-                    function contextMenu_' . str_replace([".", " ", "-"], "_", $fileName) . '()
+                    function contextMenu_' . str_replace([".", " ", "-", "(", ")"], "_", $fileName) . '()
                     {
-                        let doc = document.getElementById("contextMenu-' . str_replace([".", " ", "-"], "_", $fileName) . '");
+                        let doc = document.getElementById("contextMenu-' . str_replace([".", " ", "-", "(", ")"], "_", $fileName) . '");
                         doc.classList.toggle("showNone");
                     }
-                    function renameInput_' . str_replace([".", " ", "-"], "_", $fileName) . '() {
+                    function renameInput_' . str_replace([".", " ", "-", "(", ")"], "_", $fileName) . '() {
                         let newName = prompt("Please enter new name:", "' . $fileName . '");
                         console.log(newName);
                         if (newName == null || newName == "") {
                         }
                         else
                         {
-                            document.getElementById("rename_input_' . str_replace([".", " ", "-"], "_", $fileName) . '").setAttribute("value", newName);
-                            document.getElementById("rename_form_' . str_replace([".", " ", "-"], "_", $fileName) . '").submit();
+                            document.getElementById("rename_input_' . str_replace([".", " ", "-", "(", ")"], "_", $fileName) . '").setAttribute("value", newName);
+                            document.getElementById("rename_form_' . str_replace([".", " ", "-", "(", ")"], "_", $fileName) . '").submit();
                         }
                     }
-                    function move_' . str_replace([".", " ", "-"], "_", $fileName) . '()
+                    function move_' . str_replace([".", " ", "-", "(", ")"], "_", $fileName) . '()
                     {
                         document.getElementById("fileToMove").value = "' . $fileName . '";
                         document.getElementById("inFolder").value = "' . $dir . '";
@@ -459,7 +459,7 @@ function imageFileEcho($fileName, $uid)
     '
             <div class="file-box">
                 <div class="file">
-                    <span class="corner" style="z-index: 10" onclick="contextMenu_' . str_replace([".", " ", "-"], "_", $fileName) . '();"></span>
+                    <span class="corner" style="z-index: 10" onclick="contextMenu_' . str_replace([".", " ", "-", "(", ")"], "_", $fileName) . '();"></span>
                     <a href="/user/' . $uid . '/files/' . $dir . $fileName . '" target="_blank">
                         <div class="image">
                             <img alt="' . $fileName . '" class="img-fluid" src="/user/' . $uid . '/files/' . $dir . $fileName . '">
@@ -469,36 +469,36 @@ function imageFileEcho($fileName, $uid)
                         </div>
                     </a>
                 </div>
-                <div id="contextMenu-' . str_replace([".", " ", "-"], "_", $fileName) . '" class="contextMenu container-fluid showNone">     
+                <div id="contextMenu-' . str_replace([".", " ", "-", "(", ")"], "_", $fileName) . '" class="contextMenu container-fluid showNone">     
                     <ul style="list-style: none">
                         <li><a href="/user/' . $uid . '/files/' . $dir . $fileName . '" download><i class="bi bi-download"></i> Download</a></li>
-                        <li><button onclick="renameInput_' . str_replace([".", " ", "-"], "_", $fileName) . '()"><i class="bi bi-pencil-fill"></i> Rename</button></li>
-                        <li><a href="" data-bs-toggle="modal" data-bs-target="#moveModal" onclick="move_' . str_replace([".", " ", "-"], "_", $fileName) . '()"><i class="bi bi-arrows-move"></i> Move</a></li>
+                        <li><button onclick="renameInput_' . str_replace([".", " ", "-", "(", ")"], "_", $fileName) . '()"><i class="bi bi-pencil-fill"></i> Rename</button></li>
+                        <li><a href="" data-bs-toggle="modal" data-bs-target="#moveModal" onclick="move_' . str_replace([".", " ", "-", "(", ")"], "_", $fileName) . '()"><i class="bi bi-arrows-move"></i> Move</a></li>
                         <li><a href="?delFile=user/' . $uid . '/files/' . $dir . $fileName . '"><i class="fa fa-trash"></i> Delete</a></li>
                     </ul>
                 </div>
-                <form method="POST" id="rename_form_' . str_replace([".", " ", "-"], "_", $fileName) . '">
-                    <input type="hidden" id="rename_input_' . str_replace([".", " ", "-"], "_", $fileName) . '" name="rename">
+                <form method="POST" id="rename_form_' . str_replace([".", " ", "-", "(", ")"], "_", $fileName) . '">
+                    <input type="hidden" id="rename_input_' . str_replace([".", " ", "-", "(", ")"], "_", $fileName) . '" name="rename">
                     <input type="hidden" name="fileToRename" value="' . $fileName . '">
                 </form>
                 <script>
-                    function contextMenu_' . str_replace([".", " ", "-"], "_", $fileName) . '()
+                    function contextMenu_' . str_replace([".", " ", "-", "(", ")"], "_", $fileName) . '()
                     {
-                        let doc = document.getElementById("contextMenu-' . str_replace([".", " ", "-"], "_", $fileName) . '");
+                        let doc = document.getElementById("contextMenu-' . str_replace([".", " ", "-", "(", ")"], "_", $fileName) . '");
                         doc.classList.toggle("showNone");
                     }
-                    function renameInput_' . str_replace([".", " ", "-"], "_", $fileName) . '() {
+                    function renameInput_' . str_replace([".", " ", "-", "(", ")"], "_", $fileName) . '() {
                         let newName = prompt("Please enter new name:", "' . $fileName . '");
                         console.log(newName);
                         if (newName == null || newName == "") {
                         }
                         else
                         {
-                            document.getElementById("rename_input_' . str_replace([".", " ", "-"], "_", $fileName) . '").setAttribute("value", newName);
-                            document.getElementById("rename_form_' . str_replace([".", " ", "-"], "_", $fileName) . '").submit();
+                            document.getElementById("rename_input_' . str_replace([".", " ", "-", "(", ")"], "_", $fileName) . '").setAttribute("value", newName);
+                            document.getElementById("rename_form_' . str_replace([".", " ", "-", "(", ")"], "_", $fileName) . '").submit();
                         }
                     }
-                    function move_' . str_replace([".", " ", "-"], "_", $fileName) . '()
+                    function move_' . str_replace([".", " ", "-", "(", ")"], "_", $fileName) . '()
                     {
                         document.getElementById("fileToMove").value = "' . $fileName . '";
                         document.getElementById("inFolder").value = "' . $dir . '";
@@ -522,7 +522,7 @@ function elseFileEcho($fileName, $uid)
     '
             <div class="file-box">
                 <div class="file">
-                    <span class="corner" style="z-index: 10" onclick="contextMenu_' . str_replace([".", " ", "-"], "_", $fileName) . '();"></span>
+                    <span class="corner" style="z-index: 10" onclick="contextMenu_' . str_replace([".", " ", "-", "(", ")"], "_", $fileName) . '();"></span>
                     <a href="#">
                         <div class="icon">
                             <i class="fa fa-file"></i>
@@ -532,36 +532,36 @@ function elseFileEcho($fileName, $uid)
                         </div>
                     </a>
                 </div>
-                <div id="contextMenu-' . str_replace([".", " ", "-"], "_", $fileName) . '" class="contextMenu container-fluid showNone">
+                <div id="contextMenu-' . str_replace([".", " ", "-", "(", ")"], "_", $fileName) . '" class="contextMenu container-fluid showNone">
                     <ul style="list-style: none">
                         <li><a href="/user/' . $uid . '/files/' . $dir . $fileName . '" download><i class="bi bi-download"></i> Download</a></li>
-                        <li><button onclick="renameInput_' . str_replace([".", " ", "-"], "_", $fileName) . '()"><i class="bi bi-pencil-fill"></i> Rename</button></li>
-                        <li><a href="" data-bs-toggle="modal" data-bs-target="#moveModal" onclick="move_' . str_replace([".", " ", "-"], "_", $fileName) . '()"><i class="bi bi-arrows-move"></i> Move</a></li>
+                        <li><button onclick="renameInput_' . str_replace([".", " ", "-", "(", ")"], "_", $fileName) . '()"><i class="bi bi-pencil-fill"></i> Rename</button></li>
+                        <li><a href="" data-bs-toggle="modal" data-bs-target="#moveModal" onclick="move_' . str_replace([".", " ", "-", "(", ")"], "_", $fileName) . '()"><i class="bi bi-arrows-move"></i> Move</a></li>
                         <li><a href="?delFile=user/' . $uid . '/files/' . $dir . $fileName . '"><i class="fa fa-trash"></i> Delete</a></li>
                     </ul>
                 </div>
-                <form method="POST" id="rename_form_' . str_replace([".", " ", "-"], "_", $fileName) . '">
-                    <input type="hidden" id="rename_input_' . str_replace([".", " ", "-"], "_", $fileName) . '" name="rename">
+                <form method="POST" id="rename_form_' . str_replace([".", " ", "-", "(", ")"], "_", $fileName) . '">
+                    <input type="hidden" id="rename_input_' . str_replace([".", " ", "-", "(", ")"], "_", $fileName) . '" name="rename">
                     <input type="hidden" name="fileToRename" value="' . $fileName . '">
                 </form>
                 <script>
-                    function contextMenu_' . str_replace([".", " ", "-"], "_", $fileName) . '()
+                    function contextMenu_' . str_replace([".", " ", "-", "(", ")"], "_", $fileName) . '()
                     {
-                        let doc = document.getElementById("contextMenu-' . str_replace([".", " ", "-"], "_", $fileName) . '");
+                        let doc = document.getElementById("contextMenu-' . str_replace([".", " ", "-", "(", ")"], "_", $fileName) . '");
                         doc.classList.toggle("showNone");
                     }
-                    function renameInput_' . str_replace([".", " ", "-"], "_", $fileName) . '() {
+                    function renameInput_' . str_replace([".", " ", "-", "(", ")"], "_", $fileName) . '() {
                         let newName = prompt("Please enter new name:", "' . $fileName . '");
                         console.log(newName);
                         if (newName == null || newName == "") {
                         }
                         else
                         {
-                            document.getElementById("rename_input_' . str_replace([".", " ", "-"], "_", $fileName) . '").setAttribute("value", newName);
-                            document.getElementById("rename_form_' . str_replace([".", " ", "-"], "_", $fileName) . '").submit();
+                            document.getElementById("rename_input_' . str_replace([".", " ", "-", "(", ")"], "_", $fileName) . '").setAttribute("value", newName);
+                            document.getElementById("rename_form_' . str_replace([".", " ", "-", "(", ")"], "_", $fileName) . '").submit();
                         }
                     }
-                    function move_' . str_replace([".", " ", "-"], "_", $fileName) . '()
+                    function move_' . str_replace([".", " ", "-", "(", ")"], "_", $fileName) . '()
                     {
                         document.getElementById("fileToMove").value = "' . $fileName . '";
                         document.getElementById("inFolder").value = "' . $dir . '";
@@ -577,7 +577,7 @@ function dirFileEcho($fileName)
     '
             <div class="file-box">
                 <div class="file">
-                    <span class="corner" style="z-index: 10" onclick="contextMenu_' . str_replace([".", " ", "-"], "_", $fileName) . '();"></span>
+                    <span class="corner" style="z-index: 10" onclick="contextMenu_' . str_replace([".", " ", "-", "(", ")"], "_", $fileName) . '();"></span>
                     <a href="/fileManager.php?dir=' . $fileName . '">
                         <div class="icon">
                             <i class="fa fa-folder"></i>
@@ -587,31 +587,31 @@ function dirFileEcho($fileName)
                         </div>
                     </a>
                 </div>
-                <div id="contextMenu-' . str_replace([".", " ", "-"], "_", $fileName) . '" class="contextMenu container-fluid showNone">
+                <div id="contextMenu-' . str_replace([".", " ", "-", "(", ")"], "_", $fileName) . '" class="contextMenu container-fluid showNone">
                     <ul style="list-style: none; margin: 0;">
-                        <li><button onclick="renameInput_' . str_replace([".", " ", "-"], "_", $fileName) . '()"><i class="bi bi-pencil-fill"></i> Rename</button></li>
+                        <li><button onclick="renameInput_' . str_replace([".", " ", "-", "(", ")"], "_", $fileName) . '()"><i class="bi bi-pencil-fill"></i> Rename</button></li>
                         <li><a href="?delFolder=' . $fileName . '"><i class="fa fa-trash"></i> Delete</a></li>
                     </ul>
                 </div>
-                <form method="POST" id="rename_form_' . str_replace([".", " ", "-"], "_", $fileName) . '">
-                    <input type="hidden" id="rename_input_' . str_replace([".", " ", "-"], "_", $fileName) . '" name="rename">
+                <form method="POST" id="rename_form_' . str_replace([".", " ", "-", "(", ")"], "_", $fileName) . '">
+                    <input type="hidden" id="rename_input_' . str_replace([".", " ", "-", "(", ")"], "_", $fileName) . '" name="rename">
                     <input type="hidden" name="fileToRename" value="' . $fileName . '">
                 </form>
                 <script>
-                    function contextMenu_' . str_replace([".", " ", "-"], "_", $fileName) . '()
+                    function contextMenu_' . str_replace([".", " ", "-", "(", ")"], "_", $fileName) . '()
                     {
-                        let doc = document.getElementById("contextMenu-' . str_replace([".", " ", "-"], "_", $fileName) . '");
+                        let doc = document.getElementById("contextMenu-' . str_replace([".", " ", "-", "(", ")"], "_", $fileName) . '");
                         doc.classList.toggle("showNone");
                     }
-                    function renameInput_' . str_replace([".", " ", "-"], "_", $fileName) . '() {
+                    function renameInput_' . str_replace([".", " ", "-", "(", ")"], "_", $fileName) . '() {
                         let newName = prompt("Please enter new name:", "' . $fileName . '");
                         console.log(newName);
                         if (newName == null || newName == "") {
                         }
                         else
                         {
-                            document.getElementById("rename_input_' . str_replace([".", " ", "-"], "_", $fileName) . '").setAttribute("value", newName);
-                            document.getElementById("rename_form_' . str_replace([".", " ", "-"], "_", $fileName) . '").submit();
+                            document.getElementById("rename_input_' . str_replace([".", " ", "-", "(", ")"], "_", $fileName) . '").setAttribute("value", newName);
+                            document.getElementById("rename_form_' . str_replace([".", " ", "-", "(", ")"], "_", $fileName) . '").submit();
                         }
                     }
                 </script>
