@@ -460,7 +460,7 @@ function imageFileEcho($fileName, $uid)
             <div class="file-box">
                 <div class="file">
                     <span class="corner" style="z-index: 10" onclick="contextMenu_' . str_replace([".", " ", "-"], "_", $fileName) . '();"></span>
-                    <a href="#">
+                    <a href="/user/' . $uid . '/files/' . $dir . $fileName . '" target="_blank">
                         <div class="image">
                             <img alt="' . $fileName . '" class="img-fluid" src="/user/' . $uid . '/files/' . $dir . $fileName . '">
                         </div>
