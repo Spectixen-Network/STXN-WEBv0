@@ -1,18 +1,18 @@
 <?php
 session_start();
-include '../funkce.php';
-include '../adminPanel/adminPanelFunctions.php';
+include_once '../functions/globalFunctions.php';
+include_once '../functions/adminPanelFunctions.php';
 
 ifNotAdminRedirect();
 
 $userToUnBanUID = test_input($_GET["uid"]);
 
-if(!is_admin($_SESSION["UID"]))
+if (!is_admin($_SESSION["UID"]))
 {
     header("Location: /index.php");
     die();
 }
-if(is_banned($userToUnBanUID))
+if (is_banned($userToUnBanUID))
 {
     $con = db_connection();
     $query = "DELETE FROM banneduser WHERE uid = " . $userToUnBanUID;

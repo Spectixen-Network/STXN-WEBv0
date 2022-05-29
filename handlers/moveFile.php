@@ -1,6 +1,6 @@
 <?php
 session_start();
-include '../funkce.php';
+include_once '../functions/globalFunctions.php';
 
 $userFolder = $_SERVER["DOCUMENT_ROOT"] . "/user/" . $_POST["userDirectory"] . "/";
 $userFiles = $userFolder . "/files/";

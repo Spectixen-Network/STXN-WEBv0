@@ -1,6 +1,6 @@
 <?php
 session_start();
-include 'funkce.php';
+include_once 'functions/globalFunctions.php';
 
 html_start("Founders", "css/style");
 nav();

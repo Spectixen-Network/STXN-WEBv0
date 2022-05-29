@@ -1,13 +1,13 @@
 <?php
 session_start();
-include 'funkce.php';
+include_once 'functions/globalFunctions.php';
 
 isLoggedElseRedirect();
 html_start($_SESSION["USERNAME"], "css/style");
 nav();
 
 $con = db_connection();
-if(is_admin($_SESSION["UID"]) && isset($_GET["uid"]))
+if (is_admin($_SESSION["UID"]) && isset($_GET["uid"]))
 {
     $uid = test_input($_GET["uid"]);
 }

@@ -1,13 +1,13 @@
 <?php
 session_start();
-include '../funkce.php';
-include '../adminPanel/adminPanelFunctions.php';
+include_once '../functions/globalFunctions.php';
+include_once '../functions/adminPanelFunctions.php';
 
 ifNotAdminRedirect();
-if(is_admin($_SESSION["UID"]) == 2)
+if (is_admin($_SESSION["UID"]) == 2)
 {
     $userPromoteUID = test_input($_GET["uid"]);
-    if(is_admin($userPromoteUID))
+    if (is_admin($userPromoteUID))
     {
         header("Location: /adminPanel/users.php");
         die();
@@ -25,5 +25,3 @@ else
 {
     header("Location: /adminPanel/users.php");
 }
-
-

@@ -1,7 +1,7 @@
 <?php
 session_start();
-include '../funkce.php';
-include  'adminPanelFunctions.php';
+include_once '../functions/globalFunctions.php';
+include_once  '../functions/adminPanelFunctions.php';
 ifNotAdminRedirect();
 
 isLoggedElseRedirect();
