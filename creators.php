@@ -30,7 +30,7 @@ banner("Founders of Spectixen Network");
                 </span>
             </div>
             <div class="card-footer">
-                <a href="#" class="btn btn-primary">See Profile</a>
+                <!--<a href="#" class="btn btn-primary">See Profile</a>-->
             </div>
         </div>
     </div>
@@ -57,7 +57,7 @@ banner("Founders of Spectixen Network");
                 </span>
             </div>
             <div class="card-footer">
-                <a href="#" class="btn btn-primary">See Profile</a>
+                <!--<a href="#" class="btn btn-primary">See Profile</a>-->
             </div>
         </div>
     </div>

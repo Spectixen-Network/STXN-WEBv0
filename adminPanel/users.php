@@ -194,8 +194,8 @@ function bannedListListUser($userId, $userUsername, $from_date, $to_date)
         <div class="row" style="width: 100%; margin: 0;">
             <span class="col-11 row">
                 <p class="m-0 p-1 col-4" style="overflow-x: hidden">[ ' . $userId . ' ] ' . $userUsername . '</p>
-                <p class="m-0 p-1 col-4" style="overflow-x: hidden">From: ' . date_formatted($from_date) . '</p>
-                <p class="m-0 p-1 col-4" style="overflow-x: hidden">To: ' . date_formatted($to_date) . '</p>
+                <!--<p class="m-0 p-1 col-4" style="overflow-x: hidden">From: ' . date_formatted($from_date) . '</p>
+                <p class="m-0 p-1 col-4" style="overflow-x: hidden">To: ' . date_formatted($to_date) . '</p>-->
             </span>
             <span class="col-1 d-flex align-content-center flex-wrap">
                 <div class="row">

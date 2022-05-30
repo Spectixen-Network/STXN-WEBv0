@@ -117,10 +117,10 @@ if (isset($_GET["delFile"]))
         <div class="col-lg-10">
             <div class="container-fluid" id="topBarInFileManager">
                 <div class="row">
-                    <form class="col-md-2 d-flex">
+                    <!--<form class="col-md-2 d-flex">
                         <input class="form-control me-2" type="text" placeholder="Search">
                         <button class="btn btn-primary" type="button">Search</button>
-                    </form>
+                    </form>-->
                 </div>
             </div>
             <div id="files">

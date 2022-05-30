@@ -277,7 +277,8 @@ function navbar_logged()
         echo
         '
             <li class="nav-item">
-                <a href="/adminPanel/dashboard.php" class="nav-link">Dashboard</a>
+                <!--<a href="/adminPanel/dashboard.php" class="nav-link">Dashboard</a>-->
+                <a href="/adminPanel/users.php" class="nav-link">Users</a>
             </li>
         ';
     }
@@ -289,13 +290,13 @@ function navbar_logged()
 
                             <ul class="dropdown-menu" id="dropdownMenuList">
                                 <div class="container">
-                                    <li id="dropdownMenuContent" <div class="form-check form-switch">
+                                   <!-- <li id="dropdownMenuContent" <div class="form-check form-switch">
                                         <input class="form-check-input" type="checkbox" id="mySwitch" name="darkmode" value="yes" checked>
                                         <label class="form-check-label" for="mySwitch">Dark mode</label>
                                     </li>
                                 </div>
                                 <li><a class="dropdown-item" id="dropdownMenuContent" href="/profile.php"><i class="bi bi-person"></i>  Profile</a></li>
-                                <li><a class="dropdown-item" id="dropdownMenuContent" href="/settings.php"><i class="bi bi-gear"></i>  Settings</a></li>
+                                <li><a class="dropdown-item" id="dropdownMenuContent" href="/settings.php"><i class="bi bi-gear"></i>  Settings</a></li> -->
                                 <li>
                                     <hr class="dropdown-divider"><a class="dropdown-item" id="dropdownMenuContent" href="/handlers/logout.php"><i class="bi bi-box-arrow-in-right"></i>  Log out</a></hr>
                                 </li>
