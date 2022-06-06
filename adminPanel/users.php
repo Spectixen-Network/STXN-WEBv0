@@ -15,6 +15,11 @@ echo
             </div>
             <div class="row">';
 adminSidebar();
+
+if (!isset($_GET["id"]))
+{
+    $_GET["id"] = $_SESSION["UID"];
+}
 ?>
 
 <div class="col-10">
@@ -35,7 +40,7 @@ adminSidebar();
                 <div id="bannedList">
                     <div class="" style="height: 30vh;">
                         <span class="d-flex justify-content-center mt-1" style="background-color: rgba(83, 83, 83, 0.2); backdrop-filter: blur(10px);">
-                            <h2>Banned Users</h2>
+                            <h2>Actions</h2>
                         </span>
                         <div style="height: 23vh; overflow-y: auto">
                             <?php listAllBannedUsers(); ?>
@@ -47,10 +52,10 @@ adminSidebar();
                 <div id="discSpace">
                     <div class="mt-1" style=" overflow-y: auto">
                         <span class="d-flex justify-content-center mt-1" style="background-color: rgba(83, 83, 83, 0.2); backdrop-filter: blur(10px);">
-                            <h2>Occupied Disc Space</h2>
+                            <h2>Info</h2>
                         </span>
                         <div style="height: 20vh; overflow-y: auto">
-                            <?php listAllUsersDiscSpace(); ?>
+                            <?php listUserDiscSpaceV2($_GET["id"]); ?>
                         </div>
                     </div>
                 </div>
@@ -226,7 +231,7 @@ function listAllBannedUsers()
         bannedListListUser($row["uid"], $row["username"], $row["from_date"], $row["to_date"]);
     }
 }
-function listUserDiscSpace($userId, $userUsername, $userPath)
+function listUserDiscSpaceWithName($userId, $userUsername, $userPath)
 {
     echo
     '
@@ -245,6 +250,36 @@ function listUserDiscSpace($userId, $userUsername, $userPath)
         <!-- oneUser end -->
     ';
 }
+function listUserDiscSpace($userId, $userPath)
+{
+    echo
+    '
+        <!-- oneUser start -->
+        <div class="mt-1 userList" style="">
+            <div class="row" style="width: 100%; margin: 0; text-align: center">
+                <span class="col-11 row">
+                    <p class="m-0 p-1 col-6" style="overflow-x: hidden">Occupied Disc Space</p>
+                    <p class="m-0 p-1 col-6" style="overflow-x: hidden; text-align: end">' . round(GetDirectorySize($userPath) / 1024) . ' kB</p>
+                </span>
+                <span class="col-1 d-flex align-content-center flex-wrap">
+                    <a href="/fileManager.php?uid=' . $userId . '" tittle="Search User"><i class="bi bi-search"></i></a>
+                </span>
+            </div>
+        </div>
+        <!-- oneUser end -->
+    ';
+}
+function listUserDiscSpaceV2($userId)
+{
+    $con = db_connection();
+    $query = "SELECT uid, username FROM user WHERE uid=" . $userId;
+    $result = mysqli_query($con, $query);
+
+    $path = $_SERVER["DOCUMENT_ROOT"] . "/user/";
+
+    $row = mysqli_fetch_assoc($result);
+    listUserDiscSpace($row["uid"], $path . "/" . $row["uid"]);
+}
 function listAllUsersDiscSpace()
 {
     $con = db_connection();
@@ -256,6 +291,6 @@ function listAllUsersDiscSpace()
     for ($i = 0; $i < mysqli_num_rows($result); $i++)
     {
         $row = mysqli_fetch_assoc($result);
-        listUserDiscSpace($row["uid"], $row["username"], $path . "/" . $row["uid"]);
+        listUserDiscSpaceWithName($row["uid"], $row["username"], $path . "/" . $row["uid"]);
     }
 }
