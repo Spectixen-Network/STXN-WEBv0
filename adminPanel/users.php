@@ -43,6 +43,17 @@ if (!isset($_GET["id"]))
                             <h2>Actions</h2>
                         </span>
                         <div style="height: 23vh; overflow-y: auto">
+                            <!-- oneUser start -->
+                            <div class="mt-1 userList" onclick="">
+                                <div class="row" style="width: 100%; margin: 0; text-align: center">
+                                    <span class="col-12 row">
+                                        <p class="m-0 p-1 col-1" style="cursor: pointer; margin: 0; justify-content: center; color: #c300ff;"><i class="bi bi-hammer col"></i></p>
+                                        <p class="m-0 p-1 col-10" style="cursor: pointer;">BAN USER</p>
+                                        <p class="m-0 p-1 col-1" style="cursor: pointer; margin: 0; justify-content: center; color: #c300ff;"><i class="bi bi-hammer col"></i></p>
+                                    </span>
+                                </div>
+                            </div>
+                            <!-- oneUser end -->
                             <?php listAllBannedUsers(); ?>
                         </div>
                     </div>
@@ -52,7 +63,7 @@ if (!isset($_GET["id"]))
                 <div id="discSpace">
                     <div class="mt-1" style=" overflow-y: auto">
                         <span class="d-flex justify-content-center mt-1" style="background-color: rgba(83, 83, 83, 0.2); backdrop-filter: blur(10px);">
-                            <h2>Info</h2>
+                            <h2>Info about <?php echo username_from_uid($_GET["id"]) ?></h2>
                         </span>
                         <div style="height: 20vh; overflow-y: auto">
                             <?php listUserDiscSpaceV2($_GET["id"]); ?>
@@ -78,13 +89,17 @@ html_end();
 function userListsListUser($userId, $userUsername, $userAdmin)
 {
 
+    $redirect = "window.location.href = 'users.php?id=$userId'";
+    $activeUser = $_GET["id"];
 
     if (is_admin($_SESSION["UID"]) == 2)
     {
         echo
         '
                 <!-- oneUser start -->
-                <div class="mt-1 userList" >
+                <div class="mt-1 userList ';
+        if ($activeUser == $userId) echo "activeUserList";
+        echo '" onclick="' . $redirect . '">
                     <div class="row" style="width: 100%; margin: 0;">
                         <span class="col-8">
                             <p class="m-0 p-1 col" style="overflow-x: hidden">[ ' . $userId . ' ] ' . $userUsername . '</p>
@@ -133,7 +148,9 @@ function userListsListUser($userId, $userUsername, $userAdmin)
         echo
         '
                 <!-- oneUser start -->
-                <div class="mt-1 userList" style="">
+                <div class="mt-1 userList';
+        if ($activeUser == $userId) echo "activeUserList";
+        echo '" style="" onclick="' . $redirect . '">
                     <div class="row" style="width: 100%; margin: 0;">
                         <span class="col-8">
                             <p class="m-0 p-1 col" style="overflow-x: hidden">[ ' . $userId . ' ] ' . $userUsername . '</p>
@@ -278,7 +295,7 @@ function listUserDiscSpaceV2($userId)
     $path = $_SERVER["DOCUMENT_ROOT"] . "/user/";
 
     $row = mysqli_fetch_assoc($result);
-    listUserDiscSpace($row["uid"], $path . "/" . $row["uid"]);
+    listUserDiscSpace($row["uid"], $path . "/" . $row["uid"] . "/files");
 }
 function listAllUsersDiscSpace()
 {
@@ -291,6 +308,6 @@ function listAllUsersDiscSpace()
     for ($i = 0; $i < mysqli_num_rows($result); $i++)
     {
         $row = mysqli_fetch_assoc($result);
-        listUserDiscSpaceWithName($row["uid"], $row["username"], $path . "/" . $row["uid"]);
+        listUserDiscSpaceWithName($row["uid"], $row["username"], $path . "/" . $row["uid"] . "/files");
     }
 }

@@ -494,7 +494,7 @@ a:hover {
 }
 
 .userList:hover {
-    background-color: rgba(83, 83, 83, 0.4);
+    background-color: rgba(83, 83, 83, 0.6);
 }
 
 #topBarInFileManager {
@@ -724,4 +724,8 @@ footer {
 
 .contextMenu li:hover {
     background-color: rgba(83, 83, 83, 0.75);
+}
+
+.activeUserList {
+    background-color: rgba(83, 83, 83, 0.4);
 }
