@@ -782,7 +782,9 @@ footer {
     color: #c300ff;
 }
 
-.knihy-forms option:not(#inputGroupSelect02 option, #inputGroupSelect04 option) {
+.knihy-forms option:not(#inputGroupSelect02 option, #inputGroupSelect04 option),
+.knihy-forms #postava option,
+.knihy-forms #postavaD option {
     background-color: rgba(83, 83, 83, 0.2);
     color: #c300ff;
 }
