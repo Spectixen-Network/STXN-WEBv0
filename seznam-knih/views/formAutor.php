@@ -17,29 +17,36 @@ nav();
 banner("Seznam Knih | Autor");
 ?>
 
-<form action="../saves/saveAuthor.php" method="POST">
-    <input type="text" name="jmenoPrijmeni" placeholder="Jméno Přijmení" required><br>
-    <input type="text" name="skupina" placeholder="Skupina" required><br>
-    <select name="zanry[]" multiple required>
-        <option disabled>-----Vyber žánr-----</option>
-        <?php
-        for ($i = 0; $i < count($zanry); $i++)
-        {
-            option($zanry[$i][0], $zanry[$i][1]);
-        }
-        ?>
-    </select><br><br>
-    <select name="smery[]" multiple required>
-        <option disabled>-----Vyber směr-----</option>
-        <?php
-        for ($i = 0; $i < count($smery); $i++)
-        {
-            option($smery[$i][0], $smery[$i][1]);
-        }
-        ?>
-    </select><br>
-    <input type="submit" value="Uložit">
-</form>
+<div class="container d-flex justify-content-center">
+
+    <form action="../saves/saveAutor.php" method="POST">
+        <div class="knihy-forms">
+            <div class="input-group mb-1">
+                <span class="input-group-text">Jméno a Příjmení</span>
+                <input type="text" name="jmeno" class="form-control" required>
+                <input type="text" name="prijmeni" class="form-control" required>
+            </div>
+            <div class="input-group mb-1">
+                <span class="input-group-text" id="inputGroup-sizing-default">Skupina</span>
+                <input type="text" class="form-control" name="skupina">
+            </div>
+            <div class="input-group mb-1">
+                <label class="input-group-text" for="inputGroupSelect02">Směry</label>
+                <select name="smery[]" class="form-select" id="inputGroupSelect02" style="overflow: auto;" multiple required>
+                    <?php
+                    for ($i = 0; $i < count($smery); $i++)
+                    {
+                        option($smery[$i][0], $smery[$i][1]);
+                    }
+                    ?>
+                </select><br>
+            </div>
+            <div class="input-group d-grid gap-2 col-6 mx-auto">
+                <button type="submit" class="btn btn-primary">Přidat</button>
+            </div>
+        </div>
+    </form>
+</div>
 
 <?php
 footer();

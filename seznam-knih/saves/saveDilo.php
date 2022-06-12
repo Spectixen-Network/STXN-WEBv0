@@ -60,4 +60,4 @@ if (count($_POST) > 0)
     }
 }
 
-header("Location: index.php");
+header("Location: /seznam-knih/views/formDilo.php");

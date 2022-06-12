@@ -316,7 +316,8 @@ function navbar_logged()
 function banner($name)
 {
     $delka = strlen($name);
-    $text = str_split($name, 1);
+    //$text = mb_substr($name, 0, $delka, 'UTF-8');
+    $text = substr($name, 0);
 
     echo
     '

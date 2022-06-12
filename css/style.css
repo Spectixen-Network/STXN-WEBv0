@@ -1,5 +1,6 @@
 html {
     scroll-behavior: smooth;
+    /*height: 100vh;*/
 }
 
  ::-webkit-scrollbar {
@@ -328,7 +329,7 @@ a:hover {
     display: inline-block;
     color: #c300ff;
     animation: wavy 2s;
-    animation-delay: calc(.1s * var(--i));
+    animation-delay: calc(.03s * var(--i));
 }
 
 @keyframes wavy {
@@ -745,4 +746,38 @@ footer {
 
 .knihy-menu li:hover {
     background-color: rgba(83, 83, 83, 0.4);
+}
+
+.knihy-seznam {
+    color: #ffff;
+}
+
+.knihy-seznam-head {
+    background-color: rgba(83, 83, 83, 0.2);
+}
+
+.knihy-seznam tbody tr:hover {
+    background-color: rgba(83, 83, 83, 0.4);
+}
+
+.knihy-forms {
+    height: 44.5vh;
+}
+
+.knihy-forms *:not(button, option) {
+    background-color: transparent;
+    color: #ffff;
+    border: solid rgba(83, 83, 83, 0.4) 1px;
+}
+
+.knihy-forms input,
+.knihy-forms select {
+    background-color: rgba(83, 83, 83, 0.2);
+}
+
+.knihy-forms span,
+.knihy-forms label {
+    font-size: 1.5em;
+    background-color: rgba(83, 83, 83, 0.4);
+    color: #c300ff;
 }

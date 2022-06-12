@@ -6,11 +6,23 @@ html_start("Seznam Knih | Přidání směru", "../../css/style");
 nav();
 banner("Seznam Knih | Pridani smeru");
 ?>
-<h1>Přidání směru</h1>
-<form action="../saves/saveSmer.php" method="POST">
-    <input type="text" name="nazev" id="" placeholder="Název směru">
-    <input type="submit" value="Odeslat">
-</form>
+
+<div class="container d-flex justify-content-center">
+    <form action="../saves/saveSmer.php" method="POST">
+        <div style="height: 44.5vh;">
+            <div class="knihy-forms">
+                <div class="input-group">
+                    <span class="input-group-text" id="inputGroup-sizing-default">Směr</span>
+                    <input type="text" class="form-control" name="nazev">
+                </div>
+                <div class="input-group d-grid gap-2 col-6 mx-auto mt-1">
+                    <button type="submit" class="btn btn-primary">Přidat</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
 <?php
 footer();
 html_end();

@@ -13,4 +13,4 @@ if (count($_POST) > 0)
     mysqli_query($con, $query);
 }
 
-header("Location: index.php");
+header("Location: /seznam-knih/views/formSmer.php");

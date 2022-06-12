@@ -44,6 +44,8 @@ if (isset($_GET["id"]))
             $vysvetlenyNazevDila = $dilo["vysvetleni_nazvu"];
             $jazykoveProstredky = $dilo["jazykove_prostredky"];
             $autor = $dilo["jmeno"] . " " . $dilo["prijmeni"];
+
+            kniha($nazevDila, "CZ", $autor, "test", $literarniZanry, $literarniDruh, $literarniDruh, $forma, "test", $strukturaDila, $casoprostor, $jmenaPostav, $druhyPostav, $temaDila, "Drogy", $jazykoveProstredky, "kontext", $obsahDila);
         }
     }
     else
@@ -59,8 +61,6 @@ function kniha($nazev, $originalniJazyk, $autor, $ostatniDila, $literarniZanr, $
         <div>
         <h3>Název:</h3>
         <p>' . $nazev . '</p>
-        <h3>Originální jazyk:</h3>
-        <p>' . $originalniJazyk . '</p>
         <h3>Autor:</h3>
         <p>' . $autor . '</p>
         <h3>Další díla:</h3>
