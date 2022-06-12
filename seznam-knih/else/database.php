@@ -1,7 +1,7 @@
 <?php
 function db_connection_knihy()
 {
-    $db_info = json_decode(file_get_contents('else/database.json'), true);
+    $db_info = json_decode(file_get_contents($_SERVER["DOCUMENT_ROOT"] . '/seznam-knih/else/database.json'), true);
     $connection = mysqli_init();
     $server = $db_info["db_ip"];
     $database = $db_info["db_name"];

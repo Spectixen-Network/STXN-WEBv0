@@ -148,7 +148,7 @@ function navbar()
                             <a href="/creators.php" class="nav-link">Creators</a>
                         </li>
                         <li class="nav-item">
-                            <a href="/seznam-knih/index.php" class="nav-link">Books</a>
+                            <a href="/seznam-knih/menu.php" class="nav-link">Books</a>
                         </li>
                         <button type="button" id="loginButton" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#loginModal">
                             Log In
@@ -276,7 +276,7 @@ function navbar_logged()
                             <a href="/creators.php" class="nav-link">Creators</a>
                         </li>
                         <li class="nav-item">
-                            <a href="/seznam-knih/index.php" class="nav-link">Books</a>
+                            <a href="/seznam-knih/menu.php" class="nav-link">Books</a>
                         </li>';
     if (is_admin($_SESSION["UID"]))
     {

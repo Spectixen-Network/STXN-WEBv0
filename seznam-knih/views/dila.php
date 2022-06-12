@@ -1,5 +1,7 @@
 <?php
-include_once 'database.php';
+session_start();
+include_once '../else/database.php';
+include_once '../../functions/globalFunctions.php';
 // , jmena_postav, typy
 $con = db_connection_knihy();
 

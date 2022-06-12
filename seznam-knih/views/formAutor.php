@@ -1,6 +1,7 @@
 <?php
-include_once 'database.php';
-include_once '../functions/globalFunctions.php';
+session_start();
+include_once '../else/database.php';
+include_once '../../functions/globalFunctions.php';
 $con = db_connection_knihy();
 $query = "SELECT * FROM zanr";
 $result = mysqli_query($con, $query);
@@ -16,7 +17,7 @@ nav();
 banner("Seznam Knih | Autor");
 ?>
 
-<form action="saveAuthor.php" method="POST">
+<form action="../saves/saveAuthor.php" method="POST">
     <input type="text" name="jmenoPrijmeni" placeholder="Jméno Přijmení" required><br>
     <input type="text" name="skupina" placeholder="Skupina" required><br>
     <select name="zanry[]" multiple required>

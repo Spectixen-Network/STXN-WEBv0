@@ -1,38 +1,39 @@
 <?php
-include_once 'database.php';
+include_once '../else/database.php';
+include_once '../../functions/globalFunctions.php';
 
 if (count($_POST) > 0)
 {
     $con = db_connection_knihy();
 
     //------ ZAČÁTEK proměnných ------
-    $nazevDila = $_POST["nazev"];
-    $literarniDruh = $_POST["literarniDruh"];
+    $nazevDila = test_input($_POST["nazev"]);
+    $literarniDruh = test_input($_POST["literarniDruh"]);
     $literarniZanry = $_POST["literarniZanry"];
-    $casoprostor = $_POST["casoprostor"];
-    $strukturaDila = $_POST["strukturaDila"];
-    $obsahDila = $_POST["obsahDila"];
-    $forma = $_POST["forma"];
+    $casoprostor = test_input($_POST["casoprostor"]);
+    $strukturaDila = test_input($_POST["strukturaDila"]);
+    $obsahDila = test_input($_POST["obsahDila"]);
+    $forma = test_input($_POST["forma"]);
     if ($_POST["typ"][0] == "proza")
     {
-        $jmenaPostav = $_POST["postavyJmena"];
-        $typy = $_POST["typy"];
+        $jmenaPostav = test_input($_POST["postavyJmena"]);
+        $typy = test_input($_POST["typy"]);
     }
     if ($_POST["typ"][0] == "poezie")
     {
-        $figuryATropy = $_POST["figuryTropy"];
-        $rymy = $_POST["rymy"];
-        $rytmus = $_POST["rytmus"];
+        $figuryATropy = test_input($_POST["figuryTropy"]);
+        $rymy = test_input($_POST["rymy"]);
+        $rytmus = test_input($_POST["rytmus"]);
     }
     if ($_POST["typ"][0] == "drama")
     {
-        $druhyPostav = $_POST["postavyDruhy"];
-        $charakteristika = $_POST["charakteristika"];
+        $druhyPostav = test_input($_POST["postavyDruhy"]);
+        $charakteristika = test_input($_POST["charakteristika"]);
     }
-    $temaDila = $_POST["temaDila"];
-    $vysvetlenyNazevDila = $_POST["jazykoveProstredky"];
-    $jazykoveProstredky = $_POST["jazykoveProstredky"];
-    $autor = $_POST["autor"];
+    $temaDila = test_input($_POST["temaDila"]);
+    $vysvetlenyNazevDila = test_input($_POST["jazykoveProstredky"]);
+    $jazykoveProstredky = test_input($_POST["jazykoveProstredky"]);
+    $autor = test_input($_POST["autor"]);
     //------ KONEC proměnných ------
 
     //------ ZAČÁTEK dotazů ------
@@ -54,7 +55,7 @@ if (count($_POST) > 0)
 
     for ($i = 0; $i < count($literarniZanry); $i++)
     {
-        $insertIntoDiloZanr = "INSERT INTO dilo_zanr(dilo_id, zanr_id) VALUES('" . $diloID . "', '" . $literarniZanry[$i] . "');";
+        $insertIntoDiloZanr = "INSERT INTO dilo_zanr(dilo_id, zanr_id) VALUES('" . $diloID . "', '" . test_input($literarniZanry[$i]) . "');";
         mysqli_query($con, $insertIntoDiloZanr);
     }
 }

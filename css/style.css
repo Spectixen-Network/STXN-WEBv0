@@ -725,3 +725,24 @@ footer {
 .contextMenu li:hover {
     background-color: rgba(83, 83, 83, 0.75);
 }
+
+.knihy-menu {
+    height: 44.5vh;
+}
+
+.knihy-menu li {
+    padding: 0;
+    background-color: rgba(83, 83, 83, 0.2);
+    border: #232323 solid 2px;
+}
+
+.knihy-menu a {
+    font-size: 1.5em;
+    padding: 16px 8px;
+    display: block;
+    color: #c300ff;
+}
+
+.knihy-menu li:hover {
+    background-color: rgba(83, 83, 83, 0.4);
+}
