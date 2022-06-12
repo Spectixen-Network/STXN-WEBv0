@@ -761,7 +761,7 @@ footer {
 }
 
 .knihy-forms {
-    height: 44.5vh;
+    /*height: 44.5vh;*/
 }
 
 .knihy-forms *:not(button, option) {

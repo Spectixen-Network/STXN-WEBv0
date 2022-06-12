@@ -20,29 +20,31 @@ banner("Seznam Knih | Autor");
 <div class="container d-flex justify-content-center">
 
     <form action="../saves/saveAutor.php" method="POST">
-        <div class="knihy-forms">
-            <div class="input-group mb-1">
-                <span class="input-group-text">Jméno a Příjmení</span>
-                <input type="text" name="jmeno" class="form-control" required>
-                <input type="text" name="prijmeni" class="form-control" required>
-            </div>
-            <div class="input-group mb-1">
-                <span class="input-group-text" id="inputGroup-sizing-default">Skupina</span>
-                <input type="text" class="form-control" name="skupina">
-            </div>
-            <div class="input-group mb-1">
-                <label class="input-group-text" for="inputGroupSelect02">Směry</label>
-                <select name="smery[]" class="form-select" id="inputGroupSelect02" style="overflow: auto;" multiple required>
-                    <?php
-                    for ($i = 0; $i < count($smery); $i++)
-                    {
-                        option($smery[$i][0], $smery[$i][1]);
-                    }
-                    ?>
-                </select><br>
-            </div>
-            <div class="input-group d-grid gap-2 col-6 mx-auto">
-                <button type="submit" class="btn btn-primary">Přidat</button>
+        <div style="height: 44.5vh;">
+            <div class="knihy-forms">
+                <div class="input-group mb-1">
+                    <span class="input-group-text">Jméno a Příjmení</span>
+                    <input type="text" name="jmeno" class="form-control" required>
+                    <input type="text" name="prijmeni" class="form-control" required>
+                </div>
+                <div class="input-group mb-1">
+                    <span class="input-group-text" id="inputGroup-sizing-default">Skupina</span>
+                    <input type="text" class="form-control" name="skupina">
+                </div>
+                <div class="input-group mb-1">
+                    <label class="input-group-text" for="inputGroupSelect02">Směry</label>
+                    <select name="smery[]" class="form-select" id="inputGroupSelect02" style="overflow: auto;" multiple required>
+                        <?php
+                        for ($i = 0; $i < count($smery); $i++)
+                        {
+                            option($smery[$i][0], $smery[$i][1]);
+                        }
+                        ?>
+                    </select><br>
+                </div>
+                <div class="input-group d-grid gap-2 col-6 mx-auto">
+                    <button type="submit" class="btn btn-primary">Přidat</button>
+                </div>
             </div>
         </div>
     </form>
