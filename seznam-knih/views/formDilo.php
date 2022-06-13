@@ -122,14 +122,12 @@ banner("Seznam Knih | Dilo");
                 </label>
                 <div id="drama-input" class="showNone">
                     <button type="button" class="btn btn-primary mb-1" onclick="pridatPostavuD();">Přidat postavu</button><br>
-                    <div class="input-group mb-1">
-                        <span class="input-group-text">Charakteristika</span>
-                        <input type="text" name="charakteristika" class="form-control">
-                    </div>
                     <div id="postavaD">
                         <div class="input-group mb-1">
                             <span class="input-group-text">Postava, Vlastnosti</span>
                             <input type="text" name="jmenoPostavyD[]" class="form-control">
+                            <span class="input-group-text">Charakteristika</span>
+                            <input type="text" name="charakteristikaD[]" class="form-control">
                             <select name="typPostavyD[]" class="form-select" id="inputGroupSelect02" style="overflow: auto;">
                                 <option value="Hlavní">Hlavní</option>
                                 <option value="Vedlejší">Vedlejší</option>

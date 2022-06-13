@@ -35,9 +35,9 @@ if (count($_POST) > 0)
             "jmenoPostavyD" => $_POST["jmenoPostavyD"],
             "typPostavyD" => $_POST["typPostavyD"],
             "vlastnostiD" => $_POST["vlastnostiD"],
-            "literarniTypD" => $_POST["literarniTypD"]
+            "literarniTypD" => $_POST["literarniTypD"],
+            "charakteristikaD" => $_POST["charakteristikaD"]
         ];
-        $charakteristika = test_input($_POST["charakteristika"]);
     }
     $temaDila = test_input($_POST["temaDila"]);
     $vysvetlenyNazevDila = test_input($_POST["jazykoveProstredky"]);
@@ -57,15 +57,15 @@ if (count($_POST) > 0)
     //------ ZAČÁTEK dotazů ------
     if ($_POST["typ"][0] == "proza")
     {
-        $insertIntoDilo = "INSERT INTO dilo(nazev, literarni_druh, casoprostor, struktura, obsah, forma, tema, vysvetleni_nazvu, jazykove_prostredky, autor_id, kompozice) VALUES('" . $nazevDila . "', '" . $literarniDruh . "', '" . $casoprostor . "', '" . $strukturaDila . "', '" . $obsahDila . "', '" . $forma . "', '" . $temaDila . "', '" . $vysvetlenyNazevDila . "', '" . $jazykoveProstredky . "', '" . $autor . "', '" . $kompozice . "');";
+        $insertIntoDilo = "INSERT INTO dilo(nazev, literarni_druh, casoprostor, struktura, obsah, forma, typ, tema, vysvetleni_nazvu, jazykove_prostredky, autor_id, kompozice) VALUES('" . $nazevDila . "', '" . $literarniDruh . "', '" . $casoprostor . "', '" . $strukturaDila . "', '" . $obsahDila . "', '" . $forma . "', '" . $_POST["typ"][0] . "', '" . $temaDila . "', '" . $vysvetlenyNazevDila . "', '" . $jazykoveProstredky . "', '" . $autor . "', '" . $kompozice . "');";
     }
     if ($_POST["typ"][0] == "poezie")
     {
-        $insertIntoDilo = "INSERT INTO dilo(nazev, literarni_druh, casoprostor, struktura, obsah, forma, figury_a_tropy, rymy, rytmus, tema, vysvetleni_nazvu, jazykove_prostredky, autor_id, kompozice) VALUES('" . $nazevDila . "', '" . $literarniDruh . "', '" . $casoprostor . "', '" . $strukturaDila . "', '" . $obsahDila . "', '" . $forma . "', '" . $figuryATropy . "', '" . $rymy . "', '" . $rytmus . "', '" . $temaDila . "', '" . $vysvetlenyNazevDila . "', '" . $jazykoveProstredky . "', '" . $autor . "', '" . $kompozice . "');";
+        $insertIntoDilo = "INSERT INTO dilo(nazev, literarni_druh, casoprostor, struktura, obsah, forma, typ, figury_a_tropy, rymy, rytmus, tema, vysvetleni_nazvu, jazykove_prostredky, autor_id, kompozice) VALUES('" . $nazevDila . "', '" . $literarniDruh . "', '" . $casoprostor . "', '" . $strukturaDila . "', '" . $obsahDila . "', '" . $forma . "', '" . $_POST["typ"][0] . "', '" . $figuryATropy . "', '" . $rymy . "', '" . $rytmus . "', '" . $temaDila . "', '" . $vysvetlenyNazevDila . "', '" . $jazykoveProstredky . "', '" . $autor . "', '" . $kompozice . "');";
     }
     if ($_POST["typ"][0] == "drama")
     {
-        $insertIntoDilo = "INSERT INTO dilo(nazev, literarni_druh, casoprostor, struktura, obsah, forma, charakteristika, tema, vysvetleni_nazvu, jazykove_prostredky, autor_id, kompozice) VALUES('" . $nazevDila . "', '" . $literarniDruh . "', '" . $casoprostor . "', '" . $strukturaDila . "', '" . $obsahDila . "', '" . $forma . "', '" . $charakteristika . "', '" . $temaDila . "', '" . $vysvetlenyNazevDila . "', '" . $jazykoveProstredky . "', '" . $autor . "', '" . $kompozice . "');";
+        $insertIntoDilo = "INSERT INTO dilo(nazev, literarni_druh, casoprostor, struktura, obsah, forma, typ, tema, vysvetleni_nazvu, jazykove_prostredky, autor_id, kompozice) VALUES('" . $nazevDila . "', '" . $literarniDruh . "', '" . $casoprostor . "', '" . $strukturaDila . "', '" . $obsahDila . "', '" . $forma . "', '" . $_POST["typ"][0] . "', '" . $temaDila . "', '" . $vysvetlenyNazevDila . "', '" . $jazykoveProstredky . "', '" . $autor . "', '" . $kompozice . "');";
     }
     mysqli_query($con, $insertIntoDilo);
     $getDiloID = "SELECT id FROM dilo WHERE nazev='" . $nazevDila . "';";
@@ -81,14 +81,14 @@ if (count($_POST) > 0)
     {
         for ($i = 0; $i < count($postavy["jmenoPostavy"]); $i++)
         {
-            $insertIntoPostava = "INSERT INTO postava(dilo_id, jmeno, typ_postavy, vlastnosti, literarni_typ VALUES ('" . $getDiloID . "', '" . test_input($postavy["jmenoPostavy"][$i]) . "', '" . $postavy["typPostavy"][$i] . "', '" . $postavy["vlastnosti"][$i] . "', '" . $postavy["literarniTyp"][$i] . "');";
+            $insertIntoPostava = "INSERT INTO postava(dilo_id, jmeno, typ_postavy, vlastnosti, literarni_typ) VALUES ('" . $getDiloID . "', '" . test_input($postavy["jmenoPostavy"][$i]) . "', '" . $postavy["typPostavy"][$i] . "', '" . $postavy["vlastnosti"][$i] . "', '" . $postavy["literarniTyp"][$i] . "');";
         }
     }
     if ($_POST["typ"][0] == "drama")
     {
         for ($i = 0; $i < count($postavyD["jmenoPostavyD"]); $i++)
         {
-            $insertIntoPostava = "INSERT INTO postava(dilo_id, jmeno, typ_postavy, vlastnosti, literarni_typ VALUES ('" . $getDiloID . "', '" . test_input($postavyD["jmenoPostavyD"][$i]) . "', '" . $postavyD["typPostavyD"][$i] . "', '" . $postavyD["vlastnostiD"][$i] . "', '" . $postavyD["literarniTypD"][$i] . "');";
+            $insertIntoPostava = "INSERT INTO postava(dilo_id, jmeno, typ_postavy, vlastnosti, literarni_typ, charakteristika) VALUES ('" . $getDiloID . "', '" . test_input($postavyD["jmenoPostavyD"][$i]) . "', '" . $postavyD["typPostavyD"][$i] . "', '" . $postavyD["vlastnostiD"][$i] . "', '" . $postavyD["literarniTypD"][$i] . "', '" . $postavyD["charakteristikaD"][$i] . "');";
         }
     }
 }
