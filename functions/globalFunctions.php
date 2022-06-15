@@ -145,9 +145,6 @@ function navbar()
                             <a href="/index.php" class="nav-link">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a href="/calendar.php" class="nav-link">Calendar</a>
-                        </li>
-                        <li class="nav-item">
                             <a href="/creators.php" class="nav-link">Creators</a>
                         </li>
                         <button type="button" id="loginButton" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#loginModal">
