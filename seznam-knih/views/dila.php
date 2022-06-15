@@ -1,11 +1,8 @@
 <?php
 
-use JetBrains\PhpStorm\Internal\ReturnTypeContract;
-
 session_start();
 include_once '../else/database.php';
 include_once '../../functions/globalFunctions.php';
-// , jmena_postav, typy
 $con = db_connection_knihy();
 
 if (isset($_GET["id"]))
@@ -119,6 +116,10 @@ function knihaProza($id, $nazev, $autor, $literarniZanr, $LiterarniDruh, $forma,
         echo '<p><strong>Dílo - žánr:</strong> ' . $autorDilo["nazev"] . " - " . mysqli_fetch_row(diloNazevZanru($autorDilo["id"]))[0] . '</p>';
     }
     echo '    </div>
+    <br>
+    <br>
+    <br>
+    <br>
     </div>
     ';
 }
@@ -177,6 +178,10 @@ function knihaPoezie($id, $nazev, $autor, $literarniZanr, $LiterarniDruh, $forma
         echo '<p><strong>Dílo - žánr:</strong> ' . $autorDilo["nazev"] . " - " . mysqli_fetch_row(diloNazevZanru($autorDilo["id"]))[0] . '</p>';
     }
     echo '    </div>
+    <br>
+    <br>
+    <br>
+    <br>
     </div>
     ';
 }
@@ -238,7 +243,55 @@ function knihaDrama($id, $nazev, $autor, $literarniZanr, $LiterarniDruh, $forma,
         echo '<p><strong>Dílo - žánr:</strong> ' . $autorDilo["nazev"] . " - " . mysqli_fetch_row(diloNazevZanru($autorDilo["id"]))[0] . '</p>';
     }
     echo '    </div>
+    <br>
+    <br>
+    <br>
+    <br>
     </div>
+    ';
+}
+function knih($nazev, $originalniJazyk, $autor, $ostatniDila, $literarniZanr, $LiterarniSmer, $LiterarniDruh, $forma, $kompozice, $struktura, $casoprostor, $hlavniPostavy, $vedlejsiPostavy, $tema, $hlavniMyslenka, $jazykProstredky, $kontext, $dej)
+{
+    echo
+    '
+        <div>
+            <h3>Název:</h3>
+            <p>' . $nazev . '</p>
+            <h3>Originální jazyk:</h3>
+            <p>' . $originalniJazyk . '</p>
+            <h3>Autor:</h3>
+            <p>' . $autor . '</p>
+            <h3>Další díla:</h3>
+            <p>' . $ostatniDila . '</p>
+            <h3>Literární žánr:</h3>
+            <p>' . $literarniZanr . '</p>
+            <h3>Literární směr:</h3>
+            <p>' . $LiterarniSmer . '</p>
+            <h3>Literární druh:</h3>
+            <p>' . $LiterarniDruh . '</p>
+            <h3>Forma:</h3>
+            <p>' . $forma . '</p>
+            <h3>Kompozice:</h3>
+            <p>' . $kompozice . '</p>
+            <h3>Struktura:</h3>
+            <p>' . $struktura . '</p>
+            <h3>Časoprostor:</h3>
+            <p>' . $casoprostor . '</p>
+            <h3>Hlavní postavy:</h3>
+            <p>' . $hlavniPostavy . '</p>
+            <h3>Vedlejší postavy:</h3>
+            <p>' . $vedlejsiPostavy . '</p>
+            <h3>Téma:</h3>
+            <p>' . $tema . '</p>
+            <h3>Hlavní myšlenka:</h3>
+            <p>' . $hlavniMyslenka . '</p>
+            <h3>Jazykové a literární prostředky:</h3>
+            <p>' . $jazykProstredky . '</p>
+            <h3>Kontext:</h3>
+            <p>' . $kontext . '</p>
+            <h3>Děj:</h3>
+            <p>' . $dej . '</p>
+        </div>
     ';
 }
 function otherAutorsOfSameSmerQuery($autorID)

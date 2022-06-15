@@ -23,101 +23,11 @@ banner("Seznam knih | Seznam");
             </tr>
         </thead>
         <tbody>
-            <tr onclick="window.location.href = 'dila.php?id=all'">
+            <tr onclick="window.open('dila.php?id=all', '_blank')">
                 <td></td>
                 <td>All</td>
                 <td>All</td>
             </tr>
-            <!-- <tr>
-                <th>Pořadí.</th>
-                <th>Název díla.</th>
-                <th>Autor díla.</th>
-            </tr>
-            <tr>
-                <th>Pořadí.</th>
-                <th>Název díla.</th>
-                <th>Autor díla.</th>
-            </tr>
-            <tr>
-                <th>Pořadí.</th>
-                <th>Název díla.</th>
-                <th>Autor díla.</th>
-            </tr>
-            <tr>
-                <th>Pořadí.</th>
-                <th>Název díla.</th>
-                <th>Autor díla.</th>
-            </tr>
-            <tr>
-                <th>Pořadí.</th>
-                <th>Název díla.</th>
-                <th>Autor díla.</th>
-            </tr>
-            <tr>
-                <th>Pořadí.</th>
-                <th>Název díla.</th>
-                <th>Autor díla.</th>
-            </tr>
-            <tr>
-                <th>Pořadí.</th>
-                <th>Název díla.</th>
-                <th>Autor díla.</th>
-            </tr>
-            <tr>
-                <th>Pořadí.</th>
-                <th>Název díla.</th>
-                <th>Autor díla.</th>
-            </tr>
-            <tr>
-                <th>Pořadí.</th>
-                <th>Název díla.</th>
-                <th>Autor díla.</th>
-            </tr>
-            <tr>
-                <th>Pořadí.</th>
-                <th>Název díla.</th>
-                <th>Autor díla.</th>
-            </tr>
-            <tr>
-                <th>Pořadí.</th>
-                <th>Název díla.</th>
-                <th>Autor díla.</th>
-            </tr>
-            <tr>
-                <th>Pořadí.</th>
-                <th>Název díla.</th>
-                <th>Autor díla.</th>
-            </tr>
-            <tr>
-                <th>Pořadí.</th>
-                <th>Název díla.</th>
-                <th>Autor díla.</th>
-            </tr>
-            <tr>
-                <th>Pořadí.</th>
-                <th>Název díla.</th>
-                <th>Autor díla.</th>
-            </tr>
-            <tr>
-                <th>Pořadí.</th>
-                <th>Název díla.</th>
-                <th>Autor díla.</th>
-            </tr>
-            <tr>
-                <th>Pořadí.</th>
-                <th>Název díla.</th>
-                <th>Autor díla.</th>
-            </tr>
-            <tr>
-                <th>Pořadí.</th>
-                <th>Název díla.</th>
-                <th>Autor díla.</th>
-            </tr>
-            <tr>
-                <th>Pořadí.</th>
-                <th>Název díla.</th>
-                <th>Autor díla.</th>
-            </tr> -->
             <?php
             for ($i = 0; $i < mysqli_num_rows($result); $i++)
             {
@@ -135,7 +45,7 @@ html_end();
 
 function tableRow($poradi, $nazevDila, $jmenoAutora)
 {
-    $redirect = "window.location.href = 'dila.php?id=$poradi'";
+    $redirect = "window.open('dila.php?id=$poradi', '_blank');";
     echo
     '
         <tr onclick="' . $redirect . '">
