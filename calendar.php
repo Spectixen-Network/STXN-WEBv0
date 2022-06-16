@@ -9,16 +9,7 @@ html_start("Calendar", "css/style");
 nav();
 banner("Calendar");
 
-
-
-$numOfDays = cal_days_in_month(CAL_GREGORIAN, 6, 2022);
-$numOfWeeks = round($numOfDays / 7, 0);
-echo $numOfDays;
-echo "<br>";
-echo $numOfWeeks;
-echo date('D');
-
-$dnyVTydnu =
+$daysOfWeekCZ =
     [
         1 => "Po",
         "Út",
@@ -38,12 +29,8 @@ $dnyVTydnu =
 
             </div>
             <div class="col-10" style="background-color: blue; height: 70vh;">
-                <?php
-                echo "Den v týdnu: " . $dnyVTydnu[date("N")];
-                oneMonth(7, 2022);
-                ?>
                 <div class="row">
-                    <div class="col" style="background-color: green; height: 14vh">
+                    <div class="col" style="background-color: green; height: 14vh;">
                         <div class="d-flex flex-column">
                             <div class="p-2" style="background-color: purple;">
                                 <p style="text-align: center; margin: 0;">1</p>
@@ -202,7 +189,7 @@ function oneDay($numberOfDay)
 {
     echo
     '
-        <div class="col" style="background-color: green; height: 14vh">
+        <div class="col" style="background-color: green; height: 14vh; border: solid black 1px;">
             <div class="d-flex flex-column">
                 <div class="p-2" style="background-color: purple;">
                     <p style="text-align: center; margin: 0;">' . $numberOfDay . '</p>
