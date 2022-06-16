@@ -44,15 +44,18 @@ $daysOfWeekCZ =
     <div class="container-fluid">
 
         <div class="row">
-            <div class="col-2" style="background-color: red; height: 70vh;">
+            <div class="col-2" style="background-color: red; ">
 
             </div>
-            <div class="col-10" style="background-color: blue; height: 70vh;">
+            <div class="col-10" style="background-color: blue; ">
+                <?php oneMonth(6, 2022); ?>
                 <div class="row">
                     <div class="col" style="background-color: green; height: 14vh;">
                         <div class="d-flex flex-column">
-                            <div class="p-2" style="background-color: purple;">
-                                <p style="text-align: center; margin: 0;">1</p>
+                            <div class="p-2 row" style="background-color: purple;">
+                                <p class="col-2" style="text-align: center; margin: 0;">Po</p>
+                                <p class="col-8"></p>
+                                <p class="col-2" style="text-align: center; margin: 0;">1</p>
                             </div>
                             <div class="p-2" style="background-color: black;">
                                 <p style="text-align: center;">test<br>test</p>
@@ -212,6 +215,22 @@ function oneDay($numberOfDay)
             <div class="d-flex flex-column">
                 <div class="p-2" style="background-color: purple;">
                     <p style="text-align: center; margin: 0;">' . $numberOfDay . '</p>
+                </div>
+                <div class="p-2" style="background-color: black;">
+                    <p style="text-align: center; margin: 0;">test<br>test</p>
+                </div>
+            </div>
+        </div>
+    ';
+}
+function emptyDay()
+{
+    echo
+    '
+        <div class="col" style="background-color: green; height: 14vh; border: solid black 1px;">
+            <div class="d-flex flex-column">
+                <div class="p-2" style="background-color: purple;">
+                    <p style="text-align: center; margin: 0;"></p>
                 </div>
                 <div class="p-2" style="background-color: black;">
                     <p style="text-align: center; margin: 0;">test<br>test</p>
