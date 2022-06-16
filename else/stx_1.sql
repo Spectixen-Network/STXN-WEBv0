@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Počítač: 127.0.0.1
--- Vytvořeno: Čtv 16. čen 2022, 20:18
+-- Vytvořeno: Čtv 16. čen 2022, 21:08
 -- Verze serveru: 10.4.22-MariaDB
 -- Verze PHP: 8.1.2
 
@@ -59,6 +59,31 @@ CREATE TABLE `calendar_event` (
   `event_name` varchar(255) NOT NULL,
   `event_description` text DEFAULT NULL,
   `event_date` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Struktura tabulky `calendar_tags`
+--
+
+CREATE TABLE `calendar_tags` (
+  `user_id` int(10) UNSIGNED NOT NULL,
+  `tag_id` int(10) UNSIGNED NOT NULL,
+  `tag_name` varchar(255) NOT NULL,
+  `tag_description` text DEFAULT NULL,
+  `tag_color` varchar(255) DEFAULT '#fc03c6'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Struktura tabulky `event_tag`
+--
+
+CREATE TABLE `event_tag` (
+  `tag_id` int(10) UNSIGNED NOT NULL,
+  `event_id` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -127,6 +152,20 @@ ALTER TABLE `calendar_event`
   ADD UNIQUE KEY `uid` (`uid`,`event_id`);
 
 --
+-- Indexy pro tabulku `calendar_tags`
+--
+ALTER TABLE `calendar_tags`
+  ADD PRIMARY KEY (`tag_id`),
+  ADD KEY `user_id` (`user_id`);
+
+--
+-- Indexy pro tabulku `event_tag`
+--
+ALTER TABLE `event_tag`
+  ADD KEY `tag_id` (`tag_id`),
+  ADD KEY `event_id` (`event_id`);
+
+--
 -- Indexy pro tabulku `user`
 --
 ALTER TABLE `user`
@@ -148,6 +187,12 @@ ALTER TABLE `userinfo`
 --
 ALTER TABLE `calendar_event`
   MODIFY `event_id` int(10) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT pro tabulku `calendar_tags`
+--
+ALTER TABLE `calendar_tags`
+  MODIFY `tag_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT pro tabulku `user`
@@ -176,6 +221,19 @@ ALTER TABLE `banneduser`
 --
 ALTER TABLE `calendar_event`
   ADD CONSTRAINT `calendar_event_ibfk_1` FOREIGN KEY (`uid`) REFERENCES `user` (`uid`);
+
+--
+-- Omezení pro tabulku `calendar_tags`
+--
+ALTER TABLE `calendar_tags`
+  ADD CONSTRAINT `calendar_tags_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`uid`);
+
+--
+-- Omezení pro tabulku `event_tag`
+--
+ALTER TABLE `event_tag`
+  ADD CONSTRAINT `event_tag_ibfk_1` FOREIGN KEY (`tag_id`) REFERENCES `calendar_tags` (`tag_id`),
+  ADD CONSTRAINT `event_tag_ibfk_2` FOREIGN KEY (`event_id`) REFERENCES `calendar_event` (`event_id`);
 
 --
 -- Omezení pro tabulku `userinfo`

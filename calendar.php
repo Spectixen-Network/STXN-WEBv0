@@ -22,8 +22,24 @@ $daysOfWeekCZ =
 ?>
 
 <div class="container-fluid">
-    <div class="calendar-nav" style="height: 5vh; background-color: Blue; margin-bottom: 1vh;">
-
+    <div class="container-fluid calendar-nav" style="height: 5vh; background-color: Blue; margin-bottom: 1vh;">
+        <div class="row d-flex justify-content-center">
+            <div class="col-4" style="text-align: center; font-size: 1.5em; font-weight: bold;">
+                <a href="?show=month" style="text-decoration: none; color:black; display: block;">
+                    Month
+                </a>
+            </div>
+            <div class="col-4" style="text-align: center; font-size: 1.5em; font-weight: bold;">
+                <a href="?show=week" style="text-decoration: none; color:black; display: block;">
+                    Week
+                </a>
+            </div>
+            <div class="col-4" style="text-align: center; font-size: 1.5em; font-weight: bold;">
+                <a href="?show=day" style="text-decoration: none; color:black; display: block;">
+                    Day
+                </a>
+            </div>
+        </div>
     </div>
     <div class="container-fluid">
 

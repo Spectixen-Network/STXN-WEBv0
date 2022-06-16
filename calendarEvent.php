@@ -14,7 +14,7 @@ if (isset($_GET["day"]) && isset($_GET["month"]) && isset($_GET["year"]))
 }
 else
 {
-    banner("16.6.2022");
+    banner(date("d.m.Y"));
 }
 
 
