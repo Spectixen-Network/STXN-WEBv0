@@ -3,10 +3,31 @@ session_start();
 include_once 'functions/globalFunctions.php';
 isLoggedElseRedirect();
 
+date_default_timezone_set("Europe/Prague"); //Changing default time zone.
+
 html_start("Calendar", "css/style");
 nav();
 banner("Calendar");
 
+
+
+$numOfDays = cal_days_in_month(CAL_GREGORIAN, 6, 2022);
+$numOfWeeks = round($numOfDays / 7, 0);
+echo $numOfDays;
+echo "<br>";
+echo $numOfWeeks;
+echo date('D');
+
+$dnyVTydnu =
+    [
+        1 => "Po",
+        "Út",
+        "St",
+        "Čt",
+        "Pa",
+        "So",
+        "Ne"
+    ];
 ?>
 
 <div class="container-fluid">
@@ -17,7 +38,10 @@ banner("Calendar");
 
             </div>
             <div class="col-10" style="background-color: blue; height: 70vh;">
-
+                <?php
+                echo "Den v týdnu: " . $dnyVTydnu[date("N")];
+                oneMonth(7, 2022);
+                ?>
                 <div class="row">
                     <div class="col" style="background-color: green; height: 14vh">
                         <div class="d-flex flex-column">
@@ -173,3 +197,44 @@ banner("Calendar");
 <?php
 footer();
 html_end();
+
+function oneDay($numberOfDay)
+{
+    echo
+    '
+        <div class="col" style="background-color: green; height: 14vh">
+            <div class="d-flex flex-column">
+                <div class="p-2" style="background-color: purple;">
+                    <p style="text-align: center; margin: 0;">' . $numberOfDay . '</p>
+                </div>
+                <div class="p-2" style="background-color: black;">
+                    <p style="text-align: center; margin: 0;">test<br>test</p>
+                </div>
+            </div>
+        </div>
+    ';
+}
+function oneWeek($numberOfFirstDay)
+{
+    echo '<div class="row">';
+    for ($i = $numberOfFirstDay; $i < $numberOfFirstDay + 7; $i++)
+    {
+        oneDay($i);
+    }
+    echo '</div>';
+}
+function oneMonth($monthNumber, $year)
+{
+    $numOfDays = cal_days_in_month(CAL_GREGORIAN, $monthNumber, $year);
+    $numOfWeeks = round($numOfDays / 7, 0);
+    oneWeek(1);
+    oneWeek(8);
+    oneWeek(15);
+    oneWeek(22);
+    echo '<div class="row">';
+    for ($i = 1; $i <= $numOfDays - 7 * $numOfWeeks; $i++)
+    {
+        oneDay(28 + $i);
+    }
+    echo '</div>';
+}
