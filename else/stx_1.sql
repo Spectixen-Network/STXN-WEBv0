@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Počítač: 127.0.0.1
--- Vytvořeno: Stř 25. kvě 2022, 13:57
--- Verze serveru: 10.4.24-MariaDB
--- Verze PHP: 8.1.6
+-- Vytvořeno: Čtv 16. čen 2022, 20:18
+-- Verze serveru: 10.4.22-MariaDB
+-- Verze PHP: 8.1.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -50,6 +50,20 @@ CREATE TABLE `banneduser` (
 -- --------------------------------------------------------
 
 --
+-- Struktura tabulky `calendar_event`
+--
+
+CREATE TABLE `calendar_event` (
+  `uid` int(10) UNSIGNED NOT NULL,
+  `event_id` int(10) NOT NULL,
+  `event_name` varchar(255) NOT NULL,
+  `event_description` text DEFAULT NULL,
+  `event_date` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Struktura tabulky `user`
 --
 
@@ -70,9 +84,9 @@ INSERT INTO `user` (`uid`, `username`, `password`, `email`, `image_path`, `admin
 (1, 'AppleJamp', 'f933ad3d093dc000bcf947b91d8e3c2b00088166820a531386069c39c504e4a7', 'd.pivka.st@spseiostrava.cz', 'images/avatar_red_zoomed.png', 2),
 (2, 'Yura', '79b98a6be9e8e9b7492a8560b66dfe87ee8f162289d9c6bdb2cd4ec057e93e90', 'crazybrumikcz@gmail.com', 'images/SpectixenNetwork_logo.png', 2),
 (3, 'test', '9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08', 'test@test.test', 'images/noavatar.png', 0),
-(4, 'test1', '1b4f0e9851971998e732078544c96b36c3d01cedf7caa332359d6f1d83567014', 'test1@test1.test1', 'images/noavatar.png', 0),
+(4, 'test1', '1b4f0e9851971998e732078544c96b36c3d01cedf7caa332359d6f1d83567014', 'test1@test1.test1', 'images/noavatar.png', 1),
 (5, 'admin', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918', '', 'images/noavatar.png', 1),
-(7, 'testToBanAdmin', '1', '', 'images/noavatar.png', 1);
+(6, 'testToBan', 'e0670e55dbf2e1d06fbd1eabc6100b43f44c75857832c44f7d5c0034454fe98b', 'testToBan@test.com', 'images/noavatar.png', 0);
 
 -- --------------------------------------------------------
 
@@ -97,13 +111,20 @@ CREATE TABLE `userinfo` (
 -- Indexy pro tabulku `address`
 --
 ALTER TABLE `address`
-  ADD PRIMARY KEY (`address_id`);
+  ADD KEY `address_id` (`address_id`) USING BTREE;
 
 --
 -- Indexy pro tabulku `banneduser`
 --
 ALTER TABLE `banneduser`
-  ADD KEY `user_key` (`uid`);
+  ADD KEY `uid` (`uid`);
+
+--
+-- Indexy pro tabulku `calendar_event`
+--
+ALTER TABLE `calendar_event`
+  ADD PRIMARY KEY (`event_id`),
+  ADD UNIQUE KEY `uid` (`uid`,`event_id`);
 
 --
 -- Indexy pro tabulku `user`
@@ -123,35 +144,44 @@ ALTER TABLE `userinfo`
 --
 
 --
--- AUTO_INCREMENT pro tabulku `address`
+-- AUTO_INCREMENT pro tabulku `calendar_event`
 --
-ALTER TABLE `address`
-  MODIFY `address_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+ALTER TABLE `calendar_event`
+  MODIFY `event_id` int(10) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT pro tabulku `user`
 --
 ALTER TABLE `user`
-  MODIFY `uid` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `uid` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Omezení pro exportované tabulky
 --
 
 --
+-- Omezení pro tabulku `address`
+--
+ALTER TABLE `address`
+  ADD CONSTRAINT `address_ibfk_1` FOREIGN KEY (`address_id`) REFERENCES `userinfo` (`address_id`);
+
+--
 -- Omezení pro tabulku `banneduser`
 --
 ALTER TABLE `banneduser`
-  ADD CONSTRAINT `banneduser_ibfk_1` FOREIGN KEY (`uid`) REFERENCES `user` (`uid`),
-  ADD CONSTRAINT `banneduser_ibfk_2` FOREIGN KEY (`uid`) REFERENCES `user` (`uid`),
-  ADD CONSTRAINT `user_key` FOREIGN KEY (`uid`) REFERENCES `user` (`uid`);
+  ADD CONSTRAINT `banneduser_ibfk_1` FOREIGN KEY (`uid`) REFERENCES `user` (`uid`);
+
+--
+-- Omezení pro tabulku `calendar_event`
+--
+ALTER TABLE `calendar_event`
+  ADD CONSTRAINT `calendar_event_ibfk_1` FOREIGN KEY (`uid`) REFERENCES `user` (`uid`);
 
 --
 -- Omezení pro tabulku `userinfo`
 --
 ALTER TABLE `userinfo`
-  ADD CONSTRAINT `fk_address` FOREIGN KEY (`address_id`) REFERENCES `address` (`address_id`),
-  ADD CONSTRAINT `user_key_info` FOREIGN KEY (`uid`) REFERENCES `user` (`uid`);
+  ADD CONSTRAINT `userinfo_ibfk_1` FOREIGN KEY (`uid`) REFERENCES `user` (`uid`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -22,6 +22,9 @@ $daysOfWeekCZ =
 ?>
 
 <div class="container-fluid">
+    <div class="calendar-nav" style="height: 5vh; background-color: Blue; margin-bottom: 1vh;">
+
+    </div>
     <div class="container-fluid">
 
         <div class="row">
