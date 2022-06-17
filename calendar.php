@@ -22,20 +22,20 @@ $daysOfWeekCZ =
 ?>
 
 <div class="container-fluid">
-    <div class="container-fluid calendar-nav" style="height: 5vh; background-color: Blue; margin-bottom: 1vh;">
+    <div class="container-fluid calendar-nav" style="margin-bottom: 1vh;">
         <div class="row d-flex justify-content-center">
-            <div class="col-4" style="text-align: center; font-size: 1.5em; font-weight: bold;">
-                <a href="?show=month" style="text-decoration: none; color:black; display: block;">
+            <div class="col-4 calendar-nav-button">
+                <a href="?show=month">
                     Month
                 </a>
             </div>
-            <div class="col-4" style="text-align: center; font-size: 1.5em; font-weight: bold;">
-                <a href="?show=week" style="text-decoration: none; color:black; display: block;">
+            <div class="col-4 calendar-nav-button">
+                <a href="?show=week">
                     Week
                 </a>
             </div>
-            <div class="col-4" style="text-align: center; font-size: 1.5em; font-weight: bold;">
-                <a href="?show=day" style="text-decoration: none; color:black; display: block;">
+            <div class="col-4 calendar-nav-button">
+                <a href="?show=day">
                     Day
                 </a>
             </div>
@@ -48,156 +48,12 @@ $daysOfWeekCZ =
 
             </div>
             <div class="col-10" style="background-color: blue; ">
-                <?php oneMonth(6, 2022); ?>
-                <div class="row">
-                    <div class="col" style="background-color: green; height: 14vh;">
-                        <div class="d-flex flex-column">
-                            <div class="p-2 row" style="background-color: purple;">
-                                <p class="col-2" style="text-align: center; margin: 0;">Po</p>
-                                <p class="col-8"></p>
-                                <p class="col-2" style="text-align: center; margin: 0;">1</p>
-                            </div>
-                            <div class="p-2" style="background-color: black;">
-                                <p style="text-align: center;">test<br>test</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col" style="background-color: orange; height: 14vh">
-                        <div class="d-flex flex-column">
-                            <div class="p-2" style="background-color: purple;">
-                                <p style="text-align: center; margin: 0;">2</p>
-                            </div>
-                            <div class="p-2" style="background-color: black;">
-                                <p style="text-align: center;">test<br>test</p>
-                            </div>
-                        </div>
-                    </div>
+                <?php
+                emptyDay();
+                oneDay(17, 6, 2022);
+                oneMonth(6, 2022);
+                ?>
 
-                    <div class="col" style="background-color: green; height: 14vh">
-                        <div class="d-flex flex-column">
-                            <div class="p-2" style="background-color: purple;">
-                                <p style="text-align: center; margin: 0;">3</p>
-                            </div>
-                            <div class="p-2" style="background-color: black;">
-                                <p style="text-align: center;">test<br>test</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col" style="background-color: orange; height: 14vh">
-
-                    </div>
-
-                    <div class="col" style="background-color: green; height: 14vh">
-
-                    </div>
-                    <div class="col" style="background-color: orange; height: 14vh">
-
-                    </div>
-                    <div class="col" style="background-color: green; height: 14vh">
-
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col" style="background-color: pink; height: 14vh">;
-
-                    </div>
-                    <div class="col" style="background-color: yellow; height: 14vh">
-
-                    </div>
-
-                    <div class="col" style="background-color: pink; height: 14vh">
-
-                    </div>
-                    <div class="col" style="background-color: yellow; height: 14vh">
-
-                    </div>
-
-                    <div class="col" style="background-color: pink; height: 14vh">
-
-                    </div>
-                    <div class="col" style="background-color: yellow; height: 14vh">
-
-                    </div>
-                    <div class="col" style="background-color: pink; height: 14vh">
-
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col" style="background-color: green; height: 14vh">
-
-                    </div>
-                    <div class="col" style="background-color: orange; height: 14vh">
-
-                    </div>
-
-                    <div class="col" style="background-color: green; height: 14vh">
-
-                    </div>
-                    <div class="col" style="background-color: orange; height: 14vh">
-
-                    </div>
-
-                    <div class="col" style="background-color: green; height: 14vh">
-
-                    </div>
-                    <div class="col" style="background-color: orange; height: 14vh">
-
-                    </div>
-                    <div class="col" style="background-color: green; height: 14vh">
-
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col" style="background-color: pink; height: 14vh">
-
-                    </div>
-                    <div class="col" style="background-color: yellow; height: 14vh">
-
-                    </div>
-
-                    <div class="col" style="background-color: pink; height: 14vh">
-
-                    </div>
-                    <div class="col" style="background-color: yellow; height: 14vh">
-
-                    </div>
-
-                    <div class="col" style="background-color: pink; height: 14vh">
-
-                    </div>
-                    <div class="col" style="background-color: yellow; height: 14vh">
-
-                    </div>
-                    <div class="col" style="background-color: pink; height: 14vh">
-
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col" style="background-color: green; height: 14vh">
-
-                    </div>
-                    <div class="col" style="background-color: orange; height: 14vh">
-
-                    </div>
-
-                    <div class="col" style="background-color: green; height: 14vh">
-
-                    </div>
-                    <div class="col" style="background-color: orange; height: 14vh">
-
-                    </div>
-
-                    <div class="col" style="background-color: green; height: 14vh">
-
-                    </div>
-                    <div class="col" style="background-color: orange; height: 14vh">
-
-                    </div>
-
-                    <div class="col" style="background-color: green; height: 14vh">
-
-                    </div>
-                </div>
             </div>
         </div>
     </div>
@@ -207,14 +63,29 @@ $daysOfWeekCZ =
 footer();
 html_end();
 
-function oneDay($numberOfDay)
+function oneDay($numberOfDay, $month, $year)
 {
+    $strToDate = strtotime("$numberOfDay.$month.$year");
+    $daysOfWeekCZ =
+        [
+            1 => "Po",
+            "Út",
+            "St",
+            "Čt",
+            "Pá",
+            "So",
+            "Ne"
+        ];
+
+
     echo
     '
-        <div class="col" style="background-color: green; height: 14vh; border: solid black 1px;">
+        <div class="col calendar-day">
             <div class="d-flex flex-column">
-                <div class="p-2" style="background-color: purple;">
-                    <p style="text-align: center; margin: 0;">' . $numberOfDay . '</p>
+                <div class="p-2 row calendar-day-header">
+                    <p class="col">' . $numberOfDay . '</p>
+                    <p class="col"></p>
+                    <p class="col">' . $daysOfWeekCZ[date("N", $strToDate)] . '</p>
                 </div>
                 <div class="p-2" style="background-color: black;">
                     <p style="text-align: center; margin: 0;">test<br>test</p>
@@ -227,24 +98,23 @@ function emptyDay()
 {
     echo
     '
-        <div class="col" style="background-color: green; height: 14vh; border: solid black 1px;">
+        <div class="col calendar-day">
             <div class="d-flex flex-column">
-                <div class="p-2" style="background-color: purple;">
-                    <p style="text-align: center; margin: 0;"></p>
+                <div class="p-2 calendar-day-header">
+                    <p></p>
                 </div>
-                <div class="p-2" style="background-color: black;">
-                    <p style="text-align: center; margin: 0;">test<br>test</p>
+                <div class="p-2">
                 </div>
             </div>
         </div>
     ';
 }
-function oneWeek($numberOfFirstDay)
+function oneWeek($numberOfFirstDay, $month, $year)
 {
+
     echo '<div class="row">';
-    for ($i = $numberOfFirstDay; $i < $numberOfFirstDay + 7; $i++)
-    {
-        oneDay($i);
+    for ($i = $numberOfFirstDay; $i < $numberOfFirstDay + 7; $i++) {
+        oneDay($i, $month, $year);
     }
     echo '</div>';
 }
@@ -252,14 +122,13 @@ function oneMonth($monthNumber, $year)
 {
     $numOfDays = cal_days_in_month(CAL_GREGORIAN, $monthNumber, $year);
     $numOfWeeks = round($numOfDays / 7, 0);
-    oneWeek(1);
-    oneWeek(8);
-    oneWeek(15);
-    oneWeek(22);
+    oneWeek(1, $monthNumber, $year);
+    oneWeek(8, $monthNumber, $year);
+    oneWeek(15, $monthNumber, $year);
+    oneWeek(22, $monthNumber, $year);
     echo '<div class="row">';
-    for ($i = 1; $i <= $numOfDays - 7 * $numOfWeeks; $i++)
-    {
-        oneDay(28 + $i);
+    for ($i = 1; $i <= $numOfDays - 7 * $numOfWeeks; $i++) {
+        oneDay(28 + $i, $monthNumber, $year);
     }
     echo '</div>';
 }
