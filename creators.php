@@ -2,7 +2,7 @@
 session_start();
 include_once 'functions/globalFunctions.php';
 
-html_start("Founders", "css/style");
+html_start("Founders", "css/global");
 nav();
 
 banner("Founders of Spectixen Network");

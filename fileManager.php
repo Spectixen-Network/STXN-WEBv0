@@ -61,7 +61,7 @@ if (isset($_POST["rename"]))
 }
 
 
-html_start("Files", "css/style");
+html_start("Files", "css/global");
 //echo '<script src="/scripts/customContextMenu.js"></script>';
 nav();
 banner("File Manager");

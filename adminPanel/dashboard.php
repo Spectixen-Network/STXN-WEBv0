@@ -5,7 +5,7 @@ include_once  '../functions/adminPanelFunctions.php';
 ifNotAdminRedirect();
 
 isLoggedElseRedirect();
-html_start("Admin", "css/style");
+html_start("Admin", "css/global");
 nav();
 
 adminDashnoard();

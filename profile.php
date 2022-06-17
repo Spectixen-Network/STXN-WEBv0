@@ -3,7 +3,7 @@ session_start();
 include_once 'functions/globalFunctions.php';
 
 isLoggedElseRedirect();
-html_start($_SESSION["USERNAME"], "css/style");
+html_start($_SESSION["USERNAME"], "css/global");
 nav();
 
 $con = db_connection();

@@ -725,38 +725,3 @@ footer {
 .contextMenu li:hover {
     background-color: rgba(83, 83, 83, 0.75);
 }
-.calendar-nav
-{
-    background-color: rgba(83, 83, 83, 0.2);
-    color: #ffff;
-}
-.calendar-nav-button{
-    text-align: center;
-    font-size: 1.5em;
-    font-weight: bold;
-}
-.calendar-nav-button a{
-    text-decoration: none;
-    display: block;
-    color: #ffff;
-}
-.calendar-nav-button:hover
-{
-    transition: background-color 250ms;
-    background-color: rgba(83, 83, 83, 0.4);
-}
-.calendar-day
-{
-    background-color: green;
-    height: 14vh;
-    border: solid black 1px;
-}
-.calendar-day-header
-{
-    background-color: purple;
-}
-.calendar-day-header p{
-    text-align: center;
-    margin: 0;
-    font-weight: bolder;
-}
