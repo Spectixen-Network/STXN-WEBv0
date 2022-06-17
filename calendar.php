@@ -59,7 +59,7 @@ $currentYear = date("Y");
                     }
                     elseif (strtolower(test_input($_GET["show"])) == "week")
                     {
-                        Week(31, 12, 2021);
+                        Week(17, 6, 2022);
                     }
                     elseif (strtolower(test_input($_GET["show"])) == "day")
                     {
