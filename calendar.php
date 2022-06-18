@@ -621,15 +621,4 @@ function Week($dayInWeek, $monthNumber, $yearNumber)
     }
     // ------ End Days After ------
     echo '</div>';
-
-
-
-    /*
-        echo '<div class="row" style="height: 70vh">';
-        for ($i = 14; $i <= 21; $i++)
-        {
-            oneDay($i, 6, 2022, true);
-        }
-        echo '</div>';
-    */
 };
