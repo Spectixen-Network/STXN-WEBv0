@@ -83,6 +83,72 @@ else
     $selMonth = $currentMonth;
     $selYear = $currentYear;
     $moveWeek = $currentMoveWeek;
+
+    if ($_GET["show"] == "day")
+    {
+        if (isset($_GET["day"]) && isset($_GET["month"]) && isset($_GET["year"]))
+        {
+            /*
+            // ------ If empty, it will use current date ------
+            if ($_GET["day"] != "" || $_GET["month"] != "" || $_GET["year"] != "")
+            {
+                $day = test_input($_GET["day"]);
+                $month = test_input($_GET["month"]);
+                $year = test_input($_GET["year"]);
+            }
+            else
+            {
+                $day = date("j");
+                $month = date("n");
+                $year = date("Y");
+            }
+            // ------ End ------
+        */
+
+            $dayInput = test_input($_GET["day"]);
+            $monthInput = test_input($_GET["month"]);
+            $yearInput = test_input($_GET["year"]);
+
+            // ------ If not a number, it will use current date ------
+            if (!is_numeric($dayInput) || !is_numeric($monthInput) || !is_numeric($yearInput))
+            {
+                $selDay = date("j");
+                $selMonth = date("n");
+                $selYear = date("Y");
+            }
+            else
+            {
+                $selDay = test_input($_GET["day"]);
+                $selMonth = test_input($_GET["month"]);
+                $selYear = test_input($_GET["year"]);
+            }
+            // ------ End ------
+
+            // ------ Counting correct date, if the number exceed the correct number ------
+            do
+            {
+                while ($selMonth > 12)
+                {
+                    $selMonth -= 12;
+                    $selYear += 1;
+                }
+                $numOfDays = cal_days_in_month(CAL_GREGORIAN, $selMonth, $selYear);
+                if (($selDay - $numOfDays) > 0)
+                {
+                    $selDay -= $numOfDays;
+                    $selMonth += 1;
+                }
+            } while ($selDay > $numOfDays || $selMonth > 12);
+            // ------ End of correction ------
+
+        }
+        else
+        {
+            $selDay = date("j");
+            $selMonth = date("n");
+            $selYear = date("Y");
+        }
+    }
 }
 
 $selectedDateString = strtotime("$selDay.$selMonth.$selYear +$moveWeek week");
@@ -90,9 +156,14 @@ $selectedDate = date("d.n.Y", $selectedDateString);
 $selectedDateDay = date("d", $selectedDateString);
 $selectedDateMonth = date("n", $selectedDateString);
 $selectedDateYear = date("Y", $selectedDateString);
+
+if ($_GET["show"] == "day")
+{
+    echo "<script>window.history.pushState('', 'Day', '/calendar.php?show=day&day=$selectedDateDay&month=$selectedDateMonth&year=$selectedDateYear');</script>";
+}
 ?>
 
-<div class="container-fluid" onload="setScroll()">
+<div class="container-fluid" onload="test()">
     <div class="container-fluid calendar-nav" style="margin-bottom: 1vh;">
         <div class="row d-flex justify-content-center">
             <div class="col-4 calendar-nav-button">
@@ -376,7 +447,7 @@ html_end();
 
 function oneDay($day, $month, $year, $week = false)
 {
-    $redirect = "window.open('calendarEvent.php?day=$day&month=$month&year=$year', '_blank')";
+    $redirect = "window.location.href = 'calendar.php?show=day&day=$day&month=$month&year=$year'";
     $strToDate = strtotime("$day.$month.$year");
     $date = date("d.m.Y", $strToDate);
     $currentDate = date("d.m.Y");
@@ -391,27 +462,13 @@ function oneDay($day, $month, $year, $week = false)
             "Ne"
         ];
 
-
+    $weekStyle = ($week) ? 'style="height: 70vh;"' : "";
+    $now = ($currentDate == $date) ? "current-day" : "";
     echo
     '
-        <div class="col calendar-day ';
-    if ($currentDate == $date)
-    {
-        echo "current-day";
-    }
-    echo '" ';
-    if ($week)
-    {
-        echo 'style="height: 70vh;"';
-    }
-    echo 'onclick="' . $redirect . '">
+        <div class="col calendar-day ' . $now . '" ' . $weekStyle . 'onclick="' . $redirect . '">
             <div class="d-flex flex-column">
-                <div class="p-2 row calendar-day-header ';
-    if ($currentDate == $date)
-    {
-        echo "current-day";
-    }
-    echo '">
+                <div class="p-2 row calendar-day-header ' . $now . '">
                     <p class="col">' . $day . '.' . $month . '.</p>
                     <p class="col"></p>
                     <p class="col">' . $daysOfWeekCZ[date("N", $strToDate)] . '</p>
@@ -427,7 +484,7 @@ function oneDay($day, $month, $year, $week = false)
 }
 function oneDayNotIncluded($day, $month, $year, $week = false)
 {
-    $redirect = "window.open('calendarEvent.php?day=$day&month=$month&year=$year', '_blank')";
+    $redirect = "window.location.href = 'calendar.php?show=day&day=$day&month=$month&year=$year'";
     $strToDate = strtotime("$day.$month.$year");
     $date = date("d.m.Y", $strToDate);
     $currentDate = date("d.m.Y");
@@ -442,28 +499,13 @@ function oneDayNotIncluded($day, $month, $year, $week = false)
             "Ne"
         ];
 
-
+    $weekStyle = ($week) ? 'style="height: 70vh;"' : "";
+    $now = ($currentDate == $date) ? "current-day" : "";
     echo
     '
-        <div class="col calendar-day ';
-    if ($currentDate == $date)
-    {
-        echo "current-day";
-    }
-    echo '" ';
-    if ($week)
-    {
-        echo 'style="height: 70vh;"';
-    }
-    echo ' onclick="' . $redirect .
-        '">
+        <div class="col calendar-day ' . $now . '" ' . $weekStyle . 'onclick="' . $redirect . '">
             <div class="d-flex flex-column">
-                <div class="p-2 row calendar-day-header ';
-    if ($currentDate == $date)
-    {
-        echo "current-day";
-    }
-    echo '" style="background-color: #c300ffa0;">
+                <div class="p-2 row calendar-day-header ' . $now . '" style="background-color: #c300ffa0;">
                     <p class="col">' . $day . '.' . $month . '.</p>
                     <p class="col"></p>
                     <p class="col">' . $daysOfWeekCZ[date("N", $strToDate)] . '</p>
@@ -632,7 +674,59 @@ function Week($dayInWeek, $monthNumber, $yearNumber)
 };
 function Day($dayInWeek, $monthNumber, $yearNumber)
 {
-    echo '<div class="row" style="height: 70vh">';
-    oneDay($dayInWeek, $monthNumber, $yearNumber, true);
-    echo '</div>';
+    $strToDate = strtotime("$dayInWeek.$monthNumber.$yearNumber");
+    $date = date("d.m.Y", $strToDate);
+    $currentDate = date("d.m.Y");
+    $daysOfWeekCZ =
+        [
+            1 => "Po",
+            "Út",
+            "St",
+            "Čt",
+            "Pá",
+            "So",
+            "Ne"
+        ];
+
+
+    $now = ($currentDate == $date) ? "current-day" : "";
+    echo
+    '
+    <div class="col calendar-day ' . $now . '" style="height: 70vh;" id="oneDay">
+        <div class="d-flex flex-column">
+            <div class="m-2 p-2 row calendar-day-header ' . $now . '">
+                <p class="col">' . $dayInWeek . '.' . $monthNumber . '.</p>
+                <p class="col"></p>
+                <p class="col">' . $daysOfWeekCZ[date("N", $strToDate)] . '</p>
+            </div>
+            <div class="container-fluid">
+                <div class="container-fluid row calendarEvent-one-event mb-1">
+                    <div class="col-2" style="background-color: grey; height: 5vh;">
+                        Od
+                    </div>
+                    <div class="col-2" style="background-color: green; height: 5vh;">
+                        Do
+                    </div>
+                    <div class="col-2" style="background-color: greenyellow; height: 5vh;">
+                        Tags
+                    </div>
+                    <div class="col-6" style="background-color: silver; height: 5vh;">
+                        Název
+                    </div>
+                </div>
+                <div class="container-fluid row calendarEvent-one-event mb-1">
+                    <div class="col-3" style="background-color: grey; height: 5vh;">
+                        Od-Do
+                    </div>
+                    <div class="col-3" style="background-color: greenyellow; height: 5vh;">
+                        Tags
+                    </div>
+                    <div class="col-6" style="background-color: silver; height: 5vh;">
+                        Název
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    ';
 };

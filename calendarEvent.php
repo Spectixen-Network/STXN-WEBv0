@@ -5,34 +5,62 @@ session_start();
 html_start("Event", "css/global", "css/calendar");
 nav();
 
+// ------ ALREADY MOVED ------
 $daysOfWeekCZ =
     [
         1 => "Po",
         "Út",
         "St",
         "Čt",
-        "Pa",
+        "Pá",
         "So",
         "Ne"
     ];
-
+$daysOfWeekCzech =
+    [
+        1 => "Pondělí",
+        "Úterý",
+        "Středa",
+        "Čtvrtek",
+        "Pátek",
+        "Sobota",
+        "Neděle"
+    ];
 if (isset($_GET["day"]) && isset($_GET["month"]) && isset($_GET["year"]))
 {
-    // ------ If empty, it will use current date ------
-    if ($_GET["day"] == "" || $_GET["month"] == "" || $_GET["year"] == "")
-    {
-        goto notStated;
-    }
-    // ------ End ------
+    /*
+        // ------ If empty, it will use current date ------
+        if ($_GET["day"] != "" || $_GET["month"] != "" || $_GET["year"] != "")
+        {
+            $day = test_input($_GET["day"]);
+            $month = test_input($_GET["month"]);
+            $year = test_input($_GET["year"]);
+        }
+        else
+        {
+            $day = date("j");
+            $month = date("n");
+            $year = date("Y");
+        }
+        // ------ End ------
+    */
 
-    $day = test_input($_GET["day"]);
-    $month = test_input($_GET["month"]);
-    $year = test_input($_GET["year"]);
+    $dayInput = test_input($_GET["day"]);
+    $monthInput = test_input($_GET["month"]);
+    $yearInput = test_input($_GET["year"]);
 
     // ------ If not a number, it will use current date ------
-    if (!is_numeric($day) || !is_numeric($month) || !is_numeric($year))
+    if (!is_numeric($dayInput) || !is_numeric($monthInput) || !is_numeric($yearInput))
     {
-        goto notStated;
+        $day = date("j");
+        $month = date("n");
+        $year = date("Y");
+    }
+    else
+    {
+        $day = test_input($_GET["day"]);
+        $month = test_input($_GET["month"]);
+        $year = test_input($_GET["year"]);
     }
     // ------ End ------
 
@@ -53,18 +81,36 @@ if (isset($_GET["day"]) && isset($_GET["month"]) && isset($_GET["year"]))
     } while ($day > $numOfDays || $month > 12);
     // ------ End of correction ------
 
-    $date = strtotime($day . "." . $month . "." . $year);
-    $dateDay = date("l", $date);
-    $selectedDate = date("d.m.Y", $date);
-    banner($dateDay . " " . $selectedDate);
 }
 else
 {
-    notStated:
-    banner(date("l") . " " . date("d.m.Y"));
+    $day = date("j");
+    $month = date("n");
+    $year = date("Y");
 }
 
+$date = strtotime("$day.$month.$year");
+$dateDay = date("l", $date);
+$selectedDate = date("j.n.Y", $date);
+// ------ ALREADY MOVED ------
 
+banner($dateDay . " " . $selectedDate);
 
+?>
+
+<div class="container-fluid" style="height: 70vh; background-color: red;">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-2 calendar-side-nav" style="background-color: orange; height: 70vh;">
+
+            </div>
+            <div class="col-10" style="background-color: yellow; height: 70vh; color: red;">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<?php
 footer();
 html_end();
