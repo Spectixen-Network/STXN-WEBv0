@@ -65,24 +65,27 @@ $monthsNamesCzech =
         "Prosinec"
     ];
 $currentDay = date("d");
+$currentWeek = date("W");
 $currentMonth = date("n");
 $currentYear = date("Y");
+$currentMoveWeek = 0;
 
 if (count($_POST) > 0)
 {
-
     $selDay = $_POST["DAY"];
     $selMonth = $_POST["MONTH"];
     $selYear = $_POST["YEAR"];
+    $moveWeek = $_POST["moveWeek"];
 }
 else
 {
     $selDay = $currentDay;
     $selMonth = $currentMonth;
     $selYear = $currentYear;
+    $moveWeek = $currentMoveWeek;
 }
 
-$selectedDateString = strtotime("$selDay.$selMonth.$selYear");
+$selectedDateString = strtotime("$selDay.$selMonth.$selYear +$moveWeek week");
 $selectedDate = date("d.n.Y", $selectedDateString);
 $selectedDateDay = date("d", $selectedDateString);
 $selectedDateMonth = date("n", $selectedDateString);
@@ -112,62 +115,62 @@ $selectedDateYear = date("Y", $selectedDateString);
             <div class="row">
                 <div class="col-4">
                     <div class="row">
-                        <div onclick="today();" title="<?php echo $currentDay.".".$currentMonth.".".$currentYear ?>" class="col-3 calendar-navigation-today" style="text-align: center;">
+                        <div onclick="today();" title="<?php echo $currentDay . "." . $currentMonth . "." . $currentYear ?>" class="col-3 calendar-navigation-today" style="text-align: center;">
                             Today
                         </div>
                         <div class="col-3 row">
                             <span onclick="previous();" title="Previous <?php
-                            if (isset($_GET["show"]))
-                            {
-                                if (strtolower(test_input($_GET["show"])) == "month")
-                                {
-                                    echo "month";
-                                }
-                                elseif (strtolower(test_input($_GET["show"])) == "week")
-                                {
-                                    echo "week";
-                                }
-                                elseif (strtolower(test_input($_GET["show"])) == "day")
-                                {
-                                    echo "day";
-                                }
-                                else
-                                {
-                                    echo "month";
-                                }
-                            }
-                            else
-                            {
-                                echo "month";
-                            }
-                            ?>" class="col-6 d-flex justify-content-center calendar-navigation-arrow">
+                                                                        if (isset($_GET["show"]))
+                                                                        {
+                                                                            if (strtolower(test_input($_GET["show"])) == "month")
+                                                                            {
+                                                                                echo "month";
+                                                                            }
+                                                                            elseif (strtolower(test_input($_GET["show"])) == "week")
+                                                                            {
+                                                                                echo "week";
+                                                                            }
+                                                                            elseif (strtolower(test_input($_GET["show"])) == "day")
+                                                                            {
+                                                                                echo "day";
+                                                                            }
+                                                                            else
+                                                                            {
+                                                                                echo "month";
+                                                                            }
+                                                                        }
+                                                                        else
+                                                                        {
+                                                                            echo "month";
+                                                                        }
+                                                                        ?>" class="col-6 d-flex justify-content-center calendar-navigation-arrow">
                                 <i class="bi bi-arrow-left"></i>
                             </span>
                             <span onclick="next();" title="Next <?php
-                            if (isset($_GET["show"]))
-                            {
-                                if (strtolower(test_input($_GET["show"])) == "month")
-                                {
-                                    echo "month";
-                                }
-                                elseif (strtolower(test_input($_GET["show"])) == "week")
-                                {
-                                    echo "week";
-                                }
-                                elseif (strtolower(test_input($_GET["show"])) == "day")
-                                {
-                                    echo "day";
-                                }
-                                else
-                                {
-                                    echo "month";
-                                }
-                            }
-                            else
-                            {
-                                echo "month";
-                            }
-                            ?>" class="col-6 d-flex justify-content-center calendar-navigation-arrow">
+                                                                if (isset($_GET["show"]))
+                                                                {
+                                                                    if (strtolower(test_input($_GET["show"])) == "month")
+                                                                    {
+                                                                        echo "month";
+                                                                    }
+                                                                    elseif (strtolower(test_input($_GET["show"])) == "week")
+                                                                    {
+                                                                        echo "week";
+                                                                    }
+                                                                    elseif (strtolower(test_input($_GET["show"])) == "day")
+                                                                    {
+                                                                        echo "day";
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        echo "month";
+                                                                    }
+                                                                }
+                                                                else
+                                                                {
+                                                                    echo "month";
+                                                                }
+                                                                ?>" class="col-6 d-flex justify-content-center calendar-navigation-arrow">
                                 <i class="bi bi-arrow-right"></i>
                             </span>
                         </div>
@@ -202,6 +205,7 @@ $selectedDateYear = date("Y", $selectedDateString);
                     <form method="POST" id="dateForm">
                         <input type="hidden" name="selectedView" id="selectedView" value="<?php echo $_GET["show"]; ?>">
                         <input type="hidden" name="DAY" id="DAY" value="<?php echo $selectedDateDay; ?>">
+                        <input type="hidden" name="moveWeek" id="moveWeek" value="<?php echo $moveWeek; ?>">
                         <input type="hidden" name="MONTH" id="MONTH" value="<?php echo $selectedDateMonth; ?>">
                         <input type="hidden" name="YEAR" id="YEAR" value="<?php echo $selectedDateYear; ?>">
                     </form>
@@ -211,6 +215,8 @@ $selectedDateYear = date("Y", $selectedDateString);
                         let formSelectedView = document.getElementById('selectedView');
                         let formDay = document.getElementById('DAY');
                         let Day = parseInt(formDay.value, 10);
+                        let formMoveWeek = document.getElementById('moveWeek');
+                        let moveWeek = parseInt(formMoveWeek.value, 10);
                         let formMonth = document.getElementById('MONTH');
                         let Month = parseInt(formMonth.value, 10);
                         let formYear = document.getElementById('YEAR');
@@ -227,7 +233,8 @@ $selectedDateYear = date("Y", $selectedDateString);
                                 formMonth.value = Month;
                             }
                         } else if (formSelectedView.value.toLowerCase() == "week") {
-                            
+                            moveWeek = 1;
+                            formMoveWeek.value = moveWeek;
                         } else if (formSelectedView.value.toLowerCase() == "day") {
                             if (Day + 1 > getDays(Month, Year)) {
                                 Day = 1;
@@ -236,15 +243,12 @@ $selectedDateYear = date("Y", $selectedDateString);
                                     Year += 1;
                                     formMonth.value = Month;
                                     formYear.value = Year;
-                                }
-                                else {
+                                } else {
                                     Month += 1;
                                     formMonth.value = Month;
                                 }
                                 formDay.value = Day;
-                            }
-                            else
-                            {
+                            } else {
                                 Day += 1;
                                 formDay.value = Day;
                             }
@@ -258,6 +262,8 @@ $selectedDateYear = date("Y", $selectedDateString);
                         let formSelectedView = document.getElementById('selectedView');
                         let formDay = document.getElementById('DAY');
                         let Day = parseInt(formDay.value, 10);
+                        let formMoveWeek = document.getElementById('moveWeek');
+                        let moveWeek = parseInt(formMoveWeek.value, 10);
                         let formMonth = document.getElementById('MONTH');
                         let Month = parseInt(formMonth.value, 10);
                         let formYear = document.getElementById('YEAR');
@@ -274,7 +280,8 @@ $selectedDateYear = date("Y", $selectedDateString);
                                 formMonth.value = Month;
                             }
                         } else if (formSelectedView.value.toLowerCase() == "week") {
-                            
+                            moveWeek = -1;
+                            formMoveWeek.value = moveWeek;
                         } else if (formSelectedView.value.toLowerCase() == "day") {
                             if ((Day - 1) == 0) {
                                 if ((Month - 1) == 0) {
@@ -283,15 +290,12 @@ $selectedDateYear = date("Y", $selectedDateString);
                                     Day = getDays(Month, Year);
                                     formMonth.value = Month;
                                     formYear.value = Year;
-                                }
-                                else {
+                                } else {
                                     Month -= 1;
                                     Day = getDays(Month, Year);
                                     formMonth.value = Month;
                                 }
-                            }
-                            else
-                            {
+                            } else {
                                 Day -= 1;
                                 formDay.value = Day;
                             }
@@ -299,20 +303,23 @@ $selectedDateYear = date("Y", $selectedDateString);
                         //console.log(formDay.value + " " +formMonth.value +" " + formYear.value);
                         form.submit();
                     }
-                    function today()
-                    {
+
+                    function today() {
                         let form = document.getElementById('dateForm');
                         let formDay = document.getElementById('DAY');
+                        let formMoveWeek = document.getElementById('moveWeek');
                         let formMonth = document.getElementById('MONTH');
                         let formYear = document.getElementById('YEAR');
                         let formToday = document.getElementById('TODAY');
 
                         let dateOfToday = new Date();
                         let Day = dateOfToday.getDate();
-                        let Month = dateOfToday.getMonth() +1;
+                        let moveWeek = 0;
+                        let Month = dateOfToday.getMonth() + 1;
                         let Year = dateOfToday.getFullYear();
 
                         formDay.value = Day;
+                        formMoveWeek.value = moveWeek;
                         formMonth.value = Month;
                         formYear.value = Year;
 
