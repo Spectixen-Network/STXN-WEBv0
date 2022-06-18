@@ -112,14 +112,62 @@ $selectedDateYear = date("Y", $selectedDateString);
             <div class="row">
                 <div class="col-4">
                     <div class="row">
-                        <div onclick="today();" class="col-3 calendar-navigation-today" style="text-align: center;">
+                        <div onclick="today();" title="<?php echo $currentDay.".".$currentMonth.".".$currentYear ?>" class="col-3 calendar-navigation-today" style="text-align: center;">
                             Today
                         </div>
                         <div class="col-3 row">
-                            <span onclick="previous();" class="col-6 d-flex justify-content-center calendar-navigation-arrow">
+                            <span onclick="previous();" title="Previous <?php
+                            if (isset($_GET["show"]))
+                            {
+                                if (strtolower(test_input($_GET["show"])) == "month")
+                                {
+                                    echo "month";
+                                }
+                                elseif (strtolower(test_input($_GET["show"])) == "week")
+                                {
+                                    echo "week";
+                                }
+                                elseif (strtolower(test_input($_GET["show"])) == "day")
+                                {
+                                    echo "day";
+                                }
+                                else
+                                {
+                                    echo "month";
+                                }
+                            }
+                            else
+                            {
+                                echo "month";
+                            }
+                            ?>" class="col-6 d-flex justify-content-center calendar-navigation-arrow">
                                 <i class="bi bi-arrow-left"></i>
                             </span>
-                            <span onclick="next();" class="col-6 d-flex justify-content-center calendar-navigation-arrow">
+                            <span onclick="next();" title="Next <?php
+                            if (isset($_GET["show"]))
+                            {
+                                if (strtolower(test_input($_GET["show"])) == "month")
+                                {
+                                    echo "month";
+                                }
+                                elseif (strtolower(test_input($_GET["show"])) == "week")
+                                {
+                                    echo "week";
+                                }
+                                elseif (strtolower(test_input($_GET["show"])) == "day")
+                                {
+                                    echo "day";
+                                }
+                                else
+                                {
+                                    echo "month";
+                                }
+                            }
+                            else
+                            {
+                                echo "month";
+                            }
+                            ?>" class="col-6 d-flex justify-content-center calendar-navigation-arrow">
                                 <i class="bi bi-arrow-right"></i>
                             </span>
                         </div>
@@ -267,7 +315,7 @@ $selectedDateYear = date("Y", $selectedDateString);
                         formDay.value = Day;
                         formMonth.value = Month;
                         formYear.value = Year;
-                        
+
                         form.submit();
                     }
                     const getDays = (month, year) => {
