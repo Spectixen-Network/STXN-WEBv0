@@ -700,18 +700,15 @@ function Day($dayInWeek, $monthNumber, $yearNumber)
                 <p class="col">' . $daysOfWeekCZ[date("N", $strToDate)] . '</p>
             </div>
             <div class="container-fluid">
-                <div class="container-fluid row calendarEvent-one-event mb-1">
-                    <div class="col-2" style="background-color: grey; height: 5vh;">
-                        Od
+                <div class="container-fluid row calendarEvent-one-event mb-1 tag-birthDay">
+                    <div class="col-3" style=" height: 5vh;">
+                        16:00 - 17:30
                     </div>
-                    <div class="col-2" style="background-color: green; height: 5vh;">
-                        Do
+                    <div class="col-3" style="height: 5vh;">
+                        #BirthDays
                     </div>
-                    <div class="col-2" style="background-color: greenyellow; height: 5vh;">
-                        Tags
-                    </div>
-                    <div class="col-6" style="background-color: silver; height: 5vh;">
-                        Název
+                    <div class="col-6" style=" height: 5vh;">
+                        My Birthday
                     </div>
                 </div>
                 <div class="container-fluid row calendarEvent-one-event mb-1">
