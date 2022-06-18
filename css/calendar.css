@@ -76,3 +76,21 @@
 .week-day {
     color: rgba(255, 0, 0, 0.5)
 }
+
+.calendar-navigation {
+    margin: 0;
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.calendar-navigation-arrow,
+.calendar-navigation-today {
+    border-radius: 50px;
+}
+
+.calendar-navigation-arrow:hover,
+.calendar-navigation-today:hover {
+    transition: background-color 250ms;
+    background-color: rgba(83, 83, 83, 0.4);
+    cursor: pointer;
+}
