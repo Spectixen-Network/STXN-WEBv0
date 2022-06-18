@@ -113,7 +113,7 @@ $selectedDateYear = date("Y", $selectedDateString);
         </div>
         <div class="container-fluid calendar-navigation">
             <div class="row">
-                <div class="col-4">
+                <div class="col-5">
                     <div class="row">
                         <div onclick="today();" title="<?php echo $currentDay . "." . $currentMonth . "." . $currentYear ?>" class="col-3 calendar-navigation-today" style="text-align: center;">
                             Today
@@ -295,6 +295,7 @@ $selectedDateYear = date("Y", $selectedDateString);
                                     Day = getDays(Month, Year);
                                     formMonth.value = Month;
                                 }
+                                formDay.value = Day;
                             } else {
                                 Day -= 1;
                                 formDay.value = Day;
@@ -352,7 +353,7 @@ $selectedDateYear = date("Y", $selectedDateString);
                     }
                     elseif (strtolower(test_input($_GET["show"])) == "day")
                     {
-                        echo "WIP";
+                        Day($selectedDateDay, $selectedDateMonth, $selectedDateYear);
                     }
                     else
                     {
@@ -627,5 +628,11 @@ function Week($dayInWeek, $monthNumber, $yearNumber)
         }
     }
     // ------ End Days After ------
+    echo '</div>';
+};
+function Day($dayInWeek, $monthNumber, $yearNumber)
+{
+    echo '<div class="row" style="height: 70vh">';
+    oneDay($dayInWeek, $monthNumber, $yearNumber, true);
     echo '</div>';
 };
