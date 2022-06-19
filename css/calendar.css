@@ -61,6 +61,7 @@
     background-color: black;
     background-color: rgba(83, 83, 83, 0.21);
     border-radius: 0 0 15px 15px;
+    overflow: auto;
 }
 
 .current-day {
@@ -104,11 +105,25 @@
     background-color: rgba(83, 83, 83, 0.2);
 }
 
+.calendarEvent-add-event-button {
+    background-color: transparent;
+    border: none;
+}
+
+.calendarEvent-add-event-button p {
+    font-size: 1em;
+    font-weight: bold;
+    margin: 0;
+    border: none;
+    color: #ffff;
+}
+
 .calendarEvent-one-event:hover {
     transition: background-color 250ms;
     background-color: rgba(83, 83, 83, 0.4);
 }
 
 .tag-birthDay {
-    color: red;
+    color: #ffff;
+    background-color: #ff000033;
 }

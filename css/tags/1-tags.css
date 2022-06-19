@@ -1,0 +1,37 @@
+.none {
+    color: #ffff;
+}
+
+.TEST {
+    background-color: #fc03c633;
+    color: #fc03c6;
+}
+
+.TEST:hover {
+    background-color: #fc03c666;
+}
+
+.ts {
+    background-color: #d6e31c33;
+    color: #d6e31c;
+}
+
+.ts:hover {
+    background-color: #d6e31c66;
+}
+            .sda {
+                background-color: #883a7933;
+                color: #883a79;
+            }
+            .sda:hover {
+                background-color: #883a7966;
+            }
+            
+            .TestTAg {
+                background-color: #65d1ec33;
+                color: #65d1ec;
+            }
+            .TestTAg:hover {
+                background-color: #65d1ec66;
+            }
+            

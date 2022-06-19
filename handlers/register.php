@@ -28,12 +28,19 @@ if ($emailErr === "" && $usernameErr === "")
     $query = "SELECT uid FROM user WHERE username='" . $username . "'";
     $uid = mysqli_fetch_row(mysqli_query($con, $query))[0];
     $_SESSION["UID"] = $uid;
+    $cssNone = "
+    .none {
+        color: #ffff;
+    }";
 
     mkdir("../user/" . $uid);
     mkdir("../user/" . $uid . "/images");
     mkdir("../user/" . $uid . "/chats");
     mkdir("../user/" . $uid . "/files");
     copy("../images/noavatar.png", "../user/" . $uid . "/images/noavatar.png");
+    $cssFile = fopen("../css/tags/" . $_SESSION["UID"] . "-tags.css", "w");
+    fwrite($cssFile, $cssNone);
+    fclose($cssFile);
 
     header("Location: " . $_SESSION["PAGE"]);
     die();

@@ -5,7 +5,7 @@ isLoggedElseRedirect();
 
 date_default_timezone_set("Europe/Prague"); //Changing default time zone.
 
-html_start("Calendar", "css/global", "css/calendar");
+html_start("Calendar", "css/global", "css/calendar", "css/tags/" . $_SESSION["UID"] . "-tags");
 nav();
 //banner("Calendar");
 
@@ -451,6 +451,7 @@ function oneDay($day, $month, $year, $week = false)
     $strToDate = strtotime("$day.$month.$year");
     $date = date("d.m.Y", $strToDate);
     $currentDate = date("d.m.Y");
+    $result = getEventsInDay($_SESSION["UID"], $day, $month, $year);
     $daysOfWeekCZ =
         [
             1 => "Po",
@@ -467,17 +468,25 @@ function oneDay($day, $month, $year, $week = false)
     echo
     '
         <div class="col calendar-day ' . $now . '" ' . $weekStyle . 'onclick="' . $redirect . '">
-            <div class="d-flex flex-column">
+            <div class="d-flex flex-column"  style="height: 100%">
                 <div class="p-2 row calendar-day-header ' . $now . '">
                     <p class="col">' . $day . '.' . $month . '.</p>
                     <p class="col"></p>
                     <p class="col">' . $daysOfWeekCZ[date("N", $strToDate)] . '</p>
                 </div>
-                <div class="p-2 calendar-day-body">
-                    <p style="text-align: center; margin: 0;">
-                        
-                    </p>
-                </div>
+                <div class="p-2 calendar-day-body">';
+    for ($i = 0; $i < mysqli_num_rows($result); $i++)
+    {
+        $row = mysqli_fetch_assoc($result);
+        $eventName = $row["event_name"];
+        $tagColor = $row["tag_color"];
+        if ($tagColor == null)
+        {
+            $tagColor = "#ffff";
+        }
+        echo '<p style="color: ' . $tagColor . '; text-align: center; margin: 0;">' . $eventName . '</p>';
+    }
+    echo       '</div>
             </div>
         </div>
     ';
@@ -488,6 +497,7 @@ function oneDayNotIncluded($day, $month, $year, $week = false)
     $strToDate = strtotime("$day.$month.$year");
     $date = date("d.m.Y", $strToDate);
     $currentDate = date("d.m.Y");
+    $result = getEventsInDay($_SESSION["UID"], $day, $month, $year);
     $daysOfWeekCZ =
         [
             1 => "Po",
@@ -504,17 +514,26 @@ function oneDayNotIncluded($day, $month, $year, $week = false)
     echo
     '
         <div class="col calendar-day ' . $now . '" ' . $weekStyle . 'onclick="' . $redirect . '">
-            <div class="d-flex flex-column">
+            <div class="d-flex flex-column"  style="height: 100%">
                 <div class="p-2 row calendar-day-header ' . $now . '" style="background-color: #c300ffa0;">
                     <p class="col">' . $day . '.' . $month . '.</p>
                     <p class="col"></p>
-                    <p class="col">' . $daysOfWeekCZ[date("N", $strToDate)] . '</p>
+                    <p class="col">' . $daysOfWeekCZ[date("N", $strToDate)] .
+        '</p>
                 </div>
-                <div class="p-2 calendar-day-body">
-                    <p style="text-align: center; margin: 0;">
-                        test<br>test
-                    </p>
-                </div>
+                <div class="p-2 calendar-day-body">';
+    for ($i = 0; $i < mysqli_num_rows($result); $i++)
+    {
+        $row = mysqli_fetch_assoc($result);
+        $eventName = $row["event_name"];
+        $tagColor = $row["tag_color"];
+        if ($tagColor == null)
+        {
+            $tagColor = "#ffff";
+        }
+        echo '<p style="color: ' . $tagColor . '; text-align: center; margin: 0; height: 100%">' . $eventName . '</p>';
+    }
+    echo       '</div>
             </div>
         </div>
     ';
@@ -674,6 +693,7 @@ function Week($dayInWeek, $monthNumber, $yearNumber)
 };
 function Day($dayInWeek, $monthNumber, $yearNumber)
 {
+    $con = db_connection();
     $strToDate = strtotime("$dayInWeek.$monthNumber.$yearNumber");
     $date = date("d.m.Y", $strToDate);
     $currentDate = date("d.m.Y");
@@ -693,37 +713,170 @@ function Day($dayInWeek, $monthNumber, $yearNumber)
     echo
     '
     <div class="col calendar-day ' . $now . '" style="height: 70vh;" id="oneDay">
-        <div class="d-flex flex-column">
+        <div class="d-flex flex-column" style="height: 100%">
             <div class="m-2 p-2 row calendar-day-header ' . $now . '">
                 <p class="col">' . $dayInWeek . '.' . $monthNumber . '.</p>
                 <p class="col"></p>
                 <p class="col">' . $daysOfWeekCZ[date("N", $strToDate)] . '</p>
             </div>
-            <div class="container-fluid">
-                <div class="container-fluid row calendarEvent-one-event mb-1 tag-birthDay">
-                    <div class="col-3" style=" height: 5vh;">
-                        16:00 - 17:30
-                    </div>
-                    <div class="col-3" style="height: 5vh;">
-                        #BirthDays
-                    </div>
-                    <div class="col-6" style=" height: 5vh;">
-                        My Birthday
+            <div class="container-fluid" style="overflow: auto;">';
+    $result = getEventsInDay($_SESSION["UID"], $dayInWeek, $monthNumber, $yearNumber);
+    for ($i = 0; $i < mysqli_num_rows($result); $i++)
+    {
+        $row = mysqli_fetch_assoc($result);
+        dayEvent($row["event_from"], $row["event_to"], $row["event_name"], $row["tag_name"], $row["tag_color"]);
+    }
+
+    echo
+    '<div class="container-fluid row calendarEvent-one-event mb-1">
+                    <button type="button" class="calendarEvent-add-event-button" data-bs-toggle="modal" data-bs-target="#AddEventModal">
+                        <p>Add Event</p>
+                    </button>
+                </div>
+                <!-- AddEvent Modal -->
+                <div class="modal fade" id="AddEventModal">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+
+                            <!-- AddEvent Modal Header -->
+                            <div class="modal-header">
+                                <h4 class="modal-title">Add Event</h4>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                            </div>
+
+                            <!-- AddEvent Modal body -->
+                            <div class="container">
+                                <form action="/handlers/AddEvent.php" class="was-validated" method="POST">
+                                    <input type="hidden" name="eventDAY" value="' . $dayInWeek . '">
+                                    <input type="hidden" name="eventMONTH" value="' . $monthNumber . '">
+                                    <input type="hidden" name="eventYEAR" value="' . $yearNumber . '">
+                                    <div class="form-floating mt-3 mb-3">
+                                        <input type="text" class="form-control" id="eventName" placeholder="Event Name" name="eventName" required>
+                                        <label for="eventName" class="form-label">Event Name:</label>
+                                    </div>
+                                    <div class="form-floating mt-3 mb-3">
+                                        <textarea type="text" id="eventDescription" class="form-control" style="height: 35vh"  id="eventDescription" placeholder="Event Description" name="eventDescription" ></textarea>
+                                        <label for="eventDescription" class="form-label">Event Description:</label>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col form-floating mt-3 mb-3">
+                                            <input type="time" class="form-control" id="from" placeholder="From" name="eventFrom" value="00:00" required>
+                                            <label for="from" class="form-label ps-4">From</label>
+                                        </div>
+                                        <div class="col form-floating mt-3 mb-3">
+                                            <input type="time" class="form-control" id="to" placeholder="To" name="eventTo" value="23:59" required>
+                                            <label for="to" class="form-label ps-4">To</label>
+                                        </div>
+                                    </div>
+                                    <div class="input-group mt-3 mb-3">
+                                        <label class="input-group-text pt-3 pb-3" for="selectTag">Tag</label>
+                                        <select onchange="inputTag()" class="form-select pt-3 pb-3" id="selectTag" name="eventTag">
+                                            <option value="none" selected>None</option>
+                                            <option value="add">Add</option>';
+    $query = "SELECT tag_id, tag_name, tag_color FROM calendar_tags WHERE user_id=" . $_SESSION["UID"];
+    $result = mysqli_query($con, $query);
+    for ($i = 0; $i < mysqli_num_rows($result); $i++)
+    {
+        $row = mysqli_fetch_assoc($result);
+        echo '<option style="color: ' . (($row["tag_color"] == "#ffff") ? "black" : $row["tag_color"]) . ';" value="' . $row["tag_id"] . '">#' . $row["tag_name"] . '</option>';
+    }
+    echo                               '</select>
+                                    </div>
+                                    <div id="tagNameDiv" class="col form-floating mt-3 mb-3 showNone">
+                                        <input type="text" class="form-control" id="tagName" placeholder="Tag Name" name="tagName">
+                                        <label for="tagName" class="form-label ps-4">Tag Name</label>
+                                    </div>
+                                    <div id="tagDescriptionDiv" class="form-floating mt-3 mb-3 showNone">
+                                        <textarea type="text" class="form-control"  id="tagDescription" placeholder="Tag Description" name="tagDescription"></textarea>
+                                        <label for="tagDescription" class="form-label">Tag Description:</label>
+                                    </div>
+                                    <div id="tagColorDiv" class="col form-floating mt-3 mb-3 showNone">
+                                        <input type="color" class="form-control" id="tagColor" placeholder="Tag Color" name="tagColor">
+                                        <label for="tagColor" class="form-label ps-4">Tag Color</label>
+                                    </div>
+                                    <button id="loginSubmit" type="submit" class="btn btn-success">Add Event</button>
+                                </form>
+                                <script type="text/javascript">
+                                    function inputTag()
+                                    {
+                                        let selectOption = document.getElementById("selectTag");
+                                        let selectOptionValue = selectOption.options[selectOption.selectedIndex].value;
+                                        let eventDescription = document.getElementById("eventDescription");
+                                        let tagNameInput = document.getElementById("tagName");
+                                        let tagNameDiv = document.getElementById("tagNameDiv");
+                                        let tagDescriptionInput = document.getElementById("tagDescription");
+                                        let tagDescriptionDiv = document.getElementById("tagDescriptionDiv");
+                                        let tagColorInput = document.getElementById("tagColor");
+                                        let tagColorDiv = document.getElementById("tagColorDiv");
+                                        
+                                        console.log("test");
+
+                                        if(selectOptionValue === "add")
+                                        {
+                                            console.log("add");
+                                            eventDescription.style.height = "";
+                                            tagNameInput.required = true;
+                                            tagColorInput.required = true;
+                                            tagNameDiv.classList.remove("showNone");
+                                            tagDescriptionDiv.classList.remove("showNone");
+                                            tagColorDiv.classList.remove("showNone");
+                                        }
+                                        else
+                                        {
+                                            console.log("none");
+                                            eventDescription.style.height = "35vh";
+                                            tagNameInput.required = false;
+                                            tagColorInput.required = false;
+                                            tagNameDiv.classList.add("showNone");
+                                            tagDescriptionDiv.classList.add("showNone");
+                                            tagColorDiv.classList.add("showNone");
+                                        }
+                                    }
+                                </script>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="container-fluid row calendarEvent-one-event mb-1">
-                    <div class="col-3" style="background-color: grey; height: 5vh;">
-                        Od-Do
-                    </div>
-                    <div class="col-3" style="background-color: greenyellow; height: 5vh;">
-                        Tags
-                    </div>
-                    <div class="col-6" style="background-color: silver; height: 5vh;">
-                        Název
-                    </div>
-                </div>
+                <!-- AddEvent Modal End --->
             </div>
         </div>
     </div>
     ';
-};
+}
+function dayEvent(string $eventFrom, string $eventTo, string $eventName, $tagName, $tagColor)
+{
+    if ($tagName == null)
+    {
+        $tagName = "none";
+    }
+    if ($tagColor == null)
+    {
+        $tagColor = "#ffff";
+    }
+    echo
+    '   <div class="container-fluid row calendarEvent-one-event mb-2 ' . $tagName . '" style="cursor: pointer;">
+            <div class="col-3" style="height: 5vh;">
+                ' . $eventFrom . ' - ' . $eventTo . '
+            </div>';
+
+    echo '        <div class="col-3" style="height: 5vh;">
+                ' . (($tagName == "none") ? "" : "#" . $tagName) . '
+            </div>
+            <div class="col-6" style="height: 5vh;">
+                ' . $eventName . '
+            </div>
+        </div>
+    ';
+}
+function getEventsInDayQuery($user_id, $eventDay, $eventMonth, $eventYear)
+{
+    return "SELECT ce.event_name, ce.event_date, ce.event_from, ce.event_to, ct.tag_name, ct.tag_color
+          FROM calendar_event ce LEFT JOIN event_tag et USING (event_id) LEFT JOIN calendar_tags ct USING (tag_id)
+          WHERE ce.uid = " . $user_id . " AND ce.event_date = '" . date_to_DB(strtotime("$eventDay.$eventMonth.$eventYear")) . "';";
+}
+function getEventsInDay($user_id, $eventDay, $eventMonth, $eventYear)
+{
+    $con = db_connection();
+    $result = mysqli_query($con, getEventsInDayQuery($user_id, $eventDay, $eventMonth, $eventYear));
+    return $result;
+}

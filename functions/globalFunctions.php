@@ -357,7 +357,7 @@ function banner($name)
         </script>
     ';
 }
-function html_start($title, $css_file_pathname_1, $css_file_pathname_2 = "", $css_file_pathname_3 = "")
+function html_start($title, $css_file_pathname_1, $css_file_pathname_2 = "", $css_file_pathname_3 = "", $css_file_pathname_4 = "", $css_file_pathname_5 = "", $css_file_pathname_6 = "", $css_file_pathname_7 = "", $css_file_pathname_8 = "")
 {
     $_SESSION["PAGE"] = $_SERVER["SCRIPT_NAME"];
     if ($_SERVER["PHP_SELF"] != "/fileManager.php")
@@ -388,6 +388,26 @@ function html_start($title, $css_file_pathname_1, $css_file_pathname_2 = "", $cs
     {
         echo '<link rel="stylesheet" href="/' . $css_file_pathname_3 . '.css">';
     }
+    if ($css_file_pathname_4 != "")
+    {
+        echo '<link rel="stylesheet" href="/' . $css_file_pathname_4 . '.css">';
+    }
+    if ($css_file_pathname_5 != "")
+    {
+        echo '<link rel="stylesheet" href="/' . $css_file_pathname_5 . '.css">';
+    }
+    if ($css_file_pathname_6 != "")
+    {
+        echo '<link rel="stylesheet" href="/' . $css_file_pathname_6 . '.css">';
+    }
+    if ($css_file_pathname_7 != "")
+    {
+        echo '<link rel="stylesheet" href="/' . $css_file_pathname_7 . '.css">';
+    }
+    if ($css_file_pathname_8 != "")
+    {
+        echo '<link rel="stylesheet" href="/' . $css_file_pathname_8 . '.css">';
+    }
 
     echo '
             <title>Spectixen Network | ' . $title . '</title>
@@ -411,11 +431,21 @@ function curr_date_to_DB()
 {
     return date("Y-m-d", time());
 }
-function date_formatted($dateFromDB)
+function date_to_DB($dateTimestamp_strtotime)
+{
+    return date("Y-m-d", $dateTimestamp_strtotime);
+}
+function date_formatted_string(string $dateFromDB)
 {
     $date = explode("-", $dateFromDB);
     $format = $date[2] . "." . $date[1] . "." . $date[0];
     return $format;
+}
+function date_formatted_timestamp(string $dateFromDB)
+{
+    $date = explode("-", $dateFromDB);
+    $format = $date[2] . "." . $date[1] . "." . $date[0];
+    return strtotime($format);
 }
 function errorModal()
 {

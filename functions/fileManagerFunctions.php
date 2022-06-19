@@ -123,7 +123,7 @@ function moveModal($path)
     }
 
     echo '                      <div class="form-check form-switch">
-                                    <input class="form-check-input" type="checkbox" onclick="toggleMakeFolder();" id="mySwitch" name="makeFolder" value="Yes">
+                                    <input class="form-check-input" type="checkbox" onclick="toggleMakeFolderMove();" id="mySwitch" name="makeFolder" value="Yes">
                                     <label class="form-check-label" for="mySwitch">Make folder</label>
                                 </div>
                                 <div class="form-floating mt-3 mb-3 showNone" id="folderNameInput_">
@@ -131,7 +131,7 @@ function moveModal($path)
                                     <label for="folderToMake">Folder Name</label>
                                 </div>
                                 <script>
-                                    function toggleMakeFolder()
+                                    function toggleMakeFolderMove()
                                     {
                                             document.getElementById("folderName_").required = !document.getElementById("folderName_").required;
                                             document.getElementById("folderNameInput_").classList.toggle("showNone");

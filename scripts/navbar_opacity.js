@@ -1,6 +1,6 @@
 let vyska_prvku = document.getElementById('banner').clientHeight;
 var x = 0;
-window.addEventListener("scroll", (event) => {
+window.addEventListener("scroll", () => {
     let scroll = this.scrollY;
     let opacity = scroll / vyska_prvku;
     if ((opacity >= 1) && (x == 0)) {
