@@ -35,3 +35,11 @@
                 background-color: #65d1ec66;
             }
             
+            .Birthdays {
+                background-color: #c8141433;
+                color: #c81414;
+            }
+            .Birthdays:hover {
+                background-color: #c8141466;
+            }
+            
