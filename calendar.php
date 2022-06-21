@@ -724,7 +724,7 @@ function Day($dayInWeek, $monthNumber, $yearNumber)
     for ($i = 0; $i < mysqli_num_rows($result); $i++)
     {
         $row = mysqli_fetch_assoc($result);
-        dayEvent($row["event_from"], $row["event_to"], $row["event_name"], $row["tag_name"], $row["tag_color"]);
+        dayEvent($row["event_id"], $row["event_from"], $row["event_to"], $row["event_name"], $row["event_description"], $row["tag_name"], $row["tag_color"]);
     }
 
     echo
@@ -746,7 +746,7 @@ function Day($dayInWeek, $monthNumber, $yearNumber)
 
                             <!-- AddEvent Modal body -->
                             <div class="container">
-                                <form action="/handlers/AddEvent.php" class="was-validated" method="POST">
+                                <form action="/handlers/addCalendarEvent.php" class="was-validated" method="POST">
                                     <input type="hidden" name="eventDAY" value="' . $dayInWeek . '">
                                     <input type="hidden" name="eventMONTH" value="' . $monthNumber . '">
                                     <input type="hidden" name="eventYEAR" value="' . $yearNumber . '">
@@ -843,8 +843,9 @@ function Day($dayInWeek, $monthNumber, $yearNumber)
     </div>
     ';
 }
-function dayEvent(string $eventFrom, string $eventTo, string $eventName, $tagName, $tagColor)
+function dayEvent($event_id, string $eventFrom, string $eventTo, string $eventName, $eventDescriptio, $tagName, $tagColor)
 {
+    $con = db_connection();
     if ($tagName == null)
     {
         $tagName = "none";
@@ -854,23 +855,144 @@ function dayEvent(string $eventFrom, string $eventTo, string $eventName, $tagNam
         $tagColor = "#ffff";
     }
     echo
-    '   <div class="container-fluid row calendarEvent-one-event mb-2 ' . $tagName . '" style="cursor: pointer;">
+    '   <div onclick="editEvent_' . $event_id . '();" class="container-fluid row calendarEvent-one-event mb-2 ' . $tagName . '" style="cursor: pointer;">
             <div class="col-3" style="height: 5vh;">
                 ' . $eventFrom . ' - ' . $eventTo . '
-            </div>';
-
-    echo '        <div class="col-3" style="height: 5vh;">
+            </div>
+            <div class="col-3" style="height: 5vh;">
                 ' . (($tagName == "none") ? "" : "#" . $tagName) . '
             </div>
             <div class="col-6" style="height: 5vh;">
-                ' . $eventName . '
+                ' . $eventName .
+        '
             </div>
         </div>
+        <script>
+        function editEvent_' . $event_id . '()
+        {
+            let modal = new bootstrap.Modal(document.getElementById("editEventModal_' . $event_id . '"));
+            modal.toggle();
+        }
+        </script>
+        <!-- EditEvent Modal -->
+                <div class="modal fade" id="editEventModal_' . $event_id . '">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+
+                            <!-- EditEvent Modal Header -->
+                            <div class="modal-header">
+                                <h4 class="modal-title">Edit Event</h4>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                            </div>
+
+                            <!-- EditEvent Modal body -->
+                            <div class="container">
+                                <form action="/handlers/editCalendarEvent.php" class="was-validated" method="POST">
+                                    <input type="hidden" name="eventDAY" value="">
+                                    <input type="hidden" name="eventMONTH" value="">
+                                    <input type="hidden" name="eventYEAR" value="">
+                                    <div class="form-floating mt-3 mb-3">
+                                        <input type="text" class="form-control" id="eventName" placeholder="Event Name" name="eventName" value="' . $eventName . '" required>
+                                        <label for="eventName" class="form-label">Event Name:</label>
+                                    </div>
+                                    <div class="form-floating mt-3 mb-3">
+                                        <textarea type="text" id="eventDescription_' . $event_id . '" class="form-control" style="height: 35vh"  id="eventDescription" placeholder="Event Description" name="eventDescription">' . $eventDescriptio . '</textarea>
+                                        <label for="eventDescription_' . $event_id . '" class="form-label">Event Description:</label>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col form-floating mt-3 mb-3">
+                                            <input type="time" class="form-control" id="from" placeholder="From" name="eventFrom" value="' . $eventFrom . '" required>
+                                            <label for="from" class="form-label ps-4">From</label>
+                                        </div>
+                                        <div class="col form-floating mt-3 mb-3">
+                                            <input type="time" class="form-control" id="to" placeholder="To" name="eventTo" value="' . $eventTo .
+        '" required>
+                                            <label for="to" class="form-label ps-4">To</label>
+                                        </div>
+                                    </div>
+                                    <div class="input-group mt-3 mb-3">
+                                        <label class="input-group-text pt-3 pb-3" for="selectTag_' . $event_id . '">Tag</label>
+                                        <select onchange="inputTag_' . $event_id . '()" class="form-select pt-3 pb-3" id="selectTag_' . $event_id . '" name="eventTag">
+                                            <option value="none">None</option>
+                                            <option value="add">Add</option>';
+    $query = "SELECT tag_id, tag_name, tag_color FROM calendar_tags WHERE user_id=" . $_SESSION["UID"];
+    $result = mysqli_query($con, $query);
+    for ($i = 0; $i < mysqli_num_rows($result); $i++)
+    {
+        $row = mysqli_fetch_assoc($result);
+        echo '<option style="color: ' . (($row["tag_color"] == "#ffff") ? "black" : $row["tag_color"]) . ';" value="' . $row["tag_id"] . '" ' . (($tagName == $row["tag_name"]) ? "selected" : "") . '>#' . $row["tag_name"] . '</option>';
+    }
+    echo                               '</select>
+                                    </div>
+                                    <div id="tagNameDiv_' . $event_id . '" class="col form-floating mt-3 mb-3 showNone">
+                                        <input type="text" class="form-control" id="tagName_' . $event_id . '" placeholder="Tag Name" name="tagName">
+                                        <label for="tagName_' . $event_id . '" class="form-label ps-4">Tag Name</label>
+                                    </div>
+                                    <div id="tagDescriptionDiv_' . $event_id . '" class="form-floating mt-3 mb-3 showNone">
+                                        <textarea type="text" class="form-control"  id="tagDescription_' . $event_id . '" placeholder="Tag Description" name="tagDescription"></textarea>
+                                        <label for="tagDescription_' . $event_id . '" class="form-label">Tag Description:</label>
+                                    </div>
+                                    <div id="tagColorDiv_' . $event_id . '" class="col form-floating mt-3 mb-3 showNone">
+                                        <input type="color" class="form-control" id="tagColor_' . $event_id . '" placeholder="Tag Color" name="tagColor">
+                                        <label for="tagColor_' . $event_id . '" class="form-label ps-4">Tag Color</label>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-5">
+                                            <button class="btn btn-warning">Edit Tag</button>
+                                        </div>
+                                        <div class="col-7">
+                                            <button id="loginSubmit" type="submit" class="btn btn-success mx-1">Edit Event</button>
+                                            <button id="loginSubmit" class="btn btn-danger mx-1">Delete Event</button>
+                                        </div>
+                                    </div>
+                                </form>
+                                <script type="text/javascript">
+                                    function inputTag_' . $event_id . '()
+                                    {
+                                        let selectOption_' . $event_id . ' = document.getElementById("selectTag_' . $event_id . '");
+                                        let selectOptionValue_' . $event_id . ' = selectOption_' . $event_id . '.options[selectOption_' . $event_id . '.selectedIndex].value;
+                                        let eventDescription_' . $event_id . ' = document.getElementById("eventDescription_' . $event_id . '");
+                                        let tagNameInput_' . $event_id . ' = document.getElementById("tagName_' . $event_id . '");
+                                        let tagNameDiv_' . $event_id . ' = document.getElementById("tagNameDiv_' . $event_id . '");
+                                        let tagDescriptionInput_' . $event_id . ' = document.getElementById("tagDescription_' . $event_id . '");
+                                        let tagDescriptionDiv_' . $event_id . ' = document.getElementById("tagDescriptionDiv_' . $event_id . '");
+                                        let tagColorInput_' . $event_id . ' = document.getElementById("tagColor_' . $event_id . '");
+                                        let tagColorDiv_' . $event_id . ' = document.getElementById("tagColorDiv_' . $event_id . '");
+                                        
+                                        console.log("test");
+
+                                        if(selectOptionValue_' . $event_id . ' === "add")
+                                        {
+                                            console.log("add");
+                                            eventDescription_' . $event_id . '.style.height = "";
+                                            tagNameInput_' . $event_id . '.required = true;
+                                            tagColorInput_' . $event_id . '.required = true;
+                                            tagNameDiv_' . $event_id . '.classList.remove("showNone");
+                                            tagDescriptionDiv_' . $event_id . '.classList.remove("showNone");
+                                            tagColorDiv_' . $event_id . '.classList.remove("showNone");
+                                        }
+                                        else
+                                        {
+                                            console.log("none");
+                                            eventDescription_' . $event_id . '.style.height = "35vh";
+                                            tagNameInput_' . $event_id . '.required = false;
+                                            tagColorInput_' . $event_id . '.required = false;
+                                            tagNameDiv_' . $event_id . '.classList.add("showNone");
+                                            tagDescriptionDiv_' . $event_id . '.classList.add("showNone");
+                                            tagColorDiv_' . $event_id . '.classList.add("showNone");
+                                        }
+                                    }
+                                </script>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- EditEvent Modal End --->
     ';
 }
 function getEventsInDayQuery($user_id, $eventDay, $eventMonth, $eventYear)
 {
-    return "SELECT ce.event_name, ce.event_date, ce.event_from, ce.event_to, ct.tag_name, ct.tag_color
+    return "SELECT ce.event_id, ce.event_name, ce.event_description, ce.event_date, ce.event_from, ce.event_to, ct.tag_name, ct.tag_color
           FROM calendar_event ce LEFT JOIN event_tag et USING (event_id) LEFT JOIN calendar_tags ct USING (tag_id)
           WHERE ce.uid = " . $user_id . " AND ce.event_date = '" . date_to_DB(strtotime("$eventDay.$eventMonth.$eventYear")) . "';";
 }
