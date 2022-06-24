@@ -888,9 +888,10 @@ function dayEvent($event_id, string $eventFrom, string $eventTo, string $eventNa
                             <!-- EditEvent Modal body -->
                             <div class="container">
                                 <form action="/handlers/editCalendarEvent.php" class="was-validated" method="POST">
-                                    <input type="hidden" name="eventDAY" value="">
-                                    <input type="hidden" name="eventMONTH" value="">
-                                    <input type="hidden" name="eventYEAR" value="">
+                                    <input type="hidden" name="eventID" value="' . $event_id . '">
+                                    <input type="hidden" name="eventDAY" value="' . $_GET["day"] . '">
+                                    <input type="hidden" name="eventMONTH" value="' . $_GET["month"] . '">
+                                    <input type="hidden" name="eventYEAR" value="' . $_GET["year"] . '">
                                     <div class="form-floating mt-3 mb-3">
                                         <input type="text" class="form-control" id="eventName" placeholder="Event Name" name="eventName" value="' . $eventName . '" required>
                                         <label for="eventName" class="form-label">Event Name:</label>
@@ -942,9 +943,15 @@ function dayEvent($event_id, string $eventFrom, string $eventTo, string $eventNa
                                         </div>
                                         <div class="col-7">
                                             <button id="loginSubmit" type="submit" class="btn btn-success mx-1">Edit Event</button>
-                                            <button id="loginSubmit" class="btn btn-danger mx-1">Delete Event</button>
+                                            <button id="loginSubmit" type="submit" form="deleteEvent_' . $event_id . '" class="btn btn-danger mx-1">Delete Event</button>
                                         </div>
                                     </div>
+                                </form>
+                                <form id="deleteEvent_' . $event_id . '" action="/handlers/deleteCalendarEvent.php" class="was-validated" method="POST">
+                                    <input type="hidden" name="eventDAY" value="' . $_GET["day"] . '">
+                                    <input type="hidden" name="eventMONTH" value="' . $_GET["month"] . '">
+                                    <input type="hidden" name="eventYEAR" value="' . $_GET["year"] . '">
+                                    <input type="hidden" name="eventID" value="' . $event_id . '">
                                 </form>
                                 <script type="text/javascript">
                                     function inputTag_' . $event_id . '()
