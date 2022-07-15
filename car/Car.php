@@ -4,7 +4,7 @@ include_once 'FuelTank.php';
 
 class Car
 {
-    private FuelTank $fuelTank;
+    private $fuelTank;
     private $gearShift;
     private $distance;
 
@@ -23,10 +23,6 @@ class Car
     {
         $this->distance = $newDistance;
     }
-    public function add_distance($addDistance)
-    {
-        $this->distance += $addDistance;
-    }
     public function get_gearShift()
     {
         return $this->gearShift;
@@ -39,12 +35,11 @@ class Car
         }
         $this->gearShift = $newGearShift;
     }
-
-    public function shit_up()
+    public function shift_up()
     {
         if ($this->gearShift != 3)
         {
-            $this->gearShift += 1;
+            $this->gearShift++;
             return true;
         }
         return false;
@@ -54,9 +49,17 @@ class Car
         $this->gearShift = 0;
         $this->fuelTank->fill_fuelTank();
     }
-    public function travel_distance()
+    public function get_storedFuel()
     {
-        $this->add_distance($this->get_gearShift());
-        $this->fuelTank->use_fuel($this->get_gearShift());
+        return $this->fuelTank->get_storedFuel();
+    }
+    public function set_storedFuel($newValue)
+    {
+        $this->fuelTank->set_storedFuel($newValue);
+    }
+    public function out_of_fuel()
+    {
+        $this->set_gearShift(0);
+        $this->fuelTank->set_storedFuel(0);
     }
 }

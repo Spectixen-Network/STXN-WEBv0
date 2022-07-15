@@ -23,8 +23,4 @@ class FuelTank
     {
         $this->storedFuel = CAPACITY;
     }
-    public function use_fuel($usedFuel)
-    {
-        $this->set_storedFuel($this->get_storedFuel() - $usedFuel);
-    }
 }
