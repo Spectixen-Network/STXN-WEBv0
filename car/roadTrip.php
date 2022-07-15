@@ -95,10 +95,13 @@ if (isset($_POST))
 
 <script>
 // NOT MY FUNCTION
+// But basically the purpose of this function is to stop the flow of code for give time of miliseconds
+// Atleast i think.. :)
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 // ---------------
+
 let distance = <?php echo $car->get_distance(); ?>;
 let fuel = <?php echo $car->get_storedFuel(); ?>;
 let docDistance1 = document.getElementById("travelledDistance1");
@@ -106,7 +109,7 @@ let docDistance2 = document.getElementById("travelledDistance2");
 let docFuel = document.getElementById("storedFuelinp");
 
 let fuelForm = document.getElementById("outOfFuelForm");
-async function trav() {
+async function travell() {
     do {
 
         fuel -= <?php echo $car->get_gearShift(); ?>;
@@ -144,11 +147,10 @@ async function trav() {
 
     } while (distance <= 103);
 }
-trav();
+travell();
 </script>
 
 <?php
-
 
 footer();
 html_end();
