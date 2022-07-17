@@ -9,7 +9,7 @@ if (is_admin($_SESSION["UID"]) == 2)
     $userDemoteUID = test_input($_GET["uid"]);
     if (!is_admin($userDemoteUID))
     {
-        header("Location: /adminPanel/users.php");
+        header("Location: /adminPanel/users.php?id=" . $userDemoteUID);
         die();
     }
     else
@@ -17,11 +17,11 @@ if (is_admin($_SESSION["UID"]) == 2)
         $con = db_connection();
         $query = "UPDATE user SET admin='0' WHERE uid = '" . $userDemoteUID . "';";
         mysqli_query($con, $query);
-        header("Location: /adminPanel/users.php");
+        header("Location: /adminPanel/users.php?id=" . $userDemoteUID);
         die();
     }
 }
 else
 {
-    header("Location: /adminPanel/users.php");
+    header("Location: /adminPanel/users.php?id=" . $userDemoteUID);
 }

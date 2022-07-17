@@ -14,7 +14,7 @@ if (!is_admin($_SESSION["UID"]))
 }
 if (is_admin($userToBanUID) && is_admin($_SESSION["UID"]) != 2)
 {
-    header("Location: /adminPanel/users.php");
+    header("Location: /adminPanel/users.php?id=" . $userToBanUID);
     die();
 }
 else
@@ -25,6 +25,6 @@ else
         $query = "INSERT INTO banneduser(uid, from_date, to_date) VALUES ('" . $userToBanUID . "', '" . curr_date_to_DB() . "', '2022-05-26')";
         mysqli_query($con, $query);
     }
-    header("Location: /adminPanel/users.php");
+    header("Location: /adminPanel/users.php?id=" . $userToBanUID);
     die();
 }
