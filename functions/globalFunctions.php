@@ -147,9 +147,6 @@ function navbar()
                         <li class="nav-item">
                             <a href="/creators.php" class="nav-link">Creators</a>
                         </li>
-                        <li class="nav-item">
-                            <a href="/car/roadTrip.php" class="nav-link">Car</a>
-                        </li>
                         <button type="button" id="loginButton" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#loginModal">
                             Log In
                         </button>
@@ -277,9 +274,6 @@ function navbar_logged()
                         </li>
                         <li class="nav-item">
                             <a href="/creators.php" class="nav-link">Creators</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="/car/roadTrip.php" class="nav-link">Car</a>
                         </li>
                         ';
     if (is_admin($_SESSION["UID"]))
