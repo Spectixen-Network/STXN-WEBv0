@@ -20,6 +20,10 @@ if (!isset($_GET["id"]))
 {
     $_GET["id"] = $_SESSION["UID"];
 }
+if ($_GET["id"] == "")
+{
+    $_GET["id"] = $_SESSION["UID"];
+}
 ?>
 
 <div class="col-10">
@@ -43,8 +47,8 @@ if (!isset($_GET["id"]))
                             <h2>Actions</h2>
                         </span>
                         <div style="height: 23vh; overflow-y: auto">
-                            <!-- oneUser start -->
-                            <div class="mt-1 userList" onclick="">
+
+                            <div class="mt-1 userList" onclick='window.location.href="/handlers/banUser.php?uid=<?php echo $_GET["id"]; ?>";'>
                                 <div class="row" style="width: 100%; margin: 0; text-align: center">
                                     <span class="col-12 row">
                                         <p class="m-0 p-1 col-1" style="cursor: pointer; margin: 0; justify-content: center; color: #c300ff;"><i class="bi bi-hammer col"></i></p>
@@ -53,8 +57,67 @@ if (!isset($_GET["id"]))
                                     </span>
                                 </div>
                             </div>
-                            <!-- oneUser end -->
-                            <?php listAllBannedUsers(); ?>
+
+                            <div class="mt-1 userList" onclick='window.location.href="/handlers/unBanUser.php?uid=<?php echo $_GET["id"]; ?>";'>
+                                <div class="row" style="width: 100%; margin: 0; text-align: center">
+                                    <span class="col-12 row">
+                                        <p class="m-0 p-1 col-1" style="cursor: pointer; margin: 0; justify-content: center; color: #c300ff;"><i class="fa-solid fa-ban"></i></p>
+                                        <p class="m-0 p-1 col-10" style="cursor: pointer;">UNBAN USER</p>
+                                        <p class="m-0 p-1 col-1" style="cursor: pointer; margin: 0; justify-content: center; color: #c300ff;"><i class="fa-solid fa-ban"></i></p>
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="mt-1 userList" onclick='window.location.href="/handlers/promoteToAdmin.php?uid=<?php echo $_GET["id"]; ?>";'>
+                                <div class="row" style="width: 100%; margin: 0; text-align: center">
+                                    <span class="col-12 row">
+                                        <p class="m-0 p-1 col-1" style="cursor: pointer; margin: 0; justify-content: center; color: #c300ff;"><i class="bi bi-file-medical-fill"></i></p>
+                                        <p class="m-0 p-1 col-10" style="cursor: pointer;">PROMOTE USER</p>
+                                        <p class="m-0 p-1 col-1" style="cursor: pointer; margin: 0; justify-content: center; color: #c300ff;"><i class="bi bi-file-medical-fill"></i></p>
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="mt-1 userList" onclick='window.location.href="/handlers/demoteFromAdmin.php?uid=<?php echo $_GET["id"]; ?>";'>
+                                <div class="row" style="width: 100%; margin: 0; text-align: center">
+                                    <span class="col-12 row">
+                                        <p class="m-0 p-1 col-1" style="cursor: pointer; margin: 0; justify-content: center; color: #c300ff;"><i class="fa-solid fa-circle-user"></i></p>
+                                        <p class="m-0 p-1 col-10" style="cursor: pointer;">DEMOTE USER</p>
+                                        <p class="m-0 p-1 col-1" style="cursor: pointer; margin: 0; justify-content: center; color: #c300ff;"><i class="fa-solid fa-circle-user"></i></p>
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="mt-1 userList" onclick='window.location.href="/profile.php?uid=<?php echo $_GET["id"]; ?>";'>
+                                <div class="row" style="width: 100%; margin: 0; text-align: center">
+                                    <span class="col-12 row">
+                                        <p class="m-0 p-1 col-1" style="cursor: pointer; margin: 0; justify-content: center; color: #c300ff;"><i class="bi bi-search"></i></p>
+                                        <p class="m-0 p-1 col-10" style="cursor: pointer;">VIEW PROFILE</p>
+                                        <p class="m-0 p-1 col-1" style="cursor: pointer; margin: 0; justify-content: center; color: #c300ff;"><i class="bi bi-search"></i></p>
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="mt-1 userList" onclick='window.location.href="/fileManager.php?uid=<?php echo $_GET["id"]; ?>";'>
+                                <div class="row" style="width: 100%; margin: 0; text-align: center">
+                                    <span class="col-12 row">
+                                        <p class="m-0 p-1 col-1" style="cursor: pointer; margin: 0; justify-content: center; color: #c300ff;"><i class="bi bi-search"></i></p>
+                                        <p class="m-0 p-1 col-10" style="cursor: pointer;">VIEW DISC</p>
+                                        <p class="m-0 p-1 col-1" style="cursor: pointer; margin: 0; justify-content: center; color: #c300ff;"><i class="bi bi-search"></i></p>
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="mt-1 userList" onclick='window.location.href="/handlers/deleteUser.php?uid=<?php echo $_GET["id"]; ?>";'>
+                                <div class="row" style="width: 100%; margin: 0; text-align: center">
+                                    <span class="col-12 row">
+                                        <p class="m-0 p-1 col-1" style="cursor: pointer; margin: 0; justify-content: center; color: #c300ff;"><i class="bi bi-trash"></i></p>
+                                        <p class="m-0 p-1 col-10" style="cursor: pointer;">DELETE USER</p>
+                                        <p class="m-0 p-1 col-1" style="cursor: pointer; margin: 0; justify-content: center; color: #c300ff;"><i class="bi bi-trash"></i></p>
+                                    </span>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -277,9 +340,6 @@ function listUserDiscSpace($userId, $userPath)
                 <span class="col-11 row">
                     <p class="m-0 p-1 col-6" style="overflow-x: hidden">Occupied Disc Space</p>
                     <p class="m-0 p-1 col-6" style="overflow-x: hidden; text-align: end">' . round(GetDirectorySize($userPath) / 1024) . ' kB</p>
-                </span>
-                <span class="col-1 d-flex align-content-center flex-wrap">
-                    <a href="/fileManager.php?uid=' . $userId . '" tittle="Search User"><i class="bi bi-search"></i></a>
                 </span>
             </div>
         </div>

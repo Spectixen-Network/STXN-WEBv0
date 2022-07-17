@@ -17,11 +17,11 @@ if (is_banned($userToUnBanUID))
     $con = db_connection();
     $query = "DELETE FROM banneduser WHERE uid = " . $userToUnBanUID;
     mysqli_query($con, $query);
-    header("Location: /adminPanel/users.php");
+    header("Location: /adminPanel/users.php?id=" . $userToUnBanUID);
     die();
 }
 else
 {
-    header("Location: /adminPanel/users.php");
+    header("Location: /adminPanel/users.php?id=" . $userToUnBanUID);
     die();
 }
