@@ -5,7 +5,7 @@ $GLOBALS["relativeUserDirPath"] = "../user/" . $_SESSION["UID"] . "/";
 $GLOBALS["userImageFolder"] = "images/";
 $GLOBALS["userFilesFolder"] = "files/";
 
-function adminSidebar()
+function adminSidebar(): void
 {
     echo
     '
@@ -41,7 +41,7 @@ function adminSidebar()
         <!-- Sidebar end -->
     ';
 }
-function ifNotAdminRedirect()
+function ifNotAdminRedirect(): void
 {
     if (!is_admin($_SESSION["UID"]))
     {

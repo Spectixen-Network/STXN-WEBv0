@@ -1,5 +1,5 @@
 <?php
-function test_input($data)
+function test_input($data): string
 {
     $data = trim($data);
     $data = stripslashes($data);
@@ -11,7 +11,7 @@ function validate_email($email)
     $email = test_input($email);
     return filter_var($email, FILTER_VALIDATE_EMAIL);
 }
-function db_connection()
+function db_connection(): mysqli
 {
     $db_info = json_decode(file_get_contents($_SERVER["DOCUMENT_ROOT"] . '/else/database.json'), true);
     $connection = mysqli_init();
@@ -26,7 +26,7 @@ function db_connection()
     }
     return $connection;
 }
-function email_exist($email)
+function email_exist($email): bool
 {
     $connection = db_connection();
     $dotaz = "SELECT email FROM user WHERE email='" . $email . "'";
@@ -40,7 +40,7 @@ function email_exist($email)
         return false;
     }
 }
-function username_exist($username)
+function username_exist($username): bool
 {
     $connection = db_connection();
     $dotaz = "SELECT username FROM user WHERE username='" . $username . "'";
@@ -54,7 +54,7 @@ function username_exist($username)
         return false;
     }
 }
-function uid_exist($uid)
+function uid_exist($uid): bool
 {
     $connection = db_connection();
     $dotaz = "SELECT uid FROM user WHERE uid='" . $uid . "'";
@@ -68,7 +68,7 @@ function uid_exist($uid)
         return false;
     }
 }
-function uid_from_username($username)
+function uid_from_username($username): int
 {
     $connection = db_connection();
     $username = test_input($username);
@@ -76,7 +76,7 @@ function uid_from_username($username)
     $result = mysqli_query($connection, $dotaz);
     return mysqli_fetch_row($result)[0];
 }
-function username_from_uid($uid)
+function username_from_uid($uid): string
 {
     $connection = db_connection();
     $uid = test_input($uid);
@@ -84,42 +84,42 @@ function username_from_uid($uid)
     $result = mysqli_query($connection, $dotaz);
     return mysqli_fetch_row($result)[0];
 }
-function navbar_profile_image()
+function navbar_profile_image(): string
 {
     $con = db_connection();
     $query = "SELECT image_path FROM user WHERE username='" . $_SESSION["USERNAME"] . "'";
     $result = mysqli_query($con, $query);
     return mysqli_fetch_array($result)[0];
 }
-function image_from_id($id)
+function image_from_id($id): string
 {
     $con = db_connection();
     $query = "SELECT image_path FROM user WHERE uid='" . $id . "'";
     $result = mysqli_query($con, $query);
     return mysqli_fetch_array($result)[0];
 }
-function is_admin($uid)
+function is_admin($uid): bool
 {
     $con = db_connection();
     $query = "SELECT admin FROM user WHERE uid='" . $uid . "'";
     $result = mysqli_query($con, $query);
     return mysqli_fetch_array($result)[0];
 }
-function is_banned($uid)
+function is_banned($uid): bool
 {
     $con = db_connection();
     $query = "SELECT uid FROM banneduser WHERE uid='" . $uid . "'";
     $result = mysqli_query($con, $query);
     if (mysqli_num_rows($result) > 0)
     {
-        return 1;
+        return true;
     }
     else
     {
-        return 0;
+        return false;
     }
 }
-function nav()
+function nav(): void
 {
     if (isset($_SESSION["USERNAME"]) && isset($_SESSION["UID"]))
     {
@@ -130,7 +130,7 @@ function nav()
         navbar();
     }
 }
-function navbar()
+function navbar(): void
 {
     echo '
         <nav class="sticky-top">
@@ -254,7 +254,7 @@ function navbar()
         <!-- TOS Popover END --->
     ';
 }
-function navbar_logged()
+function navbar_logged(): void
 {
     echo
     '
@@ -317,7 +317,7 @@ function navbar_logged()
         </nav>
     ';
 }
-function banner($name)
+function banner($name): void
 {
     $delka = strlen($name);
     $text = str_split($name, 1);
@@ -363,7 +363,7 @@ function banner($name)
         </script>
     ';
 }
-function html_start($title, $css_file_pathname_1, $css_file_pathname_2 = "", $css_file_pathname_3 = "", $css_file_pathname_4 = "", $css_file_pathname_5 = "", $css_file_pathname_6 = "", $css_file_pathname_7 = "", $css_file_pathname_8 = "")
+function html_start($title, $css_file_pathname_1, $css_file_pathname_2 = "", $css_file_pathname_3 = "", $css_file_pathname_4 = "", $css_file_pathname_5 = "", $css_file_pathname_6 = "", $css_file_pathname_7 = "", $css_file_pathname_8 = ""): void
 {
     $_SESSION["PAGE"] = $_SERVER["SCRIPT_NAME"];
     if ($_SERVER["PHP_SELF"] != "/fileManager.php")
@@ -422,38 +422,38 @@ function html_start($title, $css_file_pathname_1, $css_file_pathname_2 = "", $cs
         <body>
     ';
 }
-function html_end()
+function html_end(): void
 {
     echo '
         </body>
     </html>
     ';
 }
-function curr_time_formatted()
+function curr_time_formatted(): string
 {
     return date("Y-m-d H:i:s", time());
 }
-function curr_date_to_DB()
+function curr_date_to_DB(): string
 {
     return date("Y-m-d", time());
 }
-function date_to_DB($dateTimestamp_strtotime)
+function date_to_DB($dateTimestamp_strtotime): string
 {
     return date("Y-m-d", $dateTimestamp_strtotime);
 }
-function date_formatted_string(string $dateFromDB)
+function date_formatted_string(string $dateFromDB): string
 {
     $date = explode("-", $dateFromDB);
     $format = $date[2] . "." . $date[1] . "." . $date[0];
     return $format;
 }
-function date_formatted_timestamp(string $dateFromDB)
+function date_formatted_timestamp(string $dateFromDB): int
 {
     $date = explode("-", $dateFromDB);
     $format = $date[2] . "." . $date[1] . "." . $date[0];
     return strtotime($format);
 }
-function errorModal()
+function errorModal(): void
 {
     echo
     '
@@ -494,7 +494,7 @@ function errorModal()
         <!-- Upload Modal End --->
     ';
 }
-function footer()
+function footer(): void
 {
     echo
     '
@@ -517,7 +517,7 @@ function footer()
     </footer>
     ';
 }
-function some_text()
+function some_text(): void
 {
     echo '<p>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Error, ipsa. Tenetur earum explicabo in enim, nemo
@@ -813,7 +813,7 @@ function some_text()
 
     </p>';
 }
-function svg_image()
+function svg_image(): void
 {
     echo
     '
@@ -837,7 +837,7 @@ function svg_image()
         </svg>
     ';
 }
-function isLoggedElseRedirect()
+function isLoggedElseRedirect(): void
 {
     if (!isset($_SESSION["UID"]))
     {
@@ -845,7 +845,7 @@ function isLoggedElseRedirect()
     }
 }
 // NOT MY FUNCTION
-function GetDirectorySize($path)
+function GetDirectorySize($path): int
 {
     $bytestotal = 0;
     $path = realpath($path);

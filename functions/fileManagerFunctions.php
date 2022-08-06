@@ -1,7 +1,7 @@
 <?php
 include_once 'globalFunctions.php';
 
-function uploadModal($path)
+function uploadModal($path): void
 {
     $directories = scandir($path);
     echo
@@ -75,7 +75,7 @@ function uploadModal($path)
         <!-- Upload Modal End --->
     ';
 }
-function moveModal($path)
+function moveModal($path): void
 {
     $directories = scandir($path);
     echo
@@ -149,7 +149,7 @@ function moveModal($path)
         <!-- Upload Modal End --->
     ';
 }
-function ibox($path)
+function ibox($path): void
 {
 
     if (isset($_GET["dir"]))
@@ -238,7 +238,7 @@ function ibox($path)
         </script>
     ';
 }
-function folderContent($folder = "", $uid)
+function folderContent($folder = "", $uid): void
 {
     $path = $_SERVER["DOCUMENT_ROOT"] . "/user/" . $uid . "/files/" . $folder;
 
@@ -257,7 +257,7 @@ function folderContent($folder = "", $uid)
         }
     }
 }
-function determinFile($fileName, $uid)
+function determinFile($fileName, $uid): void
 {
     $fileType = pathinfo($fileName)["extension"];
 
@@ -299,7 +299,7 @@ function determinFile($fileName, $uid)
         elseFileEcho($fileName, $uid);
     }
 }
-function sortDirFirst($path, $array)
+function sortDirFirst($path, $array): array
 {
 
     $dirArray = [];
@@ -319,7 +319,7 @@ function sortDirFirst($path, $array)
 
     return array_merge($dirArray, $rest);
 }
-function audioFileEcho($fileName, $uid)
+function audioFileEcho($fileName, $uid): void
 {
     if (isset($_GET["dir"]))
     {
@@ -382,7 +382,7 @@ function audioFileEcho($fileName, $uid)
             </div>
         ';
 }
-function videoFileEcho($fileName, $uid)
+function videoFileEcho($fileName, $uid): void
 {
     if (isset($_GET["dir"]))
     {
@@ -445,7 +445,7 @@ function videoFileEcho($fileName, $uid)
             </div>
         ';
 }
-function imageFileEcho($fileName, $uid)
+function imageFileEcho($fileName, $uid): void
 {
     if (isset($_GET["dir"]))
     {
@@ -508,7 +508,7 @@ function imageFileEcho($fileName, $uid)
             </div>
         ';
 }
-function elseFileEcho($fileName, $uid)
+function elseFileEcho($fileName, $uid): void
 {
     if (isset($_GET["dir"]))
     {
@@ -571,7 +571,7 @@ function elseFileEcho($fileName, $uid)
             </div>
         ';
 }
-function dirFileEcho($fileName)
+function dirFileEcho($fileName): void
 {
     echo
     '
