@@ -43,3 +43,11 @@
                 background-color: #c8141466;
             }
             
+            .Special Events {
+                background-color: #cd18b533;
+                color: #cd18b5;
+            }
+            .Special Events:hover {
+                background-color: #cd18b566;
+            }
+            
